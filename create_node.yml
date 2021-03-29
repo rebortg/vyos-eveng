@@ -1,0 +1,12 @@
+- name: Make requests to example api
+  hosts: all
+
+  roles:
+    - eve-ng-create-node
+
+  vars:
+    EVE_NG_BASE_URL: "https://192.168.188.92"
+    EVE_NG_USER: "admin"
+    EVE_NG_PASSWORD: "eve"
+    node_template_iso: https://downloads.vyos.io/rolling/current/amd64/vyos-1.4-rolling-202103230217-amd64.iso
+    node_template_version: 1.4-rolling-202103230217

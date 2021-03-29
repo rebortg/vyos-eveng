@@ -1,0 +1,49 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+spawn telnet localhost {{telnet_port}}
+match_max 1000000
+send -- "\r"
+expect -exact "vyos login: "
+send -- "vyos\r"
+
+expect -exact "Password: "
+send -- "vyos\r"
+
+expect -exact "vyos@vyos:~\$ "
+send -- "install image\r"
+
+expect "Would you like to continue?"
+send -- "\r"
+
+expect "Partition (Auto/Parted/Skip)"
+send -- "\r"
+
+expect "Install the image on?"
+send -- "\r"
+
+expect "Continue? (Yes/No)"
+send -- "Yes\r"
+
+expect "How big of a root partition should I create"
+send -- "\r"
+
+expect "What would you like to name this image?"
+send -- "\r"
+
+expect -exact "Which one should I copy to"
+send -- "/opt/vyatta/etc/config.boot.default\r"
+
+expect -exact "Enter password for user 'vyos':"
+send -- "vyos\r"
+
+expect -exact "Retype password for user 'vyos':"
+send -- "vyos\r"
+
+expect "Which drive should GRUB modify the boot partition on?"
+send -- "\r"
+
+expect "vyos"
+send -- "poweroff now\r"
+
+close $spawn_id

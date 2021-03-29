@@ -1,0 +1,13 @@
+---
+# defaults file for eve-ng-create-node
+
+EVE_NG_BASE_URL: "http://127.0.0.1"
+EVE_NG_USER: "admin"
+EVE_NG_PASSWORD: "eve"
+
+node_create_lab_name: node_create_lab_name
+node_template_iso: ""
+node_template_os: vyos
+node_template_arch: amd64
+node_template_version: ""
+node_template_name: "{{ node_template_os }}-{{ node_template_version }}-{{ node_template_arch }}"
