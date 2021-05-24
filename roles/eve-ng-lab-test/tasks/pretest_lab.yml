@@ -1,0 +1,54 @@
+---
+
+- name: Login to EVE-NG and get Cookie
+  uri:
+    method: POST
+    url: "{{ eve_ng_base_url }}/api/auth/login"
+    return_content: yes
+    body_format: json
+    body:
+      username: "{{ eve_ng_user }}"
+      password: "{{ eve_ng_password}}"
+      html5: "-1"
+    headers:
+      Accept: application/json
+    validate_certs: False
+  register: login
+  
+- name: get running lab list
+  uri:
+    method: GET
+    url: "{{ eve_ng_base_url }}/api/runninglabs"
+    return_content: True
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  register: response
+
+# look if lab is running and try to kill it
+
+- name: kill running labs
+  uri:
+    method: GET
+    url: "{{ eve_ng_base_url }}/api/kill/lab/{{ item.labid }}"
+    return_content: True
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  with_items: "{{ response.json.data }}"
+  when: item.labname == "/AnsibleExample"
+  register: response
+
+- name: delte existing lab
+  uri:
+    method: DELETE
+    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl"
+    return_content: True
+    status_code: [200, 404]
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  register: response

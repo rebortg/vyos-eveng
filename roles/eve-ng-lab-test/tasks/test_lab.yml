@@ -1,0 +1,15 @@
+---
+
+- name: do ping test
+  vyos.vyos.vyos_ping:
+    dest: "{{ item }}"
+  with_items: "{{ lab_vars.tests.ping }}"
+  when: lab_vars.tests.ping is defined
+
+
+- name: execute test commands
+  vyos.vyos.vyos_command:
+    commands: "{{ item.command }}"
+    wait_for: result[0] contains "{{ item.stdout }}"
+  with_items: "{{ lab_vars.tests.commands }}"
+  when: lab_vars.tests.commands is defined

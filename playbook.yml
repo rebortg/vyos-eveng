@@ -1,0 +1,19 @@
+- name: prepare node and Lab
+  hosts: all
+  gather_facts: False
+  any_errors_fatal: True
+
+  roles:
+    - role: eve-ng-create-node
+      when: inventory_hostname in groups['eve']
+
+    - role: eve-ng-lab-test
+          
+
+
+
+  vars:
+    output_dir: "output/{{ lab }}"
+    output_include_dir: "{{ output_dir }}/_include"
+    node_template_iso: "https://s3.amazonaws.com/s3-us.vyos.io/snapshot/vyos-1.3.0-rc4/generic-iso/vyos-1.3.0-rc4-amd64.iso"
+    node_template_version: 1.3.0-rc4

@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 click = "*"
 ansible = "*"
+paramiko = "*"
+jinja2 = "*"
 
 [dev-packages]
 

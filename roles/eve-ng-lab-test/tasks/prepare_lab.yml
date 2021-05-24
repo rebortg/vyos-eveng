@@ -1,0 +1,88 @@
+---
+
+- name: Create {{ lab }} Lab
+  template: 
+    src: labs/{{ lab }}/{{ lab }}.unl.j2
+    dest: /opt/unetlab/labs/{{ lab }}.unl
+  when: inventory_hostname in groups['eve']
+
+- name: Login to EVE-NG and get Cookie
+  uri:
+    method: POST
+    url: "{{ eve_ng_base_url }}/api/auth/login"
+    return_content: yes
+    body_format: json
+    body:
+      username: "{{ eve_ng_user }}"
+      password: "{{ eve_ng_password}}"
+      html5: "-1"
+    headers:
+      Accept: application/json
+    validate_certs: False
+  register: login
+  when: inventory_hostname in groups['eve']
+  
+- name: start vyos-oobm
+  uri:
+    method: GET
+    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes/1/start"
+    return_content: True
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  register: response
+  when: inventory_hostname in groups['eve']
+
+- name: Wait for vyos-oobm
+  wait_for_connection:
+  when: inventory_hostname in groups['oobm']
+
+# Start other nodes
+
+- name: Login to EVE-NG and get Cookie
+  uri:
+    method: POST
+    url: "{{ eve_ng_base_url }}/api/auth/login"
+    return_content: yes
+    body_format: json
+    body:
+      username: "{{ eve_ng_user }}"
+      password: "{{ eve_ng_password}}"
+      html5: "-1"
+    headers:
+      Accept: application/json
+    validate_certs: False
+  register: login
+  when: inventory_hostname in groups['eve']
+
+
+- name: get lab status
+  uri:
+    method: GET
+    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes"
+    return_content: True
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  register: response
+  when: inventory_hostname in groups['eve']
+
+- name: start all nodes
+  uri:
+    method: GET
+    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes/{{ item }}/start"
+    return_content: True
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  register: response
+  with_items: "{{ response.json.data }}"
+  when: inventory_hostname in groups['eve']
+
+
+- name: Wait for vyos nodes
+  wait_for_connection:
+  when: inventory_hostname in groups['vyos']

@@ -1,0 +1,22 @@
+---
+
+- fail: msg="The variable 'node_template_version' is empty"
+  when: node_template_version == ""
+
+- include: pretest_lab.yml
+  when: inventory_hostname in groups['eve']
+
+- include: prepare_lab.yml
+
+- name: include {{ lab }} lab_config.yml
+  include: "labs/{{ lab }}/lab_config.yml"
+  when: inventory_hostname in groups['vyos']
+
+- include: test_lab.yml
+
+- include: generate_output.yml
+  when: inventory_hostname in groups['eve']
+
+- include: destroy_lab.yml
+  when: inventory_hostname in groups['eve']
+
