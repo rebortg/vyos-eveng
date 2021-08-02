@@ -41,3 +41,18 @@
     src: "{{ item.path }}"
     dest: "{{ output_include_dir }}/{{ item.path.split('/')[-1] }}"
   with_items: "{{ conf_files.files }}"
+
+
+- name: find all *.png files in Lab
+  delegate_to: localhost
+  find:
+    paths: labs/{{ lab }}
+    patterns: '*.png'
+  register: png_files
+
+- name: copy all *.png files
+  delegate_to: localhost
+  template: 
+    src: "{{ item.path }}"
+    dest: "{{ output_include_dir }}/{{ item.path.split('/')[-1] }}"
+  with_items: "{{ png_files.files }}"
