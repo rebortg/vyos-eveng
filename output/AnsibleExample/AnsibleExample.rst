@@ -6,8 +6,8 @@ Ansible Example
 ###############
 
 Test:
-Date: 2021-05-24
-Version: 1.3.0-rc4
+Date: 2021-08-02
+Version: 1.3.0-rc5
 
 .. image:: output/AnsibleExample/_include/topology.png
   :alt: Ansible Example topology image

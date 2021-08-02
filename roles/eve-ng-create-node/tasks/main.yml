@@ -197,7 +197,7 @@
 
   - name: commit virtioa.qcow2
     ansible.builtin.shell: | 
-      cd /opt/unetlab/tmp/0/{{ lab_temp_id }}/1
+      cd /opt/unetlab/tmp/1/{{ lab_temp_id }}/1
       qemu-img commit virtioa.qcow2
 
   - name: delete lab for node install
