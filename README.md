@@ -1,18 +1,34 @@
 # VyOS EVENG Lab Testing
 
-This POC is for automatic build and test predefined lab for vyos.
+This POC is for automatic build and test predefined labs for vyos.
 At the moment, it only work with the EVE-NG Pro version, b/c the API is different from the CE version
 
 ## Quickstart
 
-must set Ansible vars in `playbook.yml`
+install collection:
+
+`ansible-galaxy collection install vyos.vyos`
+
+### set vars and environment specifics
+
+you must set Ansible `vars` in `playbook.yml`
 
 `node_template_iso`: the vyos iso url
 `node_template_version` the vyos version used in eve-ng
 
-eve-ng user and password are `ansible` as a default in the roles
 
-start the process
+Create a new User in Eve-NG. Name and password are `ansible`.
+or set the user in the `playbook.yml` `vars`:
+
+`eve_ng_user`
+`eve_ng_password`
+
+It is recommend to use a dedicated account for the Ansible Workflow.
+
+Edit the `poxy_command` option in the `ansible.cfg` and set the absolute path for the `inventory/id_rsa` file.
+Paramiko can't use relative path in this case.
+
+### Start the Process
 
     ansible-playbook -i labinventory.py  -e lab=AnsibleExample playbook.yml
 

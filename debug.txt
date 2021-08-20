@@ -1,0 +1,1 @@
+"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/rob/git/vyos/vyos-eveng/inventory/id_rsa -W %h:%p vyos@vyos-oobm"

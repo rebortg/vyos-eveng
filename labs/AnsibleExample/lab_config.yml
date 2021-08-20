@@ -1,6 +1,12 @@
 ---
 
+- name: DEBUG
+  debug:
+    msg: "{{environment}}"
+
 - name: setup nodes
   vyos.vyos.vyos_config:
     src: "labs/{{ lab }}/{{ inventory_hostname }}.conf"
     save: True
+
+  
