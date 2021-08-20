@@ -113,22 +113,22 @@ Also test commands will provide here:
 for example:
 
     hosts:
-    vyos:
-        rtr01:
-        tests:
-            ping:
-            - "10.1.1.2"
-            commands:
-            - desc: "Test if IP is set to interface"
-                command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-                stdout: "10.1.1.1/24"
+        vyos:
+            rtr01:
+                tests:
+                    ping:
+                    - "10.1.1.2"
+                    commands:
+                    - desc: "Test if IP is set to interface"
+                        command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
+                        stdout: "10.1.1.1/24"
 
 
-        rtr02:
-        tests:
-            ping:
-            - "10.1.1.1"
-            commands:
-            - desc: "Test if IP is set to interface"
-                command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-                stdout: "10.1.1.2/24"
+            rtr02:
+                tests:
+                    ping:
+                    - "10.1.1.1"
+                    commands:
+                    - desc: "Test if IP is set to interface"
+                        command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
+                        stdout: "10.1.1.2/24"
