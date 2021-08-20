@@ -13,14 +13,17 @@ install collection:
 
 you must set Ansible `vars` in `playbook.yml`
 
+
 `node_template_iso`: the vyos iso url
-`node_template_version` the vyos version used in eve-ng
+
+`node_template_version`: the vyos version used in eve-ng
 
 
 Create a new User in Eve-NG. Name and password are `ansible`.
 or set the user in the `playbook.yml` `vars`:
 
 `eve_ng_user`
+
 `eve_ng_password`
 
 It is recommend to use a dedicated account for the Ansible Workflow.
@@ -52,26 +55,26 @@ If something failed, you can open the lab in the `lab management` and investigat
 
 ## content of the Lab Directory
 
-LABNAME.rst.j2
+### LABNAME.rst.j2
 
-    The RST file for rendering the output
+The RST file for rendering the output
 
-LABNAME.unl.j2
+### LABNAME.unl.j2
 
-    The Lab file to import to eve-ng
+The Lab file to import to eve-ng
 
-    VyOS-OOBM must have the node id 1
+VyOS-OOBM must have the node id 1
 
     <node id="1" name="VyOS-OOBM" type="qemu" template="vyos" image="{{ node_template_name }}".....
 
-    The Startup-Config is base64 decoded.
+The Startup-Config is base64 decoded.
 
     <configs>
       <config id="1">c2V0IGludGVyZmFjZX......Bzc2gtcnNh</config>
       <config id="2">c2V0IHN5c3RlbSBob3......GUNoLXJzYQ==</config>
     </configs>
 
-    The config of VyOS-OOBM is different from the other nodes:
+The config of VyOS-OOBM is different from the other nodes:
 
     set interfaces ethernet eth0 address 'dhcp'
     set interfaces ethernet eth1 address '10.100.0.1/24'
@@ -86,7 +89,8 @@ LABNAME.unl.j2
     set system login user vyos authentication public-keys default type ssh-rsa
 
 
-    a minimal config of the nodes:
+a minimal config of the nodes:
+
     The hostname is important and used in ansible 
 
     set system host-name rtr01
@@ -95,18 +99,18 @@ LABNAME.unl.j2
     set system login user vyos authentication public-keys default key AAAAB3NzaC1yc2EAAAADAQABAAABgQDaCjzejtf56qx40toZqPRLcpg0fWJxpvR5cS9oqh+3+rRURKVrGIbgCmeucBC+kQnyvAqugCtEIZKDyk/kl9Z8eLoCjjkr4pguxo9PKWsDiMBdit1DY6m2Mr0BotbhhaNmIvRkA8/5apI6/RrNlo78Pj1doiu64+cqUjzvh5BuBUCbIaseE+4pg2Fs28d+NM20J4eOplHYnsVz7Aipj0UzT/HaIo8alPyZHOKuPOcOXZGJEwjayszQoQbKwIpBxCJM2m5zQyWkirX8QvmnIie57TSQ7J9zNB4NhLpUV27QYBBixMZOOwDJQpnISfjOd/tFpM5fn0vOIp02oQAHpK1hwQBFLVjAI50z8K96zTIwEPeCwIosTBer4HTUY073zpCVEsvnsT5c5Y0UVJLT+235S1XbuBr5zMvAAN9CpLb+WqNlDpvI/rAIVQTFjZOXr0x9rEVGRmTT19GGzjp2rXu9SIrnJ0d0X5ycyIp1dvoBngb4GWSkZaGUsYEDFk/kONs=
     set system login user vyos authentication public-keys default type ssh-rsa
 
-    # TODO: create base64 decoded config via ansible from inventory/rtr.conf.j2 and vyos-oobm.conf.j2
+TODO: create base64 decoded config via ansible from inventory/rtr.conf.j2 and vyos-oobm.conf.j2
 
-lab_config.yml
+### lab_config.yml
 
-    Ansible tasks to configure the lab after all nodes are started and are running with the startup-config
+Ansible tasks to configure the lab after all nodes are started and are running with the startup-config
 
-inventory.yml
+### inventory.yml
 
-    This is the lab inventory files, a script parse it and add the hosts to the ansible inventroy.
-    Also test commands will provide here:
+This is the lab inventory files, a script parse it and add the hosts to the ansible inventroy.
+Also test commands will provide here:
 
-    for example:
+for example:
 
     hosts:
     vyos:
