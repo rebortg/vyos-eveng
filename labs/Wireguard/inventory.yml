@@ -8,8 +8,16 @@ hosts:
           - "10.0.2.100"
         commands:
           - desc: "Test if IP is set to interface"
-            command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-            stdout: "10.1.1.1/24"
+            command: "ip -4 addr show dev eth2 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
+            wait_for:
+              - result[0] contains "10.0.1.254/24"
+          - desc: "show interfaces wireguard"
+            command: "show interfaces wireguard"
+            wait_for:
+              - result[0] contains "S - State, L - Link, u - Up, D - Down, A - Admin Down"
+              - result[0] contains "Interface        IP Address                        S/L  Description"
+              - result[0] contains "---------        ----------                        ---  -----------"
+              - result[0] contains "wg01             192.168.0.1/24                    u/u  VPN-to-Branch"
 
 
     branch:
@@ -17,6 +25,10 @@ hosts:
         ping:
           - "10.0.1.100"
         commands:
-          - desc: "Test if IP is set to interface"
-            command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-            stdout: "10.1.1.2/24"
+          - desc: "show interfaces wireguard"
+            command: "show interfaces wireguard"
+            wait_for:
+              - result[0] contains "S - State, L - Link, u - Up, D - Down, A - Admin Down"
+              - result[0] contains "Interface        IP Address                        S/L  Description"
+              - result[0] contains "---------        ----------                        ---  -----------"
+              - result[0] contains "wg01             192.168.0.2/24                    u/u  VPN-to-central"

@@ -25,12 +25,4 @@
     src: "labs/{{ lab }}/{{ inventory_hostname }}.conf"
     save: True
 
-- vyos.vyos.vyos_command:
-    commands: "show interfaces wireguard"
-  register: out
-
-
-- debug:
-    msg: "{{ out }}"
-
   

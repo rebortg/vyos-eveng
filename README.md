@@ -9,6 +9,11 @@ install collection:
 
 `ansible-galaxy collection install vyos.vyos`
 
+install python pramiko and scp
+
+`pip install paramiko`
+`pip install scp`
+
 ### set vars and environment specifics
 
 you must set Ansible `vars` in `playbook.yml`
@@ -33,7 +38,12 @@ Paramiko can't use relative path in this case.
 
 ### Start the Process
 
-    ansible-playbook -i labinventory.py  -e lab=AnsibleExample playbook.yml
+    ansible-playbook -i labinventory.py -e lab=AnsibleExample playbook.yml
+
+to test a upgrade set the a iso path in the playbook `upgrade_iso` var and run
+
+    ansible-playbook -i labinventory.py -e lab=AnsibleExample -e upgrade=True playbook.yml
+    
 
 The lab name must the same as the lab name in the `lab` folder. For example `AnsibleExample`.
 

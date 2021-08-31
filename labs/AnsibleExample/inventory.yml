@@ -9,7 +9,8 @@ hosts:
         commands:
           - desc: "Test if IP is set to interface"
             command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-            stdout: "10.1.1.1/24"
+            wait_for:
+              - result[0] contains "10.1.1.1/24"
 
 
     rtr02:
@@ -19,4 +20,5 @@ hosts:
         commands:
           - desc: "Test if IP is set to interface"
             command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-            stdout: "10.1.1.2/24"
+            wait_for:
+              - result[0] contains "10.1.1.2/24"
