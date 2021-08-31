@@ -40,7 +40,7 @@ Paramiko can't use relative path in this case.
 
     ansible-playbook -i labinventory.py -e lab=AnsibleExample playbook.yml
 
-to test a upgrade set the a iso path in the playbook `upgrade_iso` var and run
+to test a upgrade, set the iso path in the playbook `upgrade_iso` var and run:
 
     ansible-playbook -i labinventory.py -e lab=AnsibleExample -e upgrade=True playbook.yml
     
