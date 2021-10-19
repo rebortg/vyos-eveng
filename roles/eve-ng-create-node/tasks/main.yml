@@ -59,6 +59,21 @@
     ansible.builtin.shell: |
       /opt/qemu/bin/qemu-img create -f qcow2 /opt/unetlab/addons/qemu/{{ node_template_name }}/virtioa.qcow2 10G
 
+  - name: Login to EVE-NG and get Cookie
+    uri:
+      method: POST
+      url: "{{ eve_ng_base_url }}/api/auth/login"
+      return_content: yes
+      body_format: json
+      body:
+        username: "{{ eve_ng_user }}"
+        password: "{{ eve_ng_password}}"
+        html5: "-1"
+      headers:
+        Accept: application/json
+      validate_certs: False
+    register: login
+
 
   - name: create lab for node install
     uri:

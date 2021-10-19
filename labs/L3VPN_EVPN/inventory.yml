@@ -1,0 +1,12 @@
+---
+
+hosts:
+  vyos:
+    PE1:
+      tests:
+        commands:
+          - desc: "PING vyos-oobm with VRF"
+            command: "ping 10.100.0.1 vrf mgmt count 1"
+            stdout: "from 10.100.0.1: icmp_seq=1 "
+    PE2:
+    PE3:
