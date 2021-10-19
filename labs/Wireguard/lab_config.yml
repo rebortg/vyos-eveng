@@ -1,8 +1,24 @@
 ---
 
-- name: DEBUG
-  debug:
-    msg: "{{environment}}"
+- name: get and or create Wireguard default keypair
+  block:
+    - name: show wireguard keypairs pubkey default
+      vyos_command:
+        commands: show wireguard keypairs pubkey default
+      register: pubkey_out
+    - fail:
+      when: pubkey_out.stdout[0].find("found") != -1
+
+  rescue:
+    - name: generate wireguard default-keypair
+      vyos_command:
+        commands: generate wireguard default-keypair
+
+  always:
+    - name: show wireguard keypairs pubkey default
+      vyos_command:
+        commands: show wireguard keypairs pubkey default
+      register: pubkey
 
 - name: setup nodes
   vyos.vyos.vyos_config:

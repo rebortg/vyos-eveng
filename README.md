@@ -9,6 +9,11 @@ install collection:
 
 `ansible-galaxy collection install vyos.vyos`
 
+install python pramiko and scp
+
+`pip install paramiko`
+`pip install scp`
+
 ### set vars and environment specifics
 
 you must set Ansible `vars` in `playbook.yml`
@@ -33,7 +38,12 @@ Paramiko can't use relative path in this case.
 
 ### Start the Process
 
-    ansible-playbook -i labinventory.py  -e lab=AnsibleExample playbook.yml
+    ansible-playbook -i labinventory.py -e lab=AnsibleExample playbook.yml
+
+to test a upgrade, set the iso path in the playbook `upgrade_iso` var and run:
+
+    ansible-playbook -i labinventory.py -e lab=AnsibleExample -e upgrade=True playbook.yml
+    
 
 The lab name must the same as the lab name in the `lab` folder. For example `AnsibleExample`.
 
@@ -47,10 +57,12 @@ The lab name must the same as the lab name in the `lab` folder. For example `Ans
 5. configure the nodes
 6. run ping tests
 7. run command tests
-8. generate *.rst documentation
-9. stop all nodes and delete the lab
+8. if upgrade, upgrade all vyos
+9. if upgrade, run point 6 and 7 again
+10. generate *.rst documentation
+11. stop all nodes and delete the lab
 
-If something failed, you can open the lab in the `lab management` and investigate the problem.
+If something failed, you can open the lab in vyos the `lab management` and investigate the problem.
 
 
 ## content of the Lab Directory
@@ -121,7 +133,8 @@ for example:
                     commands:
                     - desc: "Test if IP is set to interface"
                         command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-                        stdout: "10.1.1.1/24"
+                        wait_for:
+                            - result[0] contains "10.1.1.1/24"
 
 
             rtr02:
@@ -131,4 +144,5 @@ for example:
                     commands:
                     - desc: "Test if IP is set to interface"
                         command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-                        stdout: "10.1.1.2/24"
+                        wait_for:
+                            - result[0] contains "10.1.1.2/24"

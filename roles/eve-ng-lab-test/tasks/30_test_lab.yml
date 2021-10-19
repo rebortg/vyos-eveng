@@ -6,10 +6,9 @@
   with_items: "{{ lab_vars.tests.ping }}"
   when: lab_vars.tests.ping is defined
 
-
 - name: execute test commands
   vyos.vyos.vyos_command:
     commands: "{{ item.command }}"
-    wait_for: result[0] contains "{{ item.stdout }}"
+    wait_for: "{{ item.wait_for }}"
   with_items: "{{ lab_vars.tests.commands }}"
   when: lab_vars.tests.commands is defined

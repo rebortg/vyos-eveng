@@ -1,0 +1,37 @@
+---
+
+- name: make sure tmp dir exist
+  delegate_to: localhost
+  ansible.builtin.file:
+    path: tmp
+    state: directory
+
+- name: Download upgrade_iso
+  delegate_to: localhost
+  get_url:
+    url: "{{ upgrade_iso }}"
+    dest: "tmp/iso.iso"
+  when: inventory_hostname in groups['vyos']
+  
+
+- name: Copy iso to host
+  ansible.netcommon.net_put:
+    src: "tmp/iso.iso"
+    dest: "/config/iso.iso"
+
+- name: upgrade vyos
+  vyos.vyos.vyos_command:
+    commands: printf '%s\n' "" "Yes" "Yes"  | add system image  /config/iso.iso && reboot now
+
+- name: Wait for vyos nodes
+  wait_for_connection:
+  when: inventory_hostname in groups['vyos']
+
+- name: clear tmp dir
+  delegate_to: localhost
+  ansible.builtin.file:
+    path: tmp
+    state: absent
+  ignore_errors: yes
+
+
