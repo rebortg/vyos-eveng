@@ -16,9 +16,6 @@
 
 - include: 30_test_lab.yml
 
-- debug:
-    msg: "{{ upgrade }}"
-
 - name: include upgrade and 2nd test
   block:
     - include: 21_upgrade_vyos.yml

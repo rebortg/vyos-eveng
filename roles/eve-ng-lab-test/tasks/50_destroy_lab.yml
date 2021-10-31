@@ -20,7 +20,7 @@
 - name: get lab status
   uri:
     method: GET
-    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes"
+    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes"
     return_content: True
     headers:
       Accept: application/json
@@ -31,7 +31,7 @@
 - name: stop all nodes
   uri:
     method: GET
-    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes/{{ item }}/stop/stopmode=3"
+    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/{{ item }}/stop/stopmode=3"
     return_content: True
     headers:
       Accept: application/json
@@ -63,7 +63,7 @@
 - name: delte lab
   uri:
     method: DELETE
-    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl"
+    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl"
     return_content: True
     headers:
       Accept: application/json

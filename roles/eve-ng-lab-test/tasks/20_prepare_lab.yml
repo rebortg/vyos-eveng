@@ -1,9 +1,21 @@
 ---
 
+- name: Ensure {{ eve_ng_folder_name }} is present
+  file: 
+    path: "/opt/unetlab/labs/{{ eve_ng_folder_name }}"
+    recurse: yes
+    state: directory
+    owner: www-data
+    group: www-data
+  when: inventory_hostname in groups['eve']
+  
+
 - name: Create {{ lab }} Lab
   template: 
     src: labs/{{ lab }}/{{ lab }}.unl.j2
-    dest: /opt/unetlab/labs/{{ lab }}.unl
+    dest: /opt/unetlab/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl
+    owner: www-data
+    group: www-data
   when: inventory_hostname in groups['eve']
 
 - name: Login to EVE-NG and get Cookie
@@ -25,7 +37,7 @@
 - name: start vyos-oobm
   uri:
     method: GET
-    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes/1/start"
+    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/1/start"
     return_content: True
     headers:
       Accept: application/json
@@ -60,7 +72,7 @@
 - name: get lab status
   uri:
     method: GET
-    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes"
+    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes"
     return_content: True
     headers:
       Accept: application/json
@@ -72,7 +84,7 @@
 - name: start all nodes
   uri:
     method: GET
-    url: "{{ eve_ng_base_url }}/api/labs/{{ lab }}.unl/nodes/{{ item }}/start"
+    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/{{ item }}/start"
     return_content: True
     headers:
       Accept: application/json

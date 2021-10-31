@@ -1,5 +1,9 @@
 ---
 
+- name: wait, b/c the ping often failed without a short break
+  pause:
+    seconds: 30
+
 - name: do ping test
   vyos.vyos.vyos_ping:
     dest: "{{ item }}"
@@ -12,3 +16,20 @@
     wait_for: "{{ item.wait_for }}"
   with_items: "{{ lab_vars.tests.commands }}"
   when: lab_vars.tests.commands is defined
+
+
+- name: register stdout commands
+  vyos.vyos.vyos_command:
+    commands: "{{ item.command }}"
+  with_items: "{{ lab_vars.tests.stdout }}"
+  when: lab_vars.tests.stdout is defined
+  register: stdout_results
+
+- name: Set variables
+  set_fact:
+    stdout: "{{ stdout_results.results }}"
+  when: stdout_results.skipped == False
+
+
+#- debug:
+#    msg: "{{ stdout_result }}"

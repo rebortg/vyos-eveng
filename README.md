@@ -16,8 +16,7 @@ install python pramiko and scp
 
 ### set vars and environment specifics
 
-you must set Ansible `vars` in `playbook.yml`
-
+you cat set Ansible `vars` in `playbook.yml` or as arguments in the execution of main.py
 
 `node_template_iso`: the vyos iso url
 
@@ -38,14 +37,21 @@ Paramiko can't use relative path in this case.
 
 ### Start the Process
 
-    ansible-playbook -i labinventory.py -e lab=AnsibleExample playbook.yml
+to set some settings and get the ansible logs after run, there is wrapper for ansible-playbook
+
+    python main.py run -l LABNAME
 
 to test a upgrade, set the iso path in the playbook `upgrade_iso` var and run:
 
-    ansible-playbook -i labinventory.py -e lab=AnsibleExample -e upgrade=True playbook.yml
-    
+    python main.py run -l LABNAME --upgrade
 
-The lab name must the same as the lab name in the `lab` folder. For example `AnsibleExample`.
+### Connect to Host in Lab
+
+    python main.py ssh HOSTNAME
+
+The lab must run, for example after a `run` command failed.
+
+
 
 
 ## The Process

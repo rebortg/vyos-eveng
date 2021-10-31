@@ -5,9 +5,11 @@
 Ansible Example
 ###############
 
-Test:
 Date: {{ current_date }}
 Version: {{ node_template_version }}
+{% if upgrade %}
+Upgrade: {{ upgrade_iso_version }}
+{% endif %}
 
 .. image:: {{ output_include_dir }}/topology.png
   :alt: Ansible Example topology image

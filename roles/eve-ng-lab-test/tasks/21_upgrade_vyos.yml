@@ -11,21 +11,32 @@
   get_url:
     url: "{{ upgrade_iso }}"
     dest: "tmp/iso.iso"
-  when: inventory_hostname in groups['vyos']
   
 
 - name: Copy iso to host
   ansible.netcommon.net_put:
     src: "tmp/iso.iso"
     dest: "/config/iso.iso"
+    mode: binary
 
 - name: upgrade vyos
   vyos.vyos.vyos_command:
-    commands: printf '%s\n' "" "Yes" "Yes"  | add system image  /config/iso.iso && reboot now
+    commands: printf '%s\n' "" "Yes" "Yes" | add system image /config/iso.iso
 
+# reboot drive me crazy.
+# Workaround: reboot in 1 minute, the task don't fail, b/c the connection will not be lost
+- name: Reboot vyos
+  vyos.vyos.vyos_command:
+    commands: reboot in 1
+
+# wait to boot, 60 + x seconds
+- name: wait while shutdown
+  pause:
+    seconds: 70
+
+# wait until vyos ist booted
 - name: Wait for vyos nodes
   wait_for_connection:
-  when: inventory_hostname in groups['vyos']
 
 - name: clear tmp dir
   delegate_to: localhost
@@ -33,5 +44,6 @@
     path: tmp
     state: absent
   ignore_errors: yes
+  run_once: true
 
 

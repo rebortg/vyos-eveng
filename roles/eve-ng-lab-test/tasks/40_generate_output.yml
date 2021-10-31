@@ -52,7 +52,13 @@
 
 - name: copy all *.png files
   delegate_to: localhost
-  template: 
+  copy: 
     src: "{{ item.path }}"
     dest: "{{ output_include_dir }}/{{ item.path.split('/')[-1] }}"
   with_items: "{{ png_files.files }}"
+
+- name: copy ansible log files
+  delegate_to: localhost
+  copy: 
+    src: "logs/{{ lab }}"
+    dest: "{{ output_dir }}/{{ lab }}.log"

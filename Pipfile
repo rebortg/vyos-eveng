@@ -4,12 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-click = "*"
 ansible = "*"
 paramiko = "*"
-jinja2 = "*"
+scp = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3"
+python_version = "3.9"
