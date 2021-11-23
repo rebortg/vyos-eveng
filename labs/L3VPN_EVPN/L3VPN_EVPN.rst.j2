@@ -3,10 +3,10 @@
 L3VPN EVPN with VyOS
 ####################
 
-Date: {{ current_date }}
-Version: {{ node_template_version }}
+| Testdate: {{ current_date }}
+| Version: {{ node_template_version }}
 {% if upgrade %}
-Upgrade: {{ upgrade_iso_version }}
+| Upgrade Version: {{ upgrade_iso_version }}
 {% endif %}
 
 I spun up a new lab in EVE-NG, which represents this as the
@@ -47,7 +47,7 @@ SSH access to the PE (Provider Edge) routers.
 
 .. literalinclude:: {{ output_include_dir }}/PE1.conf
    :language: none
-   :emphasize-lines: 1-6
+   :lines: 1-6
 
 
 ********
@@ -86,19 +86,19 @@ PE1
 
 .. literalinclude:: {{ output_include_dir }}/PE1.conf
    :language: none
-   :emphasize-lines: 8-38
+   :lines: 8-38
 
 PE2
 
 .. literalinclude:: {{ output_include_dir }}/PE2.conf
    :language: none
-   :emphasize-lines: 8-38
+   :lines: 8-38
 
 PE3
 
 .. literalinclude:: {{ output_include_dir }}/PE3.conf
    :language: none
-   :emphasize-lines: 8-38
+   :lines: 8-38
 
 
 **********************
@@ -127,19 +127,19 @@ PE1
 
 .. literalinclude:: {{ output_include_dir }}/PE1.conf
    :language: none
-   :emphasize-lines: 40-96
+   :lines: 40-96
 
 PE2
 
 .. literalinclude:: {{ output_include_dir }}/PE2.conf
    :language: none
-   :emphasize-lines: 40-89
+   :lines: 40-89
 
 PE3
 
 .. literalinclude:: {{ output_include_dir }}/PE3.conf
    :language: none
-   :emphasize-lines: 40-89
+   :lines: 40-89
 
 *********************
 Testing and debugging
@@ -153,7 +153,7 @@ Show routes for all VRFs
 {% for item in hostvars['PE1']['stdout'] %}
 {% if item['item']['name'] == 'vrf_all' %}
 
-.. code-block: none
+.. code-block:: none
 
    vyos@PE1:~$ {{ item['item']['command'] }}
 {% for line in item['stdout_lines'][0] %}
@@ -167,7 +167,7 @@ Information about Ethernet Virtual Private Networks
 {% for item in hostvars['PE1']['stdout'] %}
 {% if item['item']['name'] == 'bgp_evpn' %}
 
-.. code-block: none
+.. code-block:: none
 
    vyos@PE1:~$ {{ item['item']['command'] }}
 {% for line in item['stdout_lines'][0] %}
@@ -182,7 +182,7 @@ the EVPN network we need to run
 {% for item in hostvars['PE2']['stdout'] %}
 {% if item['item']['name'] == 'bgp_evpn_net' %}
 
-.. code-block: none
+.. code-block:: none
 
    vyos@PE2:~$ {{ item['item']['command'] }}
 {% for line in item['stdout_lines'][0] %}

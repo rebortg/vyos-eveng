@@ -1,13 +1,9 @@
 # VyOS EVENG Lab Testing
 
 This POC is for automatic build and test predefined labs for vyos.
-At the moment, it only work with the EVE-NG Pro version, b/c the API is different from the CE version
+At the moment, it only works with the EVE-NG Pro version, b/c the API is different from the CE version
 
 ## Quickstart
-
-install collection:
-
-`ansible-galaxy collection install vyos.vyos`
 
 install python pramiko and scp
 
@@ -16,7 +12,7 @@ install python pramiko and scp
 
 ### set vars and environment specifics
 
-you cat set Ansible `vars` in `playbook.yml` or as arguments in the execution of main.py
+you can set Ansible `vars` in `playbook.yml` or as arguments in the execution of main.py
 
 `node_template_iso`: the vyos iso url
 
@@ -30,14 +26,16 @@ or set the user in the `playbook.yml` `vars`:
 
 `eve_ng_password`
 
-It is recommend to use a dedicated account for the Ansible Workflow.
+It is recommended to use a dedicated account for the Ansible Workflow. It is, maybe at the moment,
+not possible to log in with the user in the Eve-NG GUI and use the same user with the ansible workflow.
+With a different User, it is possible to look live in config process.
 
 Edit the `poxy_command` option in the `ansible.cfg` and set the absolute path for the `inventory/id_rsa` file.
-Paramiko can't use relative path in this case.
+Paramiko can't use a relative path in this case.
 
 ### Start the Process
 
-to set some settings and get the ansible logs after run, there is wrapper for ansible-playbook
+To set some settings and get the ansible logs after run, there is a wrapper for the ansible-playbook
 
     python main.py run -l LABNAME
 
@@ -49,7 +47,7 @@ to test a upgrade, set the iso path in the playbook `upgrade_iso` var and run:
 
     python main.py ssh HOSTNAME
 
-The lab must run, for example after a `run` command failed.
+This is only possible if a `run` command fail and the lab is up.
 
 
 
@@ -69,6 +67,17 @@ The lab must run, for example after a `run` command failed.
 11. stop all nodes and delete the lab
 
 If something failed, you can open the lab in vyos the `lab management` and investigate the problem.
+
+## TODO and Knows issues
+
+TODO:
+ISO URL from local filesystem
+check reboot per default
+
+ISSUES:
+more than one running lab is not possible if every oobm host is called vyos-oobm
+
+
 
 
 ## content of the Lab Directory
@@ -132,23 +141,16 @@ for example:
 
     hosts:
         vyos:
-            rtr01:
+            PE2:
                 tests:
                     ping:
-                    - "10.1.1.2"
+                        - "172.29.255.1"
+                        - "172.29.255.3"
                     commands:
-                    - desc: "Test if IP is set to interface"
-                        command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-                        wait_for:
-                            - result[0] contains "10.1.1.1/24"
-
-
-            rtr02:
-                tests:
-                    ping:
-                    - "10.1.1.1"
-                    commands:
-                    - desc: "Test if IP is set to interface"
-                        command: "ip -4 addr show dev eth1 | grep inet | tr -s ' ' | cut -d' ' -f3 | head -n 1"
-                        wait_for:
-                            - result[0] contains "10.1.1.2/24"
+                        - desc: "PING vyos-oobm with VRF"
+                          command: "ping 10.100.0.1 vrf mgmt count 1"
+                          wait_for: 
+                            - result[0] contains '1 packets transmitted, 1 received'
+                    stdout:
+                        - name: bgp_evpn_net
+                          command: "show bgp l2vpn evpn 10.3.1.10"

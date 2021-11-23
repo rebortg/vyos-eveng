@@ -18,6 +18,11 @@ hosts:
               - result[0] contains "Interface        IP Address                        S/L  Description"
               - result[0] contains "---------        ----------                        ---  -----------"
               - result[0] contains "wg01             192.168.0.1/24                    u/u  VPN-to-Branch"
+        stdout:
+          - name: show_interfaces_wireguard
+            command: "show interfaces wireguard"
+          - name: ping_branch_pc
+            command: "ping 10.0.2.100 count 4"
 
 
     branch:
@@ -32,3 +37,6 @@ hosts:
               - result[0] contains "Interface        IP Address                        S/L  Description"
               - result[0] contains "---------        ----------                        ---  -----------"
               - result[0] contains "wg01             192.168.0.2/24                    u/u  VPN-to-central"
+        stdout:
+          - name: show_interfaces_wireguard
+            command: "show interfaces wireguard"

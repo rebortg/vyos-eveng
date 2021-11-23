@@ -3,8 +3,8 @@
 L3VPN EVPN with VyOS
 ####################
 
-Date: 2021-10-31
-Version: 1.4-rolling-202106170808
+| Testdate: 2021-11-11
+| Version: 1.4-rolling-202106170808
 
 I spun up a new lab in EVE-NG, which represents this as the
 "Foo Bar - Service Provider Inc." that has 3 points of presence (PoP) in random
@@ -42,9 +42,9 @@ OSPF, IS-IS, and BGP for individual VRFs.
 The lab I built is using a VRF (called **mgmt**) to provide out-of-band
 SSH access to the PE (Provider Edge) routers. 
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE1.conf
+.. literalinclude:: _include/PE1.conf
    :language: none
-   :emphasize-lines: 1-6
+   :lines: 1-6
 
 
 ********
@@ -53,7 +53,7 @@ Topology
 
 We use the following network topology in this example:
 
-.. image:: output/L3VPN_EVPN/_include/topology.png
+.. image:: _include/topology.png
   :alt: L3VPN EVPN with VyOS topology image
 
 
@@ -81,21 +81,21 @@ automatically on image upgrade. Nothing to do on your side.
 
 PE1
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE1.conf
+.. literalinclude:: _include/PE1.conf
    :language: none
-   :emphasize-lines: 8-38
+   :lines: 8-38
 
 PE2
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE2.conf
+.. literalinclude:: _include/PE2.conf
    :language: none
-   :emphasize-lines: 8-38
+   :lines: 8-38
 
 PE3
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE3.conf
+.. literalinclude:: _include/PE3.conf
    :language: none
-   :emphasize-lines: 8-38
+   :lines: 8-38
 
 
 **********************
@@ -122,21 +122,21 @@ VNI (Virtual Network Identifier) per tenant on all our routers.
 
 PE1
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE1.conf
+.. literalinclude:: _include/PE1.conf
    :language: none
-   :emphasize-lines: 40-96
+   :lines: 40-96
 
 PE2
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE2.conf
+.. literalinclude:: _include/PE2.conf
    :language: none
-   :emphasize-lines: 40-89
+   :lines: 40-89
 
 PE3
 
-.. literalinclude:: output/L3VPN_EVPN/_include/PE3.conf
+.. literalinclude:: _include/PE3.conf
    :language: none
-   :emphasize-lines: 40-89
+   :lines: 40-89
 
 *********************
 Testing and debugging
@@ -148,7 +148,7 @@ tables in action.
 Show routes for all VRFs
 
 
-.. code-block: none
+.. code-block:: none
 
    vyos@PE1:~$ show ip route vrf all
    Codes: K - kernel route, C - connected, S - static, R - RIP,
@@ -159,40 +159,40 @@ Show routes for all VRFs
    
    VRF blue:
    K>* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 00:00:57
-   C>* 10.1.1.0/24 is directly connected, br2000, 00:00:55
-   B>* 10.1.2.0/24 [200/0] via 172.29.255.2, br2000 onlink, weight 1, 00:00:35
+   C>* 10.1.1.0/24 is directly connected, br2000, 00:00:56
+   B>* 10.1.2.0/24 [200/0] via 172.29.255.2, br2000 onlink, weight 1, 00:00:31
    B>* 10.1.3.0/24 [200/0] via 172.29.255.3, br2000 onlink, weight 1, 00:00:31
    
    VRF default:
    O   172.29.0.2/31 [110/1] is directly connected, eth1, weight 1, 00:00:52
    C>* 172.29.0.2/31 is directly connected, eth1, 00:00:55
-   O>* 172.29.0.4/31 [110/2] via 172.29.0.3, eth1, weight 1, 00:00:33
-     *                       via 172.29.0.7, eth3, weight 1, 00:00:33
+   O>* 172.29.0.4/31 [110/2] via 172.29.0.3, eth1, weight 1, 00:00:34
+     *                       via 172.29.0.7, eth3, weight 1, 00:00:34
    O   172.29.0.6/31 [110/1] is directly connected, eth3, weight 1, 00:00:52
    C>* 172.29.0.6/31 is directly connected, eth3, 00:00:55
    C>* 172.29.255.1/32 is directly connected, dum0, 00:00:56
-   O>* 172.29.255.2/32 [110/20] via 172.29.0.3, eth1, weight 1, 00:00:36
-   O>* 172.29.255.3/32 [110/20] via 172.29.0.7, eth3, weight 1, 00:00:32
+   O>* 172.29.255.2/32 [110/20] via 172.29.0.3, eth1, weight 1, 00:00:33
+   O>* 172.29.255.3/32 [110/20] via 172.29.0.7, eth3, weight 1, 00:00:33
    
    VRF green:
    K>* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 00:00:57
-   C>* 10.3.1.0/24 is directly connected, br4000, 00:00:55
+   C>* 10.3.1.0/24 is directly connected, br4000, 00:00:56
    B>* 10.3.3.0/24 [200/0] via 172.29.255.3, br4000 onlink, weight 1, 00:00:31
    
    VRF mgmt:
    S>* 0.0.0.0/0 [210/0] via 10.100.0.1, eth0, weight 1, 00:00:57
    K * 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 00:02:10
-   C>* 10.100.0.0/24 is directly connected, eth0, 00:02:07
+   C>* 10.100.0.0/24 is directly connected, eth0, 00:02:06
    
    VRF red:
    K>* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 00:00:57
    C>* 10.2.1.0/24 is directly connected, br3000, 00:00:55
-   B>* 10.2.2.0/24 [200/0] via 172.29.255.2, br3000 onlink, weight 1, 00:00:35
+   B>* 10.2.2.0/24 [200/0] via 172.29.255.2, br3000 onlink, weight 1, 00:00:31
 
 Information about Ethernet Virtual Private Networks
 
 
-.. code-block: none
+.. code-block:: none
 
    vyos@PE1:~$ show bgp l2vpn evpn
    BGP table version is 1, local router ID is 172.29.255.1
@@ -208,7 +208,7 @@ Information about Ethernet Virtual Private Networks
    Route Distinguisher: 10.1.1.1:4
    *> [5]:[0]:[24]:[10.1.1.0]
                        172.29.255.1             0         32768 ?
-                       ET:8 RT:100:2000 Rmac:4a:54:20:fa:44:76
+                       ET:8 RT:100:2000 Rmac:50:00:00:01:00:04
    Route Distinguisher: 10.1.2.1:3
    *>i[5]:[0]:[24]:[10.1.2.0]
                        172.29.255.2             0    100      0 ?
@@ -216,15 +216,15 @@ Information about Ethernet Virtual Private Networks
    Route Distinguisher: 10.1.3.1:3
    *>i[5]:[0]:[24]:[10.1.3.0]
                        172.29.255.3             0    100      0 ?
-                       RT:100:2000 ET:8 Rmac:02:d7:b5:84:cc:2e
+                       RT:100:2000 ET:8 Rmac:2e:57:49:15:3e:55
    Route Distinguisher: 10.2.1.1:3
    *> [5]:[0]:[24]:[10.2.1.0]
                        172.29.255.1             0         32768 ?
-                       ET:8 RT:100:3000 Rmac:50:00:00:01:00:05
+                       ET:8 RT:100:3000 Rmac:36:cc:2f:27:0f:ce
    Route Distinguisher: 10.2.2.1:2
    *>i[5]:[0]:[24]:[10.2.2.0]
                        172.29.255.2             0    100      0 ?
-                       RT:100:3000 ET:8 Rmac:26:e4:fa:26:57:f8
+                       RT:100:3000 ET:8 Rmac:50:00:00:02:00:05
    Route Distinguisher: 10.3.1.1:2
    *> [5]:[0]:[24]:[10.3.1.0]
                        172.29.255.1             0         32768 ?
@@ -240,7 +240,7 @@ If we need to retrieve information about a specific host/network inside
 the EVPN network we need to run
 
 
-.. code-block: none
+.. code-block:: none
 
    vyos@PE2:~$ show bgp l2vpn evpn 10.3.1.10
    BGP routing table entry for 10.3.1.1:2:[5]:[0]:[24]:[10.3.1.0]
@@ -251,4 +251,4 @@ the EVPN network we need to run
        172.29.255.1 (metric 20) from 172.29.255.1 (172.29.255.1)
          Origin incomplete, metric 0, localpref 100, valid, internal, best (First path received)
          Extended Community: RT:100:4000 ET:8 Rmac:50:00:00:01:00:06
-         Last update: Sun Oct 31 20:08:38 2021
+         Last update: Thu Nov 11 20:34:17 2021

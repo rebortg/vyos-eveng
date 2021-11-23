@@ -5,10 +5,10 @@
 Ansible Example
 ###############
 
-Date: {{ current_date }}
-Version: {{ node_template_version }}
+| Testdate: {{ current_date }}
+| Version: {{ node_template_version }}
 {% if upgrade %}
-Upgrade: {{ upgrade_iso_version }}
+| Upgrade Version: {{ upgrade_iso_version }}
 {% endif %}
 
 .. image:: {{ output_include_dir }}/topology.png

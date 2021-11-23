@@ -14,7 +14,7 @@ must if -u is present
 --uisoname  NAME (default from iso)
 
 
-set in ansible.cfg or with -e in ansible-playbook?
+set in ansible.cfg or with -e in ansible-playbook
 - default_log_path
 - paramiki proxy command
 
@@ -61,6 +61,13 @@ if args.command == "run":
         os.remove(f"logs/{args.lab}")
     except:
         pass
+
+    # TODO think over git workflow
+    try:
+        os.system(f"rm -rf vyos-documentation")
+    except:
+        pass
+    os.system("git clone git@github.com:vyos/vyos-documentation.git")
 
     iso = ""
     if args.iso and args.isoname:

@@ -7,6 +7,11 @@ name = "pypi"
 ansible = "*"
 paramiko = "*"
 scp = "*"
+sphinx-rtd-theme = "*"
+docutils = "<0.18"
+lxml = "*"
+sphinx-notfound-page = "*"
+Sphinx = ">=1.4.3"
 
 [dev-packages]
 

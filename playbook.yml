@@ -12,11 +12,11 @@
 
 
   vars:
-    output_dir: "output/{{ lab }}"
-    output_include_dir: "{{ output_dir }}/_include"
+    output_dir: "vyos-documentation/docs/configexamples/autotest/{{ lab }}"
+    output_include_dir: "_include"
 
     node_template_iso: "https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-1.4-rolling-202106170808-amd64.iso"
     node_template_version: 1.4-rolling-202106170808
 
-    upgrade_iso: "https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-1.4-rolling-202110240217-amd64.iso"
-    upgrade_iso_version: 1.4-rolling-202110240217
+    upgrade_iso: "https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-1.4-rolling-202111090317-amd64.iso"
+    upgrade_iso_version: 1.4-rolling-202111090317
