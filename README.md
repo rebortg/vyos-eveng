@@ -8,6 +8,7 @@ At the moment, it only works with the EVE-NG Pro version, b/c the API is differe
 install python pramiko and scp
 
 `pip install paramiko`
+
 `pip install scp`
 
 ### set vars and environment specifics
