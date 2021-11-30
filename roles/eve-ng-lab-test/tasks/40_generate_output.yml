@@ -60,5 +60,5 @@
 - name: copy ansible log files
   delegate_to: localhost
   copy: 
-    src: "logs/{{ lab }}"
+    src: "logs/{{ lab }}.log"
     dest: "{{ output_dir }}/{{ lab }}.log"

@@ -61,10 +61,12 @@ This is only possible if a `run` command fail and the lab is up.
 5. configure the nodes
 6. run ping tests
 7. run command tests
-8. if upgrade, upgrade all vyos
-9. if upgrade, run point 6 and 7 again
-10. generate *.rst documentation
-11. stop all nodes and delete the lab
+8. do a reboot
+9. run command tests
+10. if upgrade, upgrade all vyos
+11. if upgrade, run point 6 and 7 again
+12. generate *.rst documentation
+13. stop all nodes and delete the lab
 
 If something failed, you can open the lab in vyos the `lab management` and investigate the problem.
 

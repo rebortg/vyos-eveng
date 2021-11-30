@@ -1,0 +1,16 @@
+---
+
+# reboot drive me crazy.
+# Workaround: reboot in 1 minute, the task don't fail, b/c the connection will not be lost
+- name: Reboot vyos
+  vyos.vyos.vyos_command:
+    commands: reboot in 1
+
+# wait to boot, 60 + x seconds
+- name: wait while shutdown
+  pause:
+    seconds: 70
+
+# wait until vyos ist booted
+- name: Wait for vyos nodes
+  wait_for_connection:

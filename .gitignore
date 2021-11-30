@@ -1,5 +1,5 @@
 .DS_Store
 .vscode
 vyos-documentation
-
 tmp
+logs/*.log

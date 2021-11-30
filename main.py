@@ -52,13 +52,13 @@ if args.command == "run":
     template = Template(tf.read())
     # override new ansible file
     wf = open('ansible.cfg','w+')
-    log_path = f"./logs/{args.lab}"
+    log_path = f"./logs/{args.lab}.log"
     wf.write(template.render(log_path=log_path, proxy_command=paramiko_proxy_command))
     wf.close()
 
     #remove old logfile before ansible run
     try:
-        os.remove(f"logs/{args.lab}")
+        os.remove(f"logs/{args.lab}.log")
     except:
         pass
 
