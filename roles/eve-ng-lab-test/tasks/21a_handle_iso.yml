@@ -1,0 +1,19 @@
+---
+- name: make sure tmp dir exist
+  delegate_to: localhost
+  ansible.builtin.file:
+    path: tmp
+    state: directory
+
+
+- name: "register status of tmp/{{ upgrade_iso.split('/')[-1] }}"
+  stat:
+    path: "tmp/{{ upgrade_iso.split('/')[-1] }}"
+  register: temp_iso
+
+- name: Download upgrade_iso
+  delegate_to: localhost
+  get_url:
+    url: "{{ upgrade_iso }}"
+    dest: "tmp/{{ upgrade_iso.split('/')[-1] }}"
+  when: "not temp_iso.stat.exists"

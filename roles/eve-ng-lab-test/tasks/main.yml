@@ -25,6 +25,9 @@
 
 - name: include upgrade and 2nd test
   block:
+    - include: 21a_handle_iso.yml
+      when: inventory_hostname in groups['eve']
+
     - include: 21_upgrade_vyos.yml
       when: inventory_hostname in groups['vyos']
 
