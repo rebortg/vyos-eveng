@@ -1,5 +1,6 @@
 import os
 import argparse
+import uuid
 from jinja2 import Template
 
 
@@ -67,7 +68,7 @@ if args.command == "run":
         os.system(f"rm -rf vyos-documentation")
     except:
         pass
-    os.system("git clone git@github.com:vyos/vyos-documentation.git")
+    os.system("git clone --branch equuleus git@github.com:vyos/vyos-documentation.git")
 
     iso = ""
     if args.iso and args.isoname:
@@ -83,6 +84,16 @@ if args.command == "run":
 
     command_string = f'ansible-playbook -i labinventory.py -e lab={args.lab} {iso} {upgrade} playbook.yml'
     exit_code = os.WEXITSTATUS(os.system(command_string))
+
+    # delete upgrade temp files
+    for entry in os.listdir():
+        try:
+            uuid.UUID(str(entry))
+            os.remove(entry)
+        except:
+            pass
+
+
     if exit_code != 0:
         print(f"Lab {args.lab} failed, please check output and log ({log_path})")
         exit()
