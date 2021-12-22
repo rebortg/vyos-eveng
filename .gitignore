@@ -3,3 +3,5 @@
 vyos-documentation
 tmp
 logs/*.log
+output
+ansible.cfg
