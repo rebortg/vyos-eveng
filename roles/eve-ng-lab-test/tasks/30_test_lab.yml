@@ -1,5 +1,61 @@
 ---
 
+
+
+- name: Start Stop nodes
+  # this is for stop and start a node in eve-ng e.g. to trigger a VPC to get a dhcp address
+  # the node IDs, see unl file. must define in lab/LABNAME/inventory.yml
+  block:
+  - name: Login to EVE-NG and get Cookie
+    uri:
+      method: POST
+      url: "{{ eve_ng_base_url }}/api/auth/login"
+      return_content: yes
+      body_format: json
+      body:
+        username: "{{ eve_ng_user }}"
+        password: "{{ eve_ng_password}}"
+        html5: "-1"
+      headers:
+        Accept: application/json
+      validate_certs: False
+    register: login
+
+
+  - name: "stop nodes id"
+    uri:
+      method: GET
+      url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/{{ item }}/stop/stopmode=3"
+      return_content: True
+      headers:
+        Accept: application/json
+        Cookie: "{{ login.cookies_string }}"
+      validate_certs: False
+    register: response
+    with_items: "{{ start_stop_nodes | default([]) }}"
+  
+  - name: wait after stop
+    pause:
+      seconds: 5  
+
+  - name: "start nodes id"
+    uri:
+      method: GET
+      url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/{{ item }}/start"
+      return_content: True
+      headers:
+        Accept: application/json
+        Cookie: "{{ login.cookies_string }}"
+      validate_certs: False
+    register: response
+    with_items: "{{ start_stop_nodes | default([]) }}"
+  
+  - name: wait after start
+    pause:
+      seconds: 5
+
+  when: inventory_hostname in groups['eve']
+
 - name: wait, b/c the ping often failed without a short break
   pause:
     seconds: 30
@@ -17,18 +73,19 @@
   with_items: "{{ lab_vars.tests.commands }}"
   when: lab_vars.tests.commands is defined
 
+- block:
+  - name: register stdout commands
+    vyos.vyos.vyos_command:
+      commands: "{{ item.command }}"
+    with_items: "{{ lab_vars.tests.stdout }}"
+    when: lab_vars.tests.stdout is defined
+    register: stdout_results
 
-- name: register stdout commands
-  vyos.vyos.vyos_command:
-    commands: "{{ item.command }}"
-  with_items: "{{ lab_vars.tests.stdout }}"
-  when: lab_vars.tests.stdout is defined
-  register: stdout_results
-
-- name: Set variables
-  set_fact:
-    stdout: "{{ stdout_results.results }}"
-  when: stdout_results.skipped == False
+  - name: Set variables
+    set_fact:
+      stdout: "{{ stdout_results.results }}"
+    when: stdout_results.skipped == False
+  when: stdout is not defined
 
 
 #- debug:

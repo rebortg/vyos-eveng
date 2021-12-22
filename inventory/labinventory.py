@@ -48,18 +48,25 @@ class InventoryModule(BaseInventoryPlugin):
         #print(self.lab)
         #print(self.defaultinventory)
 
+
         for defaulthostsgroup in self.defaultinventory['hosts']:
-            self.inventory.add_group(defaulthostsgroup)   
+            self.inventory.add_group(defaulthostsgroup)
             for defaulthost in self.defaultinventory['hosts'][defaulthostsgroup]:
                 self.inventory.add_host(host=defaulthost, group=defaulthostsgroup)
                 for var in self.defaultinventory['hosts'][defaulthostsgroup][defaulthost]:
                     self.inventory.set_variable(defaulthost, var, self.defaultinventory['hosts'][defaulthostsgroup][defaulthost][var])
 
-        self.inventory.add_group('vyos')   
+        self.inventory.add_group('vyos')
         for labhost in self.labinventory['hosts']['vyos']:
             self.inventory.add_host(host=labhost, group='vyos')
             for var in self.defaultinventory['vyos_vars']:
                 self.inventory.set_variable(labhost, var, self.defaultinventory['vyos_vars'][var])
 
             self.inventory.set_variable(labhost, 'lab_vars', self.labinventory['hosts']['vyos'][labhost])
+        
+        try:
+            # quick instert TODO: build more stable
+            self.inventory.set_variable('eveng', 'start_stop_nodes', self.labinventory['vars']['start_stop_nodes'])
+        except:
+            pass
 

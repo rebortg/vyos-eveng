@@ -13,7 +13,6 @@
   include: "labs/{{ lab }}/lab_config.yml"
   when: inventory_hostname in groups['vyos']
 
-
 - include: 30_test_lab.yml
 
 # reboot and test again
