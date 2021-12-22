@@ -1,0 +1,25 @@
+---
+
+hosts:
+  vyos:
+    dhcp-relay:
+      tests:
+        ping:
+          - "172.16.0.1"
+
+    dhcp-server:
+      tests:
+        ping:
+          - "172.16.0.2"
+          - "192.168.0.30"
+        stdout:
+          - name: show_dhcp_server_leases
+            command: "show dhcp server leases"
+          - name: ping_client
+            command: "ping 192.168.0.30 count 4"
+
+    transport:
+
+vars:
+  start_stop_nodes:
+    - 5
