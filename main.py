@@ -68,7 +68,7 @@ if args.command == "run":
         os.system(f"rm -rf vyos-documentation")
     except:
         pass
-    os.system("git clone --branch equuleus git@github.com:vyos/vyos-documentation.git")
+    os.system("git clone --branch master git@github.com:vyos/vyos-documentation.git")
 
     iso = ""
     if args.iso and args.isoname:
@@ -99,7 +99,7 @@ if args.command == "run":
         exit()
 
 if args.command == "ssh":
-    os.system(f'ssh -o ProxyCommand="{paramiko_proxy_command}" vyos@{args.host}')
+    os.system(f'ssh -o ProxyCommand="{paramiko_proxy_command}" -o StrictHostKeyChecking=no vyos@{args.host}')
 
 
 
