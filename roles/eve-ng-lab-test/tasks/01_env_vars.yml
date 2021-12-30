@@ -1,0 +1,11 @@
+---
+
+- name: Get env file content
+  delegate_to: localhost
+  slurp:
+    src: facts_file.json
+  register: facts_file_content
+
+- name: Load facts
+  set_fact:
+    env_data: "{{ facts_file_content['content'] | b64decode }}"

@@ -1,0 +1,30 @@
+---
+
+- name: setup nodes
+  vyos.vyos.vyos_config:
+    src: "labs/{{ lab }}/{{ inventory_hostname }}.conf"
+    save: True
+
+- block:
+  - name: Register external IP in Tunnelbroker
+    delegate_to: eveng
+    uri:
+      url: '{{ env_data["TUNNELBROKER_UPDATE_URL"] }}'
+      return_content: no
+
+  - name: get ipv4 address of vyos-wan (eth1)
+    vyos.vyos.vyos_command:
+      commands: ip -4 a show eth1 | grep -Po 'inet \K[0-9.]*'
+    register: stdout_results
+
+  - name: Set variables
+    set_fact:
+      eth1_ipv4: "{{ stdout_results.stdout[0] }}"
+  
+  - name: setup vyos-wan
+    vyos.vyos.vyos_config:
+      src: "labs/{{ lab }}/vyos-wan_tun0.conf"
+      save: True
+
+  when: inventory_hostname == "vyos-wan"
+

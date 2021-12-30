@@ -24,5 +24,3 @@
   vyos.vyos.vyos_config:
     src: "labs/{{ lab }}/{{ inventory_hostname }}.conf"
     save: True
-
-  

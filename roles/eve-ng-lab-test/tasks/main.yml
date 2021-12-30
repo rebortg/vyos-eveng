@@ -1,5 +1,7 @@
 ---
 
+- include: 01_env_vars.yml
+
 - fail: msg="The variable 'node_template_version' is empty"
   when: node_template_version == ""
 

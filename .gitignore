@@ -5,3 +5,4 @@ tmp
 logs/*.log
 output
 ansible.cfg
+facts_file
