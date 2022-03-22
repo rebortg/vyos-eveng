@@ -20,19 +20,16 @@ you can set Ansible `vars` in `playbook.yml` or as arguments in the execution of
 `node_template_version`: the vyos version used in eve-ng
 
 
-Create a new User in Eve-NG. Name and password are `ansible`.
-or set the user in the `playbook.yml` `vars`:
+Create a new User in Eve-NG. Username and password are both `ansible`.
+or set the credentials in the `playbook.yml` `vars`:
 
 `eve_ng_user`
 
 `eve_ng_password`
 
 It is recommended to use a dedicated account for the Ansible Workflow. It is, maybe at the moment,
-not possible to log in with the user in the Eve-NG GUI and use the same user with the ansible workflow.
-With a different User, it is possible to look live in config process.
-
-Edit the `poxy_command` option in the `ansible.cfg` and set the absolute path for the `inventory/id_rsa` file.
-Paramiko can't use a relative path in this case.
+not possible to login with the user in the Eve-NG GUI and use the same user with the ansible workflow.
+With a different User, it is possible to look live in the playbook process.
 
 ### Start the Process
 
@@ -40,7 +37,11 @@ To set some settings and get the ansible logs after run, there is a wrapper for 
 
     python main.py run -l LABNAME
 
-to test a upgrade, set the iso path in the playbook `upgrade_iso` var and run:
+Show other options with
+
+    python main.py run -h
+
+To test an upgrade, set the iso path in the playbook `upgrade_iso` var and run:
 
     python main.py run -l LABNAME --upgrade
 
@@ -48,34 +49,35 @@ to test a upgrade, set the iso path in the playbook `upgrade_iso` var and run:
 
     python main.py ssh HOSTNAME
 
-This is only possible if a `run` command fail and the lab is up.
+This is only possible if a `run` command failed and the lab is up.
 
 
 
 
 ## The Process
 
-1. create a new template based on iso and version name, do nothing when a VyOS image with the same version is present
-2. stop and delete an existing lab with the same name
+1. create a new template based on iso and version name, do nothing when a VyOS image with the same version name is present
+2. delete an existing lab with the same name, if all hosts are down in lab
 3. create the lab from the lab folder
 4. start the nodes
 5. configure the nodes
 6. run ping tests
 7. run command tests
-8. do a reboot
-9. run command tests
-10. if upgrade, upgrade all vyos
-11. if upgrade, run point 6 and 7 again
-12. generate *.rst documentation
-13. stop all nodes and delete the lab
+8. collect command output
+9. do a reboot
+10. run command tests
+11. if upgrade, upgrade all vyos
+12. if upgrade, run point 6 and 7 again
+13. generate *.rst documentation
+14. stop all nodes and delete the lab
 
-If something failed, you can open the lab in vyos the `lab management` and investigate the problem.
+If something failed, you can open the lab in the eve-ng `lab management` section and investigate the problem.
 
 ## TODO and Knows issues
 
 TODO:
 ISO URL from local filesystem
-check reboot per default
+create base64 decoded config via ansible from inventory/rtr.conf.j2 and vyos-oobm.conf.j2
 
 ISSUES:
 more than one running lab is not possible if every oobm host is called vyos-oobm
@@ -91,7 +93,7 @@ The RST file for rendering the output
 
 ### LABNAME.unl.j2
 
-The Lab file to import to eve-ng
+The Lab file for import to eve-ng
 
 VyOS-OOBM must have the node id 1
 
@@ -110,7 +112,6 @@ The config of VyOS-OOBM is different from the other nodes:
     set interfaces ethernet eth1 address '10.100.0.1/24'
     set service dhcp-server listen-address '10.100.0.1'
     set service dhcp-server hostfile-update
-    set service dhcp-server shared-network-name MGMT subnet 10.100.0.0/24 default-router '10.100.0.1'
     set service dhcp-server shared-network-name MGMT subnet 10.100.0.0/24 range 0 start '10.100.0.10'
     set service dhcp-server shared-network-name MGMT subnet 10.100.0.0/24 range 0 stop '10.100.0.250'
     set service ssh
@@ -121,7 +122,7 @@ The config of VyOS-OOBM is different from the other nodes:
 
 a minimal config of the nodes:
 
-    The hostname is important and used in ansible 
+    The hostname is important and will be used in ansible 
 
     set system host-name rtr01
     set interfaces ethernet eth0 address 'dhcp'
@@ -129,31 +130,36 @@ a minimal config of the nodes:
     set system login user vyos authentication public-keys default key AAAAB3NzaC1yc2EAAAADAQABAAABgQDaCjzejtf56qx40toZqPRLcpg0fWJxpvR5cS9oqh+3+rRURKVrGIbgCmeucBC+kQnyvAqugCtEIZKDyk/kl9Z8eLoCjjkr4pguxo9PKWsDiMBdit1DY6m2Mr0BotbhhaNmIvRkA8/5apI6/RrNlo78Pj1doiu64+cqUjzvh5BuBUCbIaseE+4pg2Fs28d+NM20J4eOplHYnsVz7Aipj0UzT/HaIo8alPyZHOKuPOcOXZGJEwjayszQoQbKwIpBxCJM2m5zQyWkirX8QvmnIie57TSQ7J9zNB4NhLpUV27QYBBixMZOOwDJQpnISfjOd/tFpM5fn0vOIp02oQAHpK1hwQBFLVjAI50z8K96zTIwEPeCwIosTBer4HTUY073zpCVEsvnsT5c5Y0UVJLT+235S1XbuBr5zMvAAN9CpLb+WqNlDpvI/rAIVQTFjZOXr0x9rEVGRmTT19GGzjp2rXu9SIrnJ0d0X5ycyIp1dvoBngb4GWSkZaGUsYEDFk/kONs=
     set system login user vyos authentication public-keys default type ssh-rsa
 
-TODO: create base64 decoded config via ansible from inventory/rtr.conf.j2 and vyos-oobm.conf.j2
-
 ### lab_config.yml
 
 Ansible tasks to configure the lab after all nodes are started and are running with the startup-config
 
 ### inventory.yml
 
-This is the lab inventory files, a script parse it and add the hosts to the ansible inventroy.
+This is the lab inventory file. An inventory script will parse it and add the hosts to the ansible inventroy.
 Also test commands will provide here:
+
+The Playbook wide vars define
+- start_stop_nodes: a list of nodes, see unl file, which are stopped and started via the eveng API.
+  This is mostly used for VPCs that cannot be handle via the OOBM network.
 
 for example:
 
     hosts:
-        vyos:
-            PE2:
-                tests:
-                    ping:
-                        - "172.29.255.1"
-                        - "172.29.255.3"
-                    commands:
-                        - desc: "PING vyos-oobm with VRF"
-                          command: "ping 10.100.0.1 vrf mgmt count 1"
-                          wait_for: 
-                            - result[0] contains '1 packets transmitted, 1 received'
-                    stdout:
-                        - name: bgp_evpn_net
-                          command: "show bgp l2vpn evpn 10.3.1.10"
+      vyos:
+        PE2:
+          tests:
+            ping:
+              - "172.29.255.1"
+              - "172.29.255.3"
+            commands:
+              - desc: "PING vyos-oobm with VRF"
+                command: "ping 10.100.0.1 vrf mgmt count 1"
+                wait_for: 
+                  - result[0] contains '1 packets transmitted, 1 received'
+            stdout:
+              - name: bgp_evpn_net
+                command: "show bgp l2vpn evpn 10.3.1.10"
+    vars:
+      start_stop_nodes:
+        - 5
