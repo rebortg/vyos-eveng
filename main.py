@@ -4,23 +4,7 @@ import uuid
 from jinja2 import Template
 
 
-'''
---run --urun
--l --lab NAME
---iso URL
---isoname NAME (default from iso)
-
-must if -u is present
---uiso URL
---uisoname  NAME (default from iso)
-
-
-set in ansible.cfg or with -e in ansible-playbook
-- default_log_path
-- paramiki proxy command
-
-'''
-
+# collect lab choices
 labs =[]
 for entry in os.listdir('labs'):
     if os.path.isdir(f'labs/{entry}'):
@@ -33,11 +17,12 @@ subparsers = parser.add_subparsers(dest="command")
 
 parser_run = subparsers.add_parser("run", help="Run ansible playbook")
 parser_run.add_argument("--lab", "-l", choices=labs, type=str, help="Labname", required=True)
-parser_run.add_argument("--iso", type=str, help="ISO URL")
-parser_run.add_argument("--isoname", type=str, help="Versionname")
-parser_run.add_argument("--uiso", type=str, help="ISO Upgrade URL")
-parser_run.add_argument("--uisoname", type=str, help="Upgrade Versionname")
+parser_run.add_argument("--iso_path", type=str, help="ISO URL")
+parser_run.add_argument("--iso_version", type=str, help="Versionname")
+parser_run.add_argument("--upgrade_iso_path", type=str, help="ISO Upgrade URL")
+parser_run.add_argument("--upgrade_iso_version", type=str, help="Upgrade Versionname")
 parser_run.add_argument("--upgrade", "-u", action="store_true", help="do an upgrade")
+parser_run.add_argument("--branch", "-b", type=str, help="the lab and documentation branchname", required=True,     choices=['master', 'equuleus'])
 
 # ssh commands
 parser_ssh = subparsers.add_parser("ssh", help="connect to a running ssh host")
@@ -49,13 +34,14 @@ args = parser.parse_args()
 paramiko_proxy_command = f"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i {os.getcwd()}/inventory/id_rsa -W %h:%p vyos@vyos-oobm"
 
 if args.command == "run":
-    tf = open('ansible.cfg.j2')
-    template = Template(tf.read())
+    print("")
+    template_f = open('ansible.cfg.j2')
+    template = Template(template_f.read())
     # override new ansible file
-    wf = open('ansible.cfg','w+')
+    write_f = open('ansible.cfg','w+')
     log_path = f"./logs/{args.lab}.log"
-    wf.write(template.render(log_path=log_path, proxy_command=paramiko_proxy_command))
-    wf.close()
+    write_f.write(template.render(log_path=log_path, proxy_command=paramiko_proxy_command))
+    write_f.close()
 
     #remove old logfile before ansible run
     try:
@@ -63,29 +49,40 @@ if args.command == "run":
     except:
         pass
 
+    iso = ""
+    upgrade = ""
+
+    if args.iso_path or args.iso_version:
+        if args.iso_path and args.iso_version:
+            # define Ansible envvars
+            iso = f"-e node_template_iso={args.iso_path} -e node_template_version={args.iso_version}"
+        else:
+            print("--iso_path and --iso_version must definded")
+            exit(255)
+
+    
+    if args.upgrade_iso_path or args.upgrade_iso_version:
+        if args.upgrade_iso_path and args.upgrade_iso_version:
+            # define Ansible envvars
+            upgrade = f"-e upgrade=True -e upgrade_iso={args.upgrade_iso_path} -e upgrade_iso_version={args.upgrade_iso_version}"
+        else:
+            print("--upgrade, --upgrade_iso_path and --upgrade_iso_version must definded")
+            exit(255)
+
+
     # TODO think over git workflow
     try:
         os.system(f"rm -rf vyos-documentation")
     except:
         pass
-    os.system("git clone --branch master git@github.com:vyos/vyos-documentation.git")
-
-    iso = ""
-    if args.iso and args.isoname:
-        iso = f"-e node_template_iso={args.iso} -e node_template_version={args.isoname} "
-    
-    upgrade = ""
-    if args.upgrade:
-        upgrade = "-e upgrade=True "
-    
-    uiso = ""
-    if args.uiso and args.uisoname:
-        iso = f"-e upgrade_iso={args.uiso} -e upgrade_iso_version={args.uisoname} "
+    os.system(f"git clone --branch {args.branch} git@github.com:vyos/vyos-documentation.git")
+    os.system(f"git submodule set-branch --branch {args.branch} -- labs")
+    os.system(f"git submodule update --remote -- labs")
 
     command_string = f'ansible-playbook -i labinventory.py -e lab={args.lab} {iso} {upgrade} playbook.yml'
     exit_code = os.WEXITSTATUS(os.system(command_string))
 
-    # delete upgrade temp files
+    # delete upgrade temp files which where written from andible/paramiko upload module
     for entry in os.listdir():
         try:
             uuid.UUID(str(entry))
@@ -96,11 +93,7 @@ if args.command == "run":
 
     if exit_code != 0:
         print(f"Lab {args.lab} failed, please check output and log ({log_path})")
-        exit()
+        exit(exit_code)
 
 if args.command == "ssh":
     os.system(f'ssh -o ProxyCommand="{paramiko_proxy_command}" -o StrictHostKeyChecking=no vyos@{args.host}')
-
-
-
-#os.system("ansible-playbook -i labinventory.py -e lab=L3VPN_EVPN  playbook.yml")

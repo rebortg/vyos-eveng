@@ -6,3 +6,5 @@ logs/*.log
 output
 ansible.cfg
 facts_file.json
+Pipfile
+Pipfile.lock

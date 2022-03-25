@@ -14,3 +14,11 @@ node_template_arch: amd64
 node_template_version: ""
 node_template_name: "{{ node_template_os }}-{{ node_template_version }}-{{ node_template_arch }}"
 
+upgrade_iso: ""
+upgrade_iso_version: ""
+
+upgrade_iso: ""
+upgrade_iso_version: ""
+
+output_dir: "vyos-documentation/docs/configexamples/autotest/{{ lab }}"
+output_include_dir: "_include"
