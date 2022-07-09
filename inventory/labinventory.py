@@ -44,11 +44,6 @@ class InventoryModule(BaseInventoryPlugin):
     def parse(self, inventory, loader, path, cache):
         super(InventoryModule, self).parse(inventory, loader, path)
 
-        #print(self.labinventory)
-        #print(self.lab)
-        #print(self.defaultinventory)
-
-
         for defaulthostsgroup in self.defaultinventory['hosts']:
             self.inventory.add_group(defaulthostsgroup)
             for defaulthost in self.defaultinventory['hosts'][defaulthostsgroup]:

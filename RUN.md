@@ -11,3 +11,8 @@ python main.py run -l Wireguard \
 --upgrade_iso_path https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-1.4-rolling-202203250317-amd64.iso \
 --upgrade_iso_version 1.4-rolling-202203250317 \
 --branch equuleus
+
+python main.py run -l Wireguard \
+--iso_path https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-1.4-rolling-202203280217-amd64.iso \
+--iso_version 1.4-rolling-202203280217 \
+--branch master

@@ -1,4 +1,4 @@
 [submodule "labs"]
 	path = labs
 	url = git@github.com:rebortg/vyos-eveng-labs.git
-	branch = equuleus
+	branch = master
