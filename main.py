@@ -16,7 +16,7 @@ subparsers = parser.add_subparsers(dest="command")
 # run commands
 
 parser_run = subparsers.add_parser("run", help="Run ansible playbook")
-parser_run.add_argument("--lab", "-l", choices=labs, type=str, help="Labname", required=True)
+parser_run.add_argument("--lab", "-l", choices=labs, type=str, help="Labname")
 parser_run.add_argument("--iso_path", type=str, help="ISO URL")
 parser_run.add_argument("--iso_version", type=str, help="Versionname")
 parser_run.add_argument("--upgrade_iso_path", type=str, help="ISO Upgrade URL")
@@ -35,19 +35,6 @@ paramiko_proxy_command = f"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile
 
 if args.command == "run":
     print("")
-    template_f = open('ansible.cfg.j2')
-    template = Template(template_f.read())
-    # override new ansible file
-    write_f = open('ansible.cfg','w+')
-    log_path = f"./logs/{args.lab}.log"
-    write_f.write(template.render(log_path=log_path, proxy_command=paramiko_proxy_command))
-    write_f.close()
-
-    #remove old logfile before ansible run
-    try:
-        os.remove(f"logs/{args.lab}.log")
-    except:
-        pass
 
     iso = ""
     upgrade = ""
@@ -78,21 +65,48 @@ if args.command == "run":
     os.system(f"git clone --branch {args.branch} git@github.com:vyos/vyos-documentation.git")
     os.system(f"git submodule set-branch --branch {args.branch} -- labs")
     os.system(f"git submodule update --remote -- labs")
+    
+    # fill labs var
+    run_labs = []
+    if args.lab:
+        run_labs = [args.labs]
+    else:
+        run_labs = labs
 
-    command_string = f'ansible-playbook -i labinventory.py -e lab={args.lab} {iso} {upgrade} playbook.yml'
-    exit_code = os.WEXITSTATUS(os.system(command_string))
-
-    # delete upgrade temp files which where written from andible/paramiko upload module
-    for entry in os.listdir():
+    failed_labs = []
+    for l in run_labs:
+        # open ansible.cfg template
+        template_f = open('ansible.cfg.j2')
+        template = Template(template_f.read())
+        # override new ansible file
+        write_f = open('ansible.cfg','w+')
+        log_path = f"./logs/{l}.log"
+        write_f.write(template.render(log_path=log_path, proxy_command=paramiko_proxy_command))
+        write_f.close()
+        #remove old logfile before ansible run
         try:
-            uuid.UUID(str(entry))
-            os.remove(entry)
+            os.remove(f"logs/{l}.log")
         except:
             pass
+        
+
+        command_string = f'ansible-playbook -i labinventory.py -e lab={l} {iso} {upgrade} playbook.yml'
+        exit_code = os.WEXITSTATUS(os.system(command_string))
+
+        # delete upgrade temp files which where written from andible/paramiko upload module
+        for entry in os.listdir():
+            try:
+                uuid.UUID(str(entry))
+                os.remove(entry)
+            except:
+                pass
 
 
-    if exit_code != 0:
-        print(f"Lab {args.lab} failed, please check output and log ({log_path})")
+        if exit_code != 0:
+            failed_labs.append(l)
+    
+    for fail in failed_labs:
+        print(f"Lab {fail} failed, please check output and log ({log_path})")
         exit(exit_code)
 
 if args.command == "ssh":
