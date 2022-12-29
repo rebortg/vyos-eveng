@@ -7,6 +7,13 @@
 - fail: msg="The variable 'node_template_version' is empty"
   when: node_template_version == ""
 
+
+- name: install requirements
+  ansible.builtin.apt:
+    name: expect
+    state: present
+    update_cache: true
+
 - name: Login to EVE-NG and get Cookie
   uri:
     method: POST

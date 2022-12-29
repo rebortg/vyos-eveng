@@ -69,7 +69,7 @@ if args.command == "run":
     # fill labs var
     run_labs = []
     if args.lab:
-        run_labs = [args.labs]
+        run_labs = [args.lab]
     else:
         run_labs = labs
 
