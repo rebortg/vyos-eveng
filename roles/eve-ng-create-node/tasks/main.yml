@@ -55,7 +55,7 @@
       state: directory
 
 
-  - name: Download iso
+  - name: Upload iso to eve-ng
     uri:
       url: "{{ node_template_iso }}"
       method: GET
@@ -157,6 +157,9 @@
         Cookie: "{{ login.cookies_string }}"
       validate_certs: False
     register: response
+  
+  - debug:
+      msg: "{{ response }}"
 
 
   - name: get node infos
