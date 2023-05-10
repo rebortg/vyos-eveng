@@ -1,44 +1,29 @@
 # -*- coding: utf-8 -*-
 #
 # (c) 2017 Red Hat, Inc.
-#
-# This file is part of Ansible
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 # Make coding more python3-ish
 from __future__ import absolute_import, division, print_function
 
 __metaclass__ = type
 
-import pytest
 from copy import deepcopy
+from unittest.mock import MagicMock
 
-from ansible_collections.ansible.netcommon.tests.unit.compat.mock import (
-    MagicMock,
-)
-from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import (
-    utils,
-)
+import pytest
 from ansible.module_utils.common.network import (
+    is_masklen,
+    is_netmask,
+    to_ipv6_network,
+    to_ipv6_subnet,
     to_masklen,
     to_netmask,
     to_subnet,
-    to_ipv6_network,
-    to_ipv6_subnet,
-    is_masklen,
-    is_netmask,
+)
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import (
+    utils,
 )
 
 

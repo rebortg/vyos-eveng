@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # (c) 2018, Ansible by Red Hat, inc
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import absolute_import, division, print_function
 
@@ -267,21 +268,21 @@ try:
 except ImportError:
     from xml.etree.ElementTree import tostring
 
+from ansible.module_utils._text import to_text
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.ansible.netcommon.plugins.module_utils.network.netconf.netconf import (
-    get_capabilities,
-    get_config,
-    get,
-)
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.netconf import (
     remove_namespaces,
 )
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.netconf.netconf import (
+    get,
+    get_capabilities,
+    get_config,
+)
 from ansible_collections.ansible.netcommon.plugins.module_utils.utils.data import (
+    dict_to_xml,
     validate_and_normalize_data,
     xml_to_dict,
-    dict_to_xml,
 )
-from ansible.module_utils._text import to_text
 
 try:
     import jxmlease
@@ -292,8 +293,7 @@ except ImportError:
 
 
 def main():
-    """entry point for module execution
-    """
+    """entry point for module execution"""
     argument_spec = dict(
         source=dict(choices=["running", "candidate", "startup"]),
         filter=dict(type="raw"),

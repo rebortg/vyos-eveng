@@ -182,7 +182,7 @@ Parameters
                 <td>
                 </td>
                 <td>
-                        <div>A ditionary that specifies the rule-set configurations.</div>
+                        <div>A dictionary that specifies the rule-set configurations.</div>
                 </td>
             </tr>
                                 <tr>
@@ -375,7 +375,7 @@ Parameters
                     <td class="elbow-placeholder"></td>
                 <td colspan="3">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
-                    <b>disabled</b>
+                    <b>disable</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
                         <span style="color: purple">boolean</span>
@@ -389,6 +389,7 @@ Parameters
                 </td>
                 <td>
                         <div>Option to disable firewall rule.</div>
+                        <div style="font-size: small; color: darkgreen"><br/>aliases: disabled</div>
                 </td>
             </tr>
             <tr>
@@ -550,7 +551,7 @@ Parameters
                         </ul>
                 </td>
                 <td>
-                        <div>Inboud ip sec packets.</div>
+                        <div>Inbound ip sec packets.</div>
                 </td>
             </tr>
             <tr>
@@ -653,6 +654,28 @@ Parameters
             </tr>
 
 
+            <tr>
+                    <td class="elbow-placeholder"></td>
+                    <td class="elbow-placeholder"></td>
+                    <td class="elbow-placeholder"></td>
+                <td colspan="3">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>log</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">string</span>
+                    </div>
+                </td>
+                <td>
+                        <ul style="margin: 0; padding: 0"><b>Choices:</b>
+                                    <li>disable</li>
+                                    <li>enable</li>
+                        </ul>
+                </td>
+                <td>
+                        <div>Option to log packets matching rule</div>
+                </td>
+            </tr>
             <tr>
                     <td class="elbow-placeholder"></td>
                     <td class="elbow-placeholder"></td>
@@ -1320,7 +1343,7 @@ Notes
 
 .. note::
    - Tested against VyOS 1.1.8 (helium).
-   - This module works with connection ``network_cli``. See `the VyOS OS Platform Options <../network/user_guide/platform_vyos.html>`_.
+   - This module works with connection ``ansible.netcommon.network_cli``. See `the VyOS OS Platform Options <../network/user_guide/platform_vyos.html>`_.
 
 
 
@@ -1574,7 +1597,7 @@ Examples
     # vyos@vyos# run show  configuration commands | grep firewall
     # set firewall group address-group 'inbound'
     #
-    - name: Merge the provided configuration with the exisiting running configuration
+    - name: Merge the provided configuration with the existing running configuration
       vyos.vyos.vyos_firewall_rules:
         config:
         - afi: ipv6

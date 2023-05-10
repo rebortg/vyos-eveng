@@ -34,7 +34,7 @@ extends_documentation_fragment:
 - vyos.vyos.vyos
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 - To ensure idempotency and correct diff the configuration lines in the relevant module options should be similar to how they
   appear if present in the running configuration on device including the indentation.
 options:
@@ -203,7 +203,6 @@ from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import
     run_commands,
 )
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    vyos_argument_spec,
     get_connection,
 )
 
@@ -339,8 +338,6 @@ def main():
         backup_options=dict(type="dict", options=backup_spec),
         save=dict(type="bool", default=False),
     )
-
-    argument_spec.update(vyos_argument_spec)
 
     mutually_exclusive = [("lines", "src")]
 

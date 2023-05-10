@@ -29,6 +29,7 @@ from ansible.module_utils.six import iteritems
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.utils.utils import (
     list_diff_want_only,
 )
+import re
 
 
 class Firewall_rules(ConfigBase):
@@ -167,13 +168,29 @@ class Firewall_rules(ConfigBase):
         """
         commands = []
         if have:
+            # Iterate over the afi rule sets we already have.
             for h in have:
                 r_sets = self._get_r_sets(h)
+                # Iterate over each rule set we already have.
                 for rs in r_sets:
-                    w = self.search_r_sets_in_have(want, rs["name"], "r_list")
-                    commands.extend(
-                        self._add_r_sets(h["afi"], rs, w, opr=False)
+                    # In the desired configuration, search for the rule set we
+                    # already have (to be replaced by our desired
+                    # configuration's rule set).
+                    wanted_rule_set = self.search_r_sets_in_have(
+                        want, rs["name"], "r_list", h["afi"]
                     )
+                    if wanted_rule_set is not None:
+                        # Remove the rules that we already have if the wanted
+                        # rules exist under the same name.
+                        commands.extend(
+                            self._add_r_sets(
+                                h["afi"],
+                                want=rs,
+                                have=wanted_rule_set,
+                                opr=False,
+                            )
+                        )
+        # Merge the desired configuration into what we already have.
         commands.extend(self._state_merged(want, have))
         return commands
 
@@ -189,7 +206,9 @@ class Firewall_rules(ConfigBase):
             for h in have:
                 r_sets = self._get_r_sets(h)
                 for rs in r_sets:
-                    w = self.search_r_sets_in_have(want, rs["name"], "r_list")
+                    w = self.search_r_sets_in_have(
+                        want, rs["name"], "r_list", h["afi"]
+                    )
                     if not w:
                         commands.append(
                             self._compute_command(
@@ -214,7 +233,9 @@ class Firewall_rules(ConfigBase):
         for w in want:
             r_sets = self._get_r_sets(w)
             for rs in r_sets:
-                h = self.search_r_sets_in_have(have, rs["name"], "r_list")
+                h = self.search_r_sets_in_have(
+                    have, rs["name"], "r_list", w["afi"]
+                )
                 commands.extend(self._add_r_sets(w["afi"], rs, h))
         return commands
 
@@ -232,7 +253,7 @@ class Firewall_rules(ConfigBase):
                 if r_sets:
                     for rs in r_sets:
                         h = self.search_r_sets_in_have(
-                            have, rs["name"], "r_list"
+                            have, rs["name"], "r_list", w["afi"]
                         )
                         if h:
                             commands.append(
@@ -338,8 +359,9 @@ class Firewall_rules(ConfigBase):
             "number",
             "protocol",
             "fragment",
-            "disabled",
+            "disable",
             "description",
+            "log",
         )
         if w_rules:
             for w in w_rules:
@@ -354,7 +376,7 @@ class Firewall_rules(ConfigBase):
                             and key in l_set
                             and not (h and self._is_w_same(w, h, key))
                         ):
-                            if key == "disabled":
+                            if key == "disable":
                                 if not (
                                     not val
                                     and (not h or key not in h or not h[key])
@@ -377,7 +399,7 @@ class Firewall_rules(ConfigBase):
                                 )
                                 continue
                             if (
-                                key == "disabled"
+                                key == "disable"
                                 and val
                                 and h
                                 and (key not in h or not h[key])
@@ -554,10 +576,27 @@ class Firewall_rules(ConfigBase):
                     and not (h_icmp and self._is_w_same(w[attr], h_icmp, item))
                 ):
                     if item == "type_name":
+                        os_version = self._get_os_version()
+                        ver = re.search(
+                            "vyos ([\\d\\.]+)-?.*",  # noqa: W605
+                            os_version,
+                            re.IGNORECASE,
+                        )
+                        if ver.group(1) >= "1.4":
+                            param_name = "type-name"
+                        else:
+                            param_name = "type"
                         if "ipv6-name" in cmd:
                             commands.append(
                                 cmd
-                                + (" " + "icmpv6" + " " + "type" + " " + val)
+                                + (
+                                    " "
+                                    + "icmpv6"
+                                    + " "
+                                    + param_name
+                                    + " "
+                                    + val
+                                )
                             )
                         else:
                             commands.append(
@@ -779,8 +818,9 @@ class Firewall_rules(ConfigBase):
             key = "group"
             group = w[attr].get(key) or {}
             if group:
-                if h and key in h[attr].keys():
-                    h_group = h[attr].get(key) or {}
+                h_group = {}
+                if h and h.get(attr) and key in h[attr].keys():
+                    h_group = h[attr].get(key)
                 for item, val in iteritems(group):
                     if val:
                         if (
@@ -824,12 +864,13 @@ class Firewall_rules(ConfigBase):
                             )
         return commands
 
-    def search_r_sets_in_have(self, have, w_name, type="rule_sets"):
+    def search_r_sets_in_have(self, have, w_name, type="rule_sets", afi=None):
         """
         This function  returns the rule-set/rule if it is present in target config.
         :param have: target config.
         :param w_name: rule-set name.
         :param type: rule_sets/rule/r_list.
+        :param afi: address family (when type is r_list).
         :return: rule-set/rule.
         """
         if have:
@@ -841,10 +882,11 @@ class Firewall_rules(ConfigBase):
                         return r
             elif type == "r_list":
                 for h in have:
-                    r_sets = self._get_r_sets(h)
-                    for rs in r_sets:
-                        if rs[key] == w_name:
-                            return rs
+                    if h["afi"] == afi:
+                        r_sets = self._get_r_sets(h)
+                        for rs in r_sets:
+                            if rs[key] == w_name:
+                                return rs
             else:
                 for rs in have:
                     if rs[key] == w_name:
@@ -900,7 +942,7 @@ class Firewall_rules(ConfigBase):
             value
             and opr
             and attrib != "enable_default_log"
-            and attrib != "disabled"
+            and attrib != "disable"
         ):
             cmd += " '" + str(value) + "'"
         return cmd
@@ -1005,13 +1047,22 @@ class Firewall_rules(ConfigBase):
         r_set = (
             "p2p",
             "ipsec",
+            "log",
             "action",
             "fragment",
             "protocol",
-            "disabled",
+            "disable",
             "description",
             "mac_address",
             "default_action",
             "enable_default_log",
         )
         return True if key in r_set else False
+
+    def _get_os_version(self):
+        os_version = "1.2"
+        if self._connection:
+            os_version = self._connection.get_device_info()[
+                "network_os_version"
+            ]
+        return os_version

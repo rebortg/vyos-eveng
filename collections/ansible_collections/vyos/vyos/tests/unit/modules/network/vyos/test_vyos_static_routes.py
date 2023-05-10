@@ -71,7 +71,7 @@ class TestVyosStaticRoutesModule(TestVyosModule):
         self.mock_load_config.stop()
         self.mock_execute_show_command.stop()
 
-    def load_fixtures(self, commands=None):
+    def load_fixtures(self, commands=None, filename=None):
         def load_from_file(*args, **kwargs):
             return load_fixture("vyos_static_routes_config.cfg")
 
@@ -90,10 +90,12 @@ class TestVyosStaticRoutesModule(TestVyosModule):
                                         dest="192.0.2.48/28",
                                         next_hops=[
                                             dict(
-                                                forward_router_address="192.0.2.9"
+                                                forward_router_address="192.0.2.9",
+                                                admin_distance=10,
                                             ),
                                             dict(
-                                                forward_router_address="192.0.2.10"
+                                                forward_router_address="192.0.2.10",
+                                                interface="eth0",
                                             ),
                                         ],
                                     )
@@ -108,7 +110,9 @@ class TestVyosStaticRoutesModule(TestVyosModule):
         commands = [
             "set protocols static route 192.0.2.48/28",
             "set protocols static route 192.0.2.48/28 next-hop '192.0.2.9'",
+            "set protocols static route 192.0.2.48/28 next-hop 192.0.2.9 distance '10'",
             "set protocols static route 192.0.2.48/28 next-hop '192.0.2.10'",
+            "set protocols static route 192.0.2.48/28 next-hop 192.0.2.10 next-hop-interface 'eth0'",
         ]
         self.execute_module(changed=True, commands=commands)
 
@@ -155,10 +159,12 @@ class TestVyosStaticRoutesModule(TestVyosModule):
                                         dest="192.0.2.48/28",
                                         next_hops=[
                                             dict(
-                                                forward_router_address="192.0.2.9"
+                                                forward_router_address="192.0.2.9",
+                                                interface="eth0",
                                             ),
                                             dict(
-                                                forward_router_address="192.0.2.10"
+                                                forward_router_address="192.0.2.10",
+                                                admin_distance=10,
                                             ),
                                         ],
                                     )
@@ -173,7 +179,9 @@ class TestVyosStaticRoutesModule(TestVyosModule):
         commands = [
             "set protocols static route 192.0.2.48/28",
             "set protocols static route 192.0.2.48/28 next-hop '192.0.2.9'",
+            "set protocols static route 192.0.2.48/28 next-hop 192.0.2.9 next-hop-interface 'eth0'",
             "set protocols static route 192.0.2.48/28 next-hop '192.0.2.10'",
+            "set protocols static route 192.0.2.48/28 next-hop 192.0.2.10 distance '10'",
         ]
         self.execute_module(changed=True, commands=commands)
 

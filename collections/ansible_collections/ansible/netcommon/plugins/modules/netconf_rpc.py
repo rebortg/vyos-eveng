@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # (c) 2018, Ansible by Red Hat, inc
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import absolute_import, division, print_function
 
@@ -157,11 +158,11 @@ except ImportError:
     from xml.etree.ElementTree import tostring
 
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.ansible.netcommon.plugins.module_utils.network.netconf.netconf import (
-    dispatch,
-)
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.netconf import (
     remove_namespaces,
+)
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.netconf.netconf import (
+    dispatch,
 )
 
 try:
@@ -227,8 +228,7 @@ def get_xml_request(module, request, xmlns, content):
 
 
 def main():
-    """entry point for module execution
-    """
+    """entry point for module execution"""
     argument_spec = dict(
         rpc=dict(type="str", required=True),
         xmlns=dict(type="str"),

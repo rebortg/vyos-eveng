@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -35,7 +36,7 @@ DOCUMENTATION = """
         - This option can be passed in lookup plugin as a key, value pair.
           For example C(config_data|ansible.utils.validate(config_criteria, engine='ansible.utils.jsonschema')), in
           this case the value C(ansible.utils.jsonschema) represents the engine to be use for data validation.
-          If the value is not provided the default value that is C(ansible.uitls.jsonschema) will be used.
+          If the value is not provided the default value that is C(ansible.utils.jsonschema) will be used.
         - The value should be in fully qualified collection name format that is
           C(<org-name>.<collection-name>.<validator-plugin-name>).
         default: ansible.utils.jsonschema
@@ -58,7 +59,7 @@ EXAMPLES = r"""
 
 - name: validate data in json format using jsonschema by passing plugin configuration variable as key/value pairs
   ansible.builtin.set_fact:
-    data_validilty: "{{ data|ansible.utils.validate(criteria, engine='ansible.utils.jsonschema', draft='draft7') }}"
+    data_validity: "{{ data|ansible.utils.validate(criteria, engine='ansible.utils.jsonschema', draft='draft7') }}"
 """
 
 RETURN = """
@@ -70,15 +71,12 @@ RETURN = """
 
 from ansible.errors import AnsibleError, AnsibleFilterError
 from ansible.module_utils._text import to_text
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.validate import (
-    _load_validator,
-)
-from ansible_collections.ansible.utils.plugins.module_utils.common.utils import (
-    to_list,
-)
+
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
     check_argspec,
 )
+from ansible_collections.ansible.utils.plugins.module_utils.common.utils import to_list
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.validate import _load_validator
 
 
 ARGSPEC_CONDITIONALS = {}
@@ -88,7 +86,7 @@ def validate(*args, **kwargs):
     if len(args) < 2:
         raise AnsibleFilterError(
             "Missing either 'data' or 'criteria' value in filter input,"
-            " refer 'ansible.utils.validate' filter plugin documentation for details"
+            " refer 'ansible.utils.validate' filter plugin documentation for details",
         )
 
     params = {"data": args[0], "criteria": args[1]}
@@ -96,17 +94,14 @@ def validate(*args, **kwargs):
         params.update({"engine": kwargs["engine"]})
 
     valid, argspec_result, updated_params = check_argspec(
-        DOCUMENTATION,
-        "validate filter",
-        schema_conditionals=ARGSPEC_CONDITIONALS,
-        **params
+        DOCUMENTATION, "validate filter", schema_conditionals=ARGSPEC_CONDITIONALS, **params
     )
     if not valid:
         raise AnsibleFilterError(
             "{argspec_result} with errors: {argspec_errors}".format(
                 argspec_result=argspec_result.get("msg"),
                 argspec_errors=argspec_result.get("errors"),
-            )
+            ),
         )
 
     validator_engine, validator_result = _load_validator(
@@ -118,8 +113,8 @@ def validate(*args, **kwargs):
     if validator_result.get("failed"):
         raise AnsibleFilterError(
             "validate lookup plugin failed with errors: {msg}".format(
-                msg=validator_result.get("msg")
-            )
+                msg=validator_result.get("msg"),
+            ),
         )
 
     try:
@@ -131,14 +126,14 @@ def validate(*args, **kwargs):
             "Unhandled exception from validator '{validator}'. Error: {err}".format(
                 validator=updated_params["engine"],
                 err=to_text(exc, errors="surrogate_then_replace"),
-            )
+            ),
         )
 
     return to_list(result.get("errors", []))
 
 
 class FilterModule(object):
-    """ index_of  """
+    """index_of"""
 
     def filters(self):
         """a mapping of filter names to functions"""

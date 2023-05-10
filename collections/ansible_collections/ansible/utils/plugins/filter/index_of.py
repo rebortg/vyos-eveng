@@ -9,6 +9,7 @@ The index_of filter plugin
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -39,7 +40,7 @@ DOCUMENTATION = """
       value:
         description:
         - The value used to test each list item against.
-        - Not required for simple tests (eg: C(true), C(false), C(even), C(odd))
+        - 'Not required for simple tests (eg: C(true), C(false), C(even), C(odd))'
         - May be a C(string), C(boolean), C(number), C(regular expression) C(dict) and so on, depending on the C(test) used
         type: raw
       key:
@@ -298,16 +299,20 @@ EXAMPLES = r"""
 """
 
 from ansible.errors import AnsibleFilterError
-from jinja2.filters import environmentfilter
-from ansible_collections.ansible.utils.plugins.module_utils.common.index_of import (
-    index_of,
-)
+
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
     AnsibleArgSpecValidator,
 )
+from ansible_collections.ansible.utils.plugins.plugin_utils.index_of import index_of
 
 
-@environmentfilter
+try:
+    from jinja2.filters import pass_environment
+except ImportError:
+    from jinja2.filters import environmentfilter as pass_environment
+
+
+@pass_environment
 def _index_of(*args, **kwargs):
     """Find the indicies of items in a list matching some criteria."""
 
@@ -323,9 +328,7 @@ def _index_of(*args, **kwargs):
     data = dict(zip(keys, args))
     data.update(kwargs)
     environment = data.pop("environment")
-    aav = AnsibleArgSpecValidator(
-        data=data, schema=DOCUMENTATION, name="index_of"
-    )
+    aav = AnsibleArgSpecValidator(data=data, schema=DOCUMENTATION, name="index_of")
     valid, errors, updated_data = aav.validate()
     if not valid:
         raise AnsibleFilterError(errors)
@@ -334,7 +337,7 @@ def _index_of(*args, **kwargs):
 
 
 class FilterModule(object):
-    """ index_of  """
+    """index_of"""
 
     def filters(self):
         """a mapping of filter names to functions"""

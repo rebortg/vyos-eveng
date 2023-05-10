@@ -1,0 +1,8 @@
+download_url: https://galaxy.ansible.com/download/vyos-vyos-4.0.0.tar.gz
+format_version: 1.0.0
+name: vyos
+namespace: vyos
+server: https://galaxy.ansible.com/api/
+signatures: []
+version: 4.0.0
+version_url: https://galaxy.ansible.com/api/v2/collections/vyos/vyos/versions/4.0.0/

@@ -1,4 +1,3 @@
-#
 # (c) 2017 Red Hat Inc.
 #
 # This file is part of Ansible
@@ -21,8 +20,8 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 DOCUMENTATION = """
-author: Ansible Networking Team
-cliconf: vyos
+author: Ansible Networking Team (@ansible-network)
+name: vyos
 short_description: Use vyos cliconf to run command on VyOS platform
 description:
 - This vyos plugin provides low level abstraction apis for sending and receiving CLI
@@ -37,6 +36,7 @@ options:
       to the device is present in this list, the existing cache is invalidated.
     version_added: 2.0.0
     type: list
+    elements: str
     default: []
     vars:
     - name: ansible_vyos_config_commands
@@ -54,7 +54,9 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.c
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils import (
     to_list,
 )
-from ansible.plugins.cliconf import CliconfBase
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.cliconf_base import (
+    CliconfBase,
+)
 
 
 class Cliconf(CliconfBase):
@@ -81,7 +83,7 @@ class Cliconf(CliconfBase):
             if match:
                 device_info["network_os_version"] = match.group(1)
 
-            match = re.search(r"HW model:\s*(\S+)", data)
+            match = re.search(r"(?:HW|Hardware) model:\s*(\S+)", data)
             if match:
                 device_info["network_os_model"] = match.group(1)
 
@@ -174,8 +176,8 @@ class Cliconf(CliconfBase):
         prompt=None,
         answer=None,
         sendonly=False,
-        output=None,
         newline=True,
+        output=None,
         check_all=False,
     ):
         if not command:

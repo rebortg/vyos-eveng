@@ -55,6 +55,24 @@ from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.bgp_g
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.bgp_address_family.bgp_address_family import (
     Bgp_address_familyFacts,
 )
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.route_maps.route_maps import (
+    Route_mapsFacts,
+)
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.prefix_lists.prefix_lists import (
+    Prefix_listsFacts,
+)
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.logging_global.logging_global import (
+    Logging_globalFacts,
+)
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.ntp_global.ntp_global import (
+    Ntp_globalFacts,
+)
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.snmp_server.snmp_server import (
+    Snmp_serverFacts,
+)
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.hostname.hostname import (
+    HostnameFacts,
+)
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.legacy.base import (
     Default,
     Neighbors,
@@ -78,6 +96,12 @@ FACT_RESOURCE_SUBSETS = dict(
     ospf_interfaces=Ospf_interfacesFacts,
     bgp_global=Bgp_globalFacts,
     bgp_address_family=Bgp_address_familyFacts,
+    route_maps=Route_mapsFacts,
+    prefix_lists=Prefix_listsFacts,
+    logging_global=Logging_globalFacts,
+    ntp_global=Ntp_globalFacts,
+    snmp_server=Snmp_serverFacts,
+    hostname=HostnameFacts,
 )
 
 

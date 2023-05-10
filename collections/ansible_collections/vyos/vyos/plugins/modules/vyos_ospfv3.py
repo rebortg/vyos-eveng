@@ -39,7 +39,7 @@ description: This resource module configures and manages attributes of OSPFv3 ro
 version_added: 1.0.0
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 author:
 - Rohit Thakur (@rohitthakur2590)
 options:
@@ -126,7 +126,7 @@ EXAMPLES = """
 # vyos@vyos# run show  configuration commands | grep ospfv3
 #
 #
-- name: Merge the provided configuration with the exisiting running configuration
+- name: Merge the provided configuration with the existing running configuration
   vyos.vyos.vyos_ospfv3:
     config:
       redistribute:

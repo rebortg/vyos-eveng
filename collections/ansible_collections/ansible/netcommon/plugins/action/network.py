@@ -1,44 +1,31 @@
 #
 # (c) 2018 Red Hat Inc.
-#
-# This file is part of Ansible
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from __future__ import absolute_import, division, print_function
 
 __metaclass__ = type
 
 import os
-import time
 import re
+import time
 
 from ansible.errors import AnsibleError
-from ansible.module_utils._text import to_text, to_bytes
+from ansible.module_utils._text import to_text
+from ansible.module_utils.six import PY3
 from ansible.module_utils.six.moves.urllib.parse import urlsplit
 from ansible.plugins.action.normal import ActionModule as _ActionModule
 from ansible.utils.display import Display
-from ansible.module_utils.six import PY3
+from ansible.utils.hashing import checksum, checksum_s
 
 display = Display()
 
-PRIVATE_KEYS_RE = re.compile("__.+__")
 DEXEC_PREFIX = "ANSIBLE_NETWORK_IMPORT_MODULES:"
 
 
 class ActionModule(_ActionModule):
-    def run(self, task_vars=None):
+    def run(self, tmp=None, task_vars=None):
         config_module = hasattr(self, "_config_module") and self._config_module
         if config_module and self._task.args.get("src"):
             try:
@@ -109,7 +96,15 @@ class ActionModule(_ActionModule):
         filename = None
         backup_path = None
         try:
-            content = result["__backup__"]
+            non_config_regexes = self._connection.cliconf.get_option(
+                "non_config_lines", task_vars
+            )
+        except (AttributeError, KeyError):
+            non_config_regexes = []
+        try:
+            content = self._sanitize_contents(
+                contents=result.pop("__backup__"), filters=non_config_regexes
+            )
         except KeyError:
             raise AnsibleError("Failed while reading configuration backup")
 
@@ -118,76 +113,46 @@ class ActionModule(_ActionModule):
             filename = backup_options.get("filename")
             backup_path = backup_options.get("dir_path")
 
+        tstamp = time.strftime(
+            "%Y-%m-%d@%H:%M:%S", time.localtime(time.time())
+        )
         if not backup_path:
             cwd = self._get_working_path()
             backup_path = os.path.join(cwd, "backup")
         if not filename:
-            tstamp = time.strftime(
-                "%Y-%m-%d@%H:%M:%S", time.localtime(time.time())
-            )
             filename = "%s_config.%s" % (
                 task_vars["inventory_hostname"],
                 tstamp,
             )
 
         dest = os.path.join(backup_path, filename)
-        backup_path = os.path.expanduser(
-            os.path.expandvars(
-                to_bytes(backup_path, errors="surrogate_or_strict")
-            )
-        )
-
         if not os.path.exists(backup_path):
             os.makedirs(backup_path)
 
-        new_task = self._task.copy()
-        for item in self._task.args:
-            if not item.startswith("_"):
-                new_task.args.pop(item, None)
-
-        new_task.args.update(dict(content=content, dest=dest))
-        copy_action = self._shared_loader_obj.action_loader.get(
-            "copy",
-            task=new_task,
-            connection=self._connection,
-            play_context=self._play_context,
-            loader=self._loader,
-            templar=self._templar,
-            shared_loader_obj=self._shared_loader_obj,
-        )
-        copy_result = copy_action.run(task_vars=task_vars)
-        if copy_result.get("failed"):
-            result["failed"] = copy_result["failed"]
-            result["msg"] = copy_result.get("msg")
-            return
+        changed = False
+        # Do not overwrite the destination if the contents match.
+        if not os.path.exists(dest) or checksum(dest) != checksum_s(content):
+            try:
+                with open(dest, "w") as output_file:
+                    output_file.write(content)
+            except Exception as exc:
+                result["failed"] = True
+                result[
+                    "msg"
+                ] = "Could not write to destination file %s: %s" % (
+                    dest,
+                    to_text(exc),
+                )
+                return
+            changed = True
 
         result["backup_path"] = dest
-        if copy_result.get("changed", False):
-            result["changed"] = copy_result["changed"]
+        result["changed"] = changed
 
-        if backup_options and backup_options.get("filename"):
-            result["date"] = time.strftime(
-                "%Y-%m-%d",
-                time.gmtime(os.stat(result["backup_path"]).st_ctime),
-            )
-            result["time"] = time.strftime(
-                "%H:%M:%S",
-                time.gmtime(os.stat(result["backup_path"]).st_ctime),
-            )
-
-        else:
-            result["date"] = tstamp.split("@")[0]
-            result["time"] = tstamp.split("@")[1]
-            result["shortname"] = result["backup_path"][::-1].split(".", 1)[1][
-                ::-1
-            ]
-            result["filename"] = result["backup_path"].split("/")[-1]
-
-        # strip out any keys that have two leading and two trailing
-        # underscore characters
-        for key in list(result.keys()):
-            if PRIVATE_KEYS_RE.match(key):
-                del result[key]
+        result["date"], result["time"] = tstamp.split("@")
+        if not (backup_options and backup_options.get("filename")):
+            result["filename"] = os.path.basename(result["backup_path"])
+            result["shortname"] = os.path.splitext(result["backup_path"])[0]
 
     def _get_working_path(self):
         cwd = self._loader.get_basedir()
@@ -256,18 +221,32 @@ class ActionModule(_ActionModule):
         return network_os
 
     def _check_dexec_eligibility(self, host):
-        """ Check if current python and task are eligble
-        """
+        """Check if current python and task are eligble"""
         dexec = self.get_connection_option("import_modules")
 
         # log early about dexec
         if dexec:
-            display.vvvv(
-                "{prefix} enabled via connection option".format(
-                    prefix=DEXEC_PREFIX
-                ),
-                host=host,
-            )
+            display.vvvv("{prefix} enabled".format(prefix=DEXEC_PREFIX), host)
+
+            # disable dexec when not PY3
+            if not PY3:
+                dexec = False
+                display.vvvv(
+                    "{prefix} disabled for when not Python 3".format(
+                        prefix=DEXEC_PREFIX
+                    ),
+                    host=host,
+                )
+
+            # disable dexec when running async
+            if self._task.async_val:
+                dexec = False
+                display.vvvv(
+                    "{prefix} disabled for a task using async".format(
+                        prefix=DEXEC_PREFIX
+                    ),
+                    host=host,
+                )
         else:
             display.vvvv("{prefix} disabled".format(prefix=DEXEC_PREFIX), host)
             display.vvvv(
@@ -277,29 +256,10 @@ class ActionModule(_ActionModule):
                 host,
             )
 
-        # disable dexec when running async
-        if self._task.async_val and dexec:
-            dexec = False
-            display.vvvv(
-                "{prefix} disabled for a task using async".format(
-                    prefix=DEXEC_PREFIX
-                ),
-                host=host,
-            )
-
-        # disable dexec when not PY3
-        if not PY3:
-            dexec = False
-            display.vvvv(
-                "{prefix} disabled for when not Python 3".format(
-                    prefix=DEXEC_PREFIX
-                ),
-                host=host,
-            )
         return dexec
 
     def _find_load_module(self):
-        """ Use the task action to find a module
+        """Use the task action to find a module
         and import it.
 
         :return filename: The module's filename
@@ -327,7 +287,7 @@ class ActionModule(_ActionModule):
         return filename, module
 
     def _patch_update_module(self, module, task_vars):
-        """ Update a module instance, replacing it's AnsibleModule
+        """Update a module instance, replacing it's AnsibleModule
         with one that doesn't load params
 
         :param module: An loaded module
@@ -336,6 +296,7 @@ class ActionModule(_ActionModule):
         :type task_vars: dict
         """
         import copy
+
         from ansible.module_utils.basic import AnsibleModule as _AnsibleModule
 
         # build an AnsibleModule that doesn't load params
@@ -354,7 +315,7 @@ class ActionModule(_ActionModule):
         module.AnsibleModule = PatchedAnsibleModule
 
     def _exec_module(self, module):
-        """ exec the module's main() since modules
+        """exec the module's main() since modules
         print their result, we need to replace stdout
         with a buffer. If main() fails, we assume that as stderr
         Once we collect stdout/stderr, use our super to json load
@@ -367,24 +328,25 @@ class ActionModule(_ActionModule):
         """
         import io
         import sys
-        from ansible.vars.clean import remove_internal_keys
+
         from ansible.module_utils._text import to_native
+        from ansible.vars.clean import remove_internal_keys
 
         # preserve previous stdout, replace with buffer
         sys_stdout = sys.stdout
         sys.stdout = io.StringIO()
 
+        stdout = ""
+        stderr = ""
         # run the module, catch the SystemExit so we continue
         try:
             module.main()
         except SystemExit:
             # module exited cleanly
             stdout = sys.stdout.getvalue()
-            stderr = ""
         except Exception as exc:
             # dirty module or connection traceback
             stderr = to_native(exc)
-            stdout = ""
 
         # restore stdout & stderr
         sys.stdout = sys_stdout
@@ -403,11 +365,19 @@ class ActionModule(_ActionModule):
         # split stdout/stderr into lines if needed
         if "stdout" in data and "stdout_lines" not in data:
             # if the value is 'False', a default won't catch it.
-            txt = data.get("stdout", None) or u""
+            txt = data.get("stdout", None) or ""
             data["stdout_lines"] = txt.splitlines()
         if "stderr" in data and "stderr_lines" not in data:
             # if the value is 'False', a default won't catch it.
-            txt = data.get("stderr", None) or u""
+            txt = data.get("stderr", None) or ""
             data["stderr_lines"] = txt.splitlines()
 
         return data
+
+    def _sanitize_contents(self, contents, filters):
+        """remove lines from contents that match
+        regexes specified in the `filters` list
+        """
+        for x in filters:
+            contents = re.sub(x, "", contents)
+        return contents.strip()

@@ -5,6 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -40,20 +41,16 @@ DOCUMENTATION = """
 
 import json
 
+from ansible.errors import AnsibleError
 from ansible.module_utils._text import to_text
 from ansible.module_utils.basic import missing_required_lib
-from ansible.errors import AnsibleError
 from ansible.module_utils.six import string_types
 
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.validate import (
-    ValidateBase,
-)
+from ansible_collections.ansible.utils.plugins.module_utils.common.utils import to_list
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.validate import ValidateBase
 
-from ansible_collections.ansible.utils.plugins.module_utils.common.utils import (
-    to_list,
-)
 
-# PY2 compatiblilty for JSONDecodeError
+# PY2 compatibility for JSONDecodeError
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -86,7 +83,7 @@ class Validate(ValidateBase):
     def _check_reqs():
         """Check the prerequisites are installed for jsonschema
 
-        :return None: In case all prerequisites are satisfised
+        :return None: In case all prerequisites are satisfied
         """
         if not HAS_JSONSCHEMA:
             raise AnsibleError(missing_required_lib("jsonschema"))
@@ -106,7 +103,7 @@ class Validate(ValidateBase):
             msg = (
                 "'data' option value is invalid, value should a valid JSON."
                 " Failed to read with error '{err}'".format(
-                    err=to_text(exe, errors="surrogate_then_replace")
+                    err=to_text(exe, errors="surrogate_then_replace"),
                 )
             )
             raise AnsibleError(msg)
@@ -124,7 +121,7 @@ class Validate(ValidateBase):
             msg = (
                 "'criteria' option value is invalid, value should a valid JSON."
                 " Failed to read with error '{err}'".format(
-                    err=to_text(exe, errors="surrogate_then_replace")
+                    err=to_text(exe, errors="surrogate_then_replace"),
                 )
             )
             raise AnsibleError(msg)
@@ -160,37 +157,39 @@ class Validate(ValidateBase):
 
         for criteria in self._criteria:
             if draft == "draft3":
-                validator = jsonschema.Draft3Validator(criteria)
+                validator = jsonschema.Draft3Validator(
+                    criteria,
+                    format_checker=jsonschema.draft3_format_checker,
+                )
             elif draft == "draft4":
-                validator = jsonschema.Draft4Validator(criteria)
+                validator = jsonschema.Draft4Validator(
+                    criteria,
+                    format_checker=jsonschema.draft4_format_checker,
+                )
             elif draft == "draft6":
-                validator = jsonschema.Draft6Validator(criteria)
+                validator = jsonschema.Draft6Validator(
+                    criteria,
+                    format_checker=jsonschema.draft6_format_checker,
+                )
             else:
-                validator = jsonschema.Draft7Validator(criteria)
+                validator = jsonschema.Draft7Validator(
+                    criteria,
+                    format_checker=jsonschema.draft7_format_checker,
+                )
 
-            validation_errors = sorted(
-                validator.iter_errors(self._data), key=lambda e: e.path
-            )
+            validation_errors = sorted(validator.iter_errors(self._data), key=lambda e: e.path)
 
             if validation_errors:
                 if "errors" not in self._result:
                     self._result["errors"] = []
 
                 for validation_error in validation_errors:
-                    if isinstance(
-                        validation_error, jsonschema.ValidationError
-                    ):
+                    if isinstance(validation_error, jsonschema.ValidationError):
                         error = {
                             "message": validation_error.message,
-                            "data_path": to_path(
-                                validation_error.absolute_path
-                            ),
-                            "json_path": json_path(
-                                validation_error.absolute_path
-                            ),
-                            "schema_path": to_path(
-                                validation_error.relative_schema_path
-                            ),
+                            "data_path": to_path(validation_error.absolute_path),
+                            "json_path": json_path(validation_error.absolute_path),
+                            "schema_path": to_path(validation_error.relative_schema_path),
                             "relative_schema": validation_error.schema,
                             "expected": validation_error.validator_value,
                             "validator": validation_error.validator,

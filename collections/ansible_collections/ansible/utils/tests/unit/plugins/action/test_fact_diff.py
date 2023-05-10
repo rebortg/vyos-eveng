@@ -5,27 +5,31 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import re
 import unittest
+
 from ansible.playbook.task import Task
 from ansible.template import Templar
 
-from ansible_collections.ansible.utils.plugins.action.fact_diff import (
-    ActionModule,
-)
+from ansible_collections.ansible.utils.plugins.action.fact_diff import ActionModule
+
 
 try:
     from unittest.mock import MagicMock  # pylint:disable=syntax-error
 except ImportError:
-    from mock import MagicMock
+    from mock import MagicMock  # pyright: ignore[reportMissingModuleSource]
 
 
 class TestUpdate_Fact(unittest.TestCase):
     def setUp(self):
         task = MagicMock(Task)
+        # Ansible > 2.13 looks for check_mode in task
+        task.check_mode = False
         play_context = MagicMock()
+        # Ansible <= 2.13 looks for check_mode in play_context
         play_context.check_mode = False
         connection = MagicMock()
         fake_loader = {}
@@ -151,15 +155,9 @@ class TestUpdate_Fact(unittest.TestCase):
         self._plugin._task.args = {"before": before, "after": after}
         result = self._plugin.run(task_vars=self._task_vars)
         self.assertTrue(result["changed"])
-        mlines = [
-            line for line in result["diff_lines"] if re.match(r"^-\s+3$", line)
-        ]
+        mlines = [line for line in result["diff_lines"] if re.match(r"^-\s+3$", line)]
         self.assertEqual(1, len(mlines))
-        mlines = [
-            line
-            for line in result["diff_lines"]
-            if re.match(r"^\+\s+4$", line)
-        ]
+        mlines = [line for line in result["diff_lines"] if re.match(r"^\+\s+4$", line)]
         self.assertEqual(1, len(mlines))
 
     def test_invalid_diff_engine_not_collection(self):

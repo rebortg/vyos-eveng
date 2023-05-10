@@ -2,3 +2,4 @@ jsonschema
 textfsm
 ttp
 xmltodict
+netaddr

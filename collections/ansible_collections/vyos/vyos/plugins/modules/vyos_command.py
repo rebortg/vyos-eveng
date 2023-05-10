@@ -89,7 +89,7 @@ notes:
   is using a custom pager setting to display the output of that command.
 - If a command sent to the device requires answering a prompt, it is possible to pass
   a dict containing I(command), I(answer) and I(prompt). See examples.
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 """
 
 EXAMPLES = """
@@ -154,9 +154,6 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.u
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
     run_commands,
 )
-from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    vyos_argument_spec,
-)
 
 
 def parse_commands(module, warnings):
@@ -182,8 +179,6 @@ def main():
         retries=dict(default=10, type="int"),
         interval=dict(default=1, type="int"),
     )
-
-    spec.update(vyos_argument_spec)
 
     module = AnsibleModule(argument_spec=spec, supports_check_mode=True)
 

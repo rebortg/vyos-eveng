@@ -1,44 +1,29 @@
 #
 # (c) 2020 Red Hat Inc.
-#
-# This file is part of Ansible
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import absolute_import, division, print_function
 
 __metaclass__ = type
 
 DOCUMENTATION = """
-    cache: memory
     short_description: RAM backed, non persistent cache.
     description:
         - RAM backed cache that is not persistent.
         - Tailored for networking use case.
     version_added: 2.0.0
-    author: Ansible Networking Team
+    author:
+        - Ansible Networking Team (@ansible-network)
+    name: memory
 """
 
-
-from ansible_collections.ansible.netcommon.plugins.cache import (
-    NetworkBaseCacheModule,
-)
+from ansible.plugins import AnsiblePlugin
 
 
-class CacheModule(NetworkBaseCacheModule):
+class CacheModule(AnsiblePlugin):
     def __init__(self, *args, **kwargs):
+        super(CacheModule, self).__init__(*args, **kwargs)
         self._cache = {}
 
     def get(self, key):
@@ -52,3 +37,12 @@ class CacheModule(NetworkBaseCacheModule):
 
     def flush(self):
         self._cache = {}
+
+    def lookup(self, key):
+        return self.get(key)
+
+    def populate(self, key, value):
+        self.set(key, value)
+
+    def invalidate(self):
+        self.flush()

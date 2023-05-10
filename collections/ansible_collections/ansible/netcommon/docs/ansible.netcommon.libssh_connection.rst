@@ -5,10 +5,10 @@
 ansible.netcommon.libssh
 ************************
 
-**(Tech preview) Run tasks using libssh for ssh connection**
+**Run tasks using libssh for ssh connection**
 
 
-Version added: 2.10
+Version added: 1.1.0
 
 .. contents::
    :local:
@@ -133,6 +133,26 @@ Parameters
             <tr>
                 <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>password_prompt</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">-</span>
+                    </div>
+                    <div style="font-style: italic; font-size: small; color: darkgreen">added in 3.1.0</div>
+                </td>
+                <td>
+                </td>
+                    <td>
+                                <div>var: ansible_libssh_password_prompt</div>
+                    </td>
+                <td>
+                        <div>Text to match when using keyboard-interactive authentication to determine if the prompt is for the password.</div>
+                        <div>Requires ansible-pylibssh version &gt;= 1.0.0</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>proxy_command</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
@@ -147,9 +167,11 @@ Parameters
                                     <p>[libssh_connection]<br>proxy_command = </p>
                             </div>
                                 <div>env:ANSIBLE_LIBSSH_PROXY_COMMAND</div>
+                                <div>var: ansible_paramiko_proxy_command</div>
+                                <div>var: ansible_libssh_proxy_command</div>
                     </td>
                 <td>
-                        <div>Proxy information for running the connection via a jumphost</div>
+                        <div>Proxy information for running the connection via a jumphost.</div>
                         <div>Also this plugin will scan &#x27;ssh_args&#x27;, &#x27;ssh_extra_args&#x27; and &#x27;ssh_common_args&#x27; from the &#x27;ssh&#x27; plugin settings for proxy information if set.</div>
                 </td>
             </tr>
@@ -188,6 +210,7 @@ Parameters
                         <b>Default:</b><br/><div style="color: blue">"inventory_hostname"</div>
                 </td>
                     <td>
+                                <div>var: inventory_hostname</div>
                                 <div>var: ansible_host</div>
                                 <div>var: ansible_ssh_host</div>
                                 <div>var: ansible_libssh_host</div>
@@ -221,6 +244,81 @@ Parameters
                 <td>
                         <div>User to login/authenticate as</div>
                         <div>Can be set from the CLI via the <code>--user</code> or <code>-u</code> options.</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>ssh_args</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">-</span>
+                    </div>
+                    <div style="font-style: italic; font-size: small; color: darkgreen">added in 3.2.0</div>
+                </td>
+                <td>
+                </td>
+                    <td>
+                            <div> ini entries:
+                                    <p>[ssh_connection]<br>ssh_args = VALUE</p>
+                            </div>
+                                <div>env:ANSIBLE_SSH_ARGS</div>
+                                <div>var: ansible_ssh_args</div>
+                    </td>
+                <td>
+                        <div>Arguments to pass to all ssh CLI tools.</div>
+                        <div>ProxyCommand is the only supported argument.</div>
+                        <div>This option is deprecated in favor of <em>proxy_command</em>.</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>ssh_common_args</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">-</span>
+                    </div>
+                    <div style="font-style: italic; font-size: small; color: darkgreen">added in 3.2.0</div>
+                </td>
+                <td>
+                </td>
+                    <td>
+                            <div> ini entries:
+                                    <p>[ssh_connection]<br>ssh_common_args = VALUE</p>
+                            </div>
+                                <div>env:ANSIBLE_SSH_COMMON_ARGS</div>
+                                <div>var: ansible_ssh_common_args</div>
+                    </td>
+                <td>
+                        <div>Common extra arguments for all ssh CLI tools.</div>
+                        <div>ProxyCommand is the only supported argument.</div>
+                        <div>This option is deprecated in favor of <em>proxy_command</em>.</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>ssh_extra_args</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">-</span>
+                    </div>
+                    <div style="font-style: italic; font-size: small; color: darkgreen">added in 3.2.0</div>
+                </td>
+                <td>
+                </td>
+                    <td>
+                            <div> ini entries:
+                                    <p>[ssh_connection]<br>ssh_extra_args = VALUE</p>
+                            </div>
+                                <div>env:ANSIBLE_SSH_EXTRA_ARGS</div>
+                                <div>var: ansible_ssh_extra_args</div>
+                    </td>
+                <td>
+                        <div>Extra arguments exclusive to the &#x27;ssh&#x27; CLI tool.</div>
+                        <div>ProxyCommand is the only supported argument.</div>
+                        <div>This option is deprecated in favor of <em>proxy_command</em>.</div>
                 </td>
             </tr>
             <tr>
@@ -262,7 +360,7 @@ Status
 Authors
 ~~~~~~~
 
-- Ansible Team
+- Ansible Networking Team (@ansible-network)
 
 
 .. hint::

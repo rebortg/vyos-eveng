@@ -28,16 +28,16 @@ extends_documentation_fragment:
 - vyos.vyos.vyos
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 options:
   gather_subset:
     description:
     - When supplied, this argument will restrict the facts collected to a given subset.  Possible
-      values for this argument include all, default, config, and neighbors. Can specify
+      values for this argument include C(all), C(default), C(config), C(neighbors) and C(min). Can specify
       a list of values to include a larger subset. Values can also be used with an
-      initial C(M(!)) to specify that a specific subset should not be collected.
+      initial C(!) to specify that a specific subset should not be collected.
     required: false
-    default: '!config'
+    default: 'min'
     type: list
     elements: str
   gather_network_resources:
@@ -45,13 +45,17 @@ options:
     - When supplied, this argument will restrict the facts collected to a given subset.
       Possible values for this argument include all and the resources like interfaces.
       Can specify a list of values to include a larger subset. Values can also be
-      used with an initial C(M(!)) to specify that a specific subset should not be
+      used with an initial C(!) to specify that a specific subset should not be
       collected. Valid subsets are 'all', 'interfaces', 'l3_interfaces', 'lag_interfaces',
       'lldp_global', 'lldp_interfaces', 'static_routes', 'firewall_rules', 'firewall_global',
       'firewall_interfaces', 'ospfv3', 'ospfv2'.
     required: false
     type: list
     elements: str
+  available_network_resources:
+    description: When 'True' a list of network resources for which resource modules are available will be provided.
+    type: bool
+    default: false
 """
 
 EXAMPLES = """
@@ -140,9 +144,7 @@ from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.argspec.fac
 )
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.facts.facts import (
     Facts,
-)
-from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    vyos_argument_spec,
+    FACT_RESOURCE_SUBSETS,
 )
 
 
@@ -153,21 +155,21 @@ def main():
     :returns: ansible_facts
     """
     argument_spec = FactsArgs.argument_spec
-    argument_spec.update(vyos_argument_spec)
 
     module = AnsibleModule(
         argument_spec=argument_spec, supports_check_mode=True
     )
 
     warnings = []
-    if module.params["gather_subset"] == "!config":
-        warnings.append(
-            "default value for `gather_subset` will be changed to `min` from `!config` v2.11 onwards"
+
+    ansible_facts = {}
+    if module.params.get("available_network_resources"):
+        ansible_facts["available_network_resources"] = sorted(
+            FACT_RESOURCE_SUBSETS.keys()
         )
-
     result = Facts(module).get_facts()
-
-    ansible_facts, additional_warnings = result
+    additional_facts, additional_warnings = result
+    ansible_facts.update(additional_facts)
     warnings.extend(additional_warnings)
 
     module.exit_json(ansible_facts=ansible_facts, warnings=warnings)

@@ -36,14 +36,9 @@ class Firewall_global(ConfigBase):
     The vyos_firewall_global class
     """
 
-    gather_subset = [
-        "!all",
-        "!min",
-    ]
+    gather_subset = ["!all", "!min"]
 
-    gather_network_resources = [
-        "firewall_global",
-    ]
+    gather_network_resources = ["firewall_global"]
 
     def __init__(self, module):
         super(Firewall_global, self).__init__(module)
@@ -349,7 +344,7 @@ class Firewall_global(ConfigBase):
                 h_grp = h.get("group") or {}
             if w:
                 commands.extend(
-                    self._render_grp_mem("port-group", w["group"], h_grp, opr)
+                    self._render_grp_mem("port_group", w["group"], h_grp, opr)
                 )
                 commands.extend(
                     self._render_grp_mem(
@@ -383,8 +378,15 @@ class Firewall_global(ConfigBase):
 
         if w_grp:
             for want in w_grp:
-                cmd = self._compute_command(key="group", attr=attr, opr=opr)
                 h = self.search_attrib_in_have(h_grp, want, "name")
+                if "afi" in want and want["afi"] == "ipv6":
+                    cmd = self._compute_command(
+                        key="group", attr="ipv6-" + attr, opr=opr
+                    )
+                else:
+                    cmd = self._compute_command(
+                        key="group", attr=attr, opr=opr
+                    )
                 for key, val in iteritems(want):
                     if val:
                         if (

@@ -6,6 +6,7 @@ https://github.com/dmulyalin/ttp
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -40,9 +41,9 @@ import os
 
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import missing_required_lib
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import (
-    CliParserBase,
-)
+
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import CliParserBase
+
 
 try:
     from ttp import ttp
@@ -53,7 +54,7 @@ except ImportError:
 
 
 class CliParser(CliParserBase):
-    """ The ttp parser class
+    """The ttp parser class
     Convert raw text to structured data using ttp
     """
 
@@ -62,7 +63,7 @@ class CliParser(CliParserBase):
 
     @staticmethod
     def _check_reqs():
-        """ Check the prerequisites for the ttp parser
+        """Check the prerequisites for the ttp parser
 
         :return dict: A dict with errors or a template_path
         """
@@ -74,7 +75,7 @@ class CliParser(CliParserBase):
         return {"errors": errors}
 
     def parse(self, *_args, **_kwargs):
-        """ Std entry point for a cli_parse parse execution
+        """Std entry point for a cli_parse parse execution
 
         :return: Errors or parsed text as structured data
         :rtype: dict
@@ -86,9 +87,7 @@ class CliParser(CliParserBase):
         or
         {"parsed": obj}
         """
-        cli_output = to_native(
-            self._task_args.get("text"), errors="surrogate_then_replace"
-        )
+        cli_output = to_native(self._task_args.get("text"), errors="surrogate_then_replace")
         res = self._check_reqs()
         if res.get("errors"):
             return {"errors": res.get("errors")}
@@ -100,25 +99,19 @@ class CliParser(CliParserBase):
         if template_path and not os.path.isfile(template_path):
             return {
                 "errors": "error while reading template_path file {file}".format(
-                    file=template_path
-                )
+                    file=template_path,
+                ),
             }
 
         try:
             parser_param = self._task_args.get("parser")
             vars = (
-                parser_param.get("vars", {}).get("ttp_vars", {})
-                if parser_param.get("vars")
-                else {}
+                parser_param.get("vars", {}).get("ttp_vars", {}) if parser_param.get("vars") else {}
             )
             kwargs = (
-                parser_param.get("vars", {}).get("ttp_init", {})
-                if parser_param.get("vars")
-                else {}
+                parser_param.get("vars", {}).get("ttp_init", {}) if parser_param.get("vars") else {}
             )
-            parser = ttp(
-                data=cli_output, template=template_path, vars=vars, **kwargs
-            )
+            parser = ttp(data=cli_output, template=template_path, vars=vars, **kwargs)
             parser.parse(one=True)
             ttp_results = (
                 parser_param.get("vars", {}).get("ttp_results", {})

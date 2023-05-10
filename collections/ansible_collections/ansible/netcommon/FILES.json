@@ -8,283 +8,45 @@
    "format": 1
   },
   {
-   "name": "README.md",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d1d731b3741b2df19abef0e753edde6f6a893f7702c1f2d42697eb16bab9d12d",
-   "format": 1
-  },
-  {
-   "name": "bindep.txt",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "612613df2dcbe82983430531a4cda52f220138a74ed3b2380e3a1fbb95b387b3",
-   "format": 1
-  },
-  {
-   "name": "tox.ini",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "20e4ac325b232cbf68be298a499a5730e37dbbe1cb3a8e23a98cda652996ec7d",
-   "format": 1
-  },
-  {
-   "name": "docs",
+   "name": ".github",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "docs/ansible.netcommon.net_lldp_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "997367fa4589608be27ed54fd001087cd7cf7a290ae1af1e3c916c889f93586b",
+   "name": ".github/workflows",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "docs/ansible.netcommon.restconf_config_module.rst",
+   "name": ".github/workflows/tests.yml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "8202fa525ea6fe95d25f578c612b7aab8cc75d97c0f59b233420cfb342de807c",
+   "chksum_sha256": "4d81fb19461a03a67a20cfd215f7e5740bbe096a4cc7122f6a2405f5b18a7c3a",
    "format": 1
   },
   {
-   "name": "docs/ansible.netcommon.netconf_get_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "b61aa32fea37af5e9548cff349771cf9cff58029423a6649280ffb6ba2502d2d",
+   "name": "LICENSES",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "docs/ansible.netcommon.net_logging_module.rst",
+   "name": "LICENSES/GPL-3.0-or-later.txt",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "dbffe4934c013fb53cedb46e4956d265ef44d5bd6e21340507ad8c1dfb1372ba",
+   "chksum_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
    "format": 1
   },
   {
-   "name": "docs/ansible.netcommon.net_l3_interface_module.rst",
+   "name": "LICENSES/BSD-2-Clause.txt",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "f50affbeaefe1a0f802d915048e46fac01ab6566f3bf83a1d393ec032a19938f",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_put_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "51cb81fc87bc4e92c6442a15d218fa9425bf8b19cb47f33e3e7a7c9b6c1cc560",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.napalm_connection.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "bf0b068450a0a2b9ea4e3454bc93f89400a419944d9c5ff8abbaf10a9430f8fe",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.netconf_config_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "3abf821342d2126c668376ff89177309699981949c5837dad40e52c7ba0bc14f",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.default_netconf.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ec062546f064537bba4c3a6d2303014b1a07481a7d56963a6b8c4c69b67a27f3",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_system_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "f99f5b81570f2f8b0262a6ee6a9339b232c7f41e346a545505ef57c4eca24e90",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.restconf_httpapi.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d67c3e746bb5aaff7dd485edcdea3d74cc49f0e22db5869e70f9bb7423fc3377",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_linkagg_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "c835ea024c729f889f0c84a88d83e0c7c33ba4880588ddf8cb14d51e4090a4e4",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.cli_command_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "1e75f91ee9d6ce2799aa9076e8ba8897e5752cd21fec1ca7493fcfec33718da8",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_lldp_interface_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e30a742b2fbf0258de06a71cda711cf3277363e55147c88636fa556663209295",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_static_route_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "201b642e3e6010af269b6e23549c38a908e727177e1cf87946ff0ef3bd53447c",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.cli_parse_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "7d30b691703b4a414ebbc3bcb51e09968db5c170a5665de062fd0878529a8e7d",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.cli_config_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "f87eca68465a740a887d79d515ff17ab4ab5650f52635181d352937ed37b6340",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.restconf_get_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6ec64e2c0ec91b10bc1df3cdb3ce58076615f7f258b3ffc1032e8efe9237fd7a",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.netconf_connection.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "52d44bbfa4a99bd570b6c25c727c11a5d213157653d43a58b587128a9409799a",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_ping_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ac33d21c4f133625feb63e1edc99621fa9a37db0b5dae6728dbc54911fee12cf",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.enable_become.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "425d998c376b425d2ad51140cc1c61fd03b2425987241d6a2976a5d96e55fa47",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_banner_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "7517ec60e09dab0c810d84072607526069c7fea751538afd3622f7138ef4c22c",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.network_cli_connection.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "b3117886b2ce6c6a63a75576830888a55b77d5e353b80eef2dfdc38a146e57d1",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.httpapi_connection.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6ab8d129acd4620768b6d7e82917a6828c2a5b8b5411ce2b4d3488300b7be5e4",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.telnet_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "97b242bc1dd7bc16d6708cc6d9e457817ae86c6b77e244b3d20b9bb5ab6d27b3",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.persistent_connection.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e9a5788b7ba335682f66d986d979b3d4961d7ddb29e50128d2cc7e2883431e14",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_vrf_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "5f71024abe9b9e89551a51b55c8fd826ee629c778074988cbe16d09c4fa128fc",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_get_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "53a379e03e2889b6cfa119cf9f9d8c8d9dfacad3fad45596c5f90ab6ce2a34af",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_l2_interface_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d2399f7cc79e3ae8e52a847571d6dc0f591001aab5c297df534f5679bd3dc0b1",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_user_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "c39dab2c0fbecc4214ee1a97e773a31c62f73b413f54eb8307962393e4832302",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_vlan_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a3901db6832b12c850c5c2fbd02153064a6b414590a26691a7159bf13d5ad2e7",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.net_interface_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d03737a8bd9e67dfb8c2943d94184141d536838114ac4cdf0f37fddfaea37d7f",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.libssh_connection.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a4070a1cf9c3a839e5ffe77e3494e1e5e02442a1c27eb96f4e6aecf4e24db422",
-   "format": 1
-  },
-  {
-   "name": "docs/ansible.netcommon.netconf_rpc_module.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "b8ed5ab30aa2c64bd979e916534335039b3ecacdea98cf0ad031ca63e7d51148",
-   "format": 1
-  },
-  {
-   "name": "CHANGELOG.rst",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a73b448d077f95e675e5d78087e5d024e62d14aee9430e50c9f94591af3ad7ba",
-   "format": 1
-  },
-  {
-   "name": "requirements.txt",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "98833a741c310f21415de167918a2800033aab87a805de7030f31b513f9bf58a",
+   "chksum_sha256": "f6036f79d054f42e11f2dd52458b4d2282e901d197955e598bf1a23600280cf0",
    "format": 1
   },
   {
@@ -309,31 +71,206 @@
    "format": 1
   },
   {
-   "name": "changelogs/config.yaml",
+   "name": "changelogs/CHANGELOG.rst",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "68ef61012fa961ced5e338862d00db3946a66056ec9003a82c7662fbf94436c2",
+   "chksum_sha256": "0ccda3a775ac79df07a7a7f0cff6c9f157793d95e60f5fe4a2326592b346819e",
    "format": 1
   },
   {
    "name": "changelogs/changelog.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "aefda0b6f1bbbf1ef27bf9829b4d959fbfa78b7c297b35a19b57187aa03fd723",
+   "chksum_sha256": "a365536d8254a835c04f5919fc24764bf862de7dba0b5b813f1fc692864f1f01",
    "format": 1
   },
   {
-   "name": ".yamllint",
+   "name": "changelogs/config.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "386fa31449c09e5df093aa72eabcb7653011a90181dc30b539ac67dbe3b17bf4",
+   "chksum_sha256": "3414335bb2a020a16ca0b75b6520c0d820c5a66c73d462b2f8a404e7f53a5d7f",
    "format": 1
   },
   {
-   "name": ".gitignore",
+   "name": "docs",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.cli_command_module.rst",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "a2ebfecdb6c1b58267fbe97e6e2ac02c2b963df7673fc1047270f0f0cff16732",
+   "chksum_sha256": "1e75f91ee9d6ce2799aa9076e8ba8897e5752cd21fec1ca7493fcfec33718da8",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.cli_config_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f87eca68465a740a887d79d515ff17ab4ab5650f52635181d352937ed37b6340",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.default_netconf.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "60610f9b4e18905f854afbdd8a6cd0549acf58c99fb212b46d8de1d9e46e6ff6",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.enable_become.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b56103797876c3da488319d7ce0f9e9bc0386c05989f3e7b0af949692a6054bc",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.grpc_config_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e2a9a8545eee94a44ace4918d94c5b16550e61956a7630da578661eb292f22a4",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.grpc_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3f07b08648236fefad3bffdedd3a58ef0b0c52eed4b0f16711ac5803ddce9267",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.grpc_get_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6017d33b7dbd04fe4729bb3f80dfa3c532e8101eb741538818a176e9e0ef2988",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.httpapi_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a13a085cd68c372ec0dc5d659f077a752c1fff5de02a95c2df495c1a36675290",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.libssh_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7e561fd5d6158ec398bacbbdaaaa15f99d036e1fadde6ebbe75f2fd438c3c379",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.net_get_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "53a379e03e2889b6cfa119cf9f9d8c8d9dfacad3fad45596c5f90ab6ce2a34af",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.net_ping_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ac33d21c4f133625feb63e1edc99621fa9a37db0b5dae6728dbc54911fee12cf",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.net_put_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "51cb81fc87bc4e92c6442a15d218fa9425bf8b19cb47f33e3e7a7c9b6c1cc560",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.netconf_config_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3abf821342d2126c668376ff89177309699981949c5837dad40e52c7ba0bc14f",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.netconf_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5266f064052a86c046e07842477f46fae46818f0dfe9ff8db40cae93d9598f64",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.netconf_get_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b61aa32fea37af5e9548cff349771cf9cff58029423a6649280ffb6ba2502d2d",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.netconf_rpc_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b8ed5ab30aa2c64bd979e916534335039b3ecacdea98cf0ad031ca63e7d51148",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.network_cli_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bf32d28db424f6d217fb11de96c042c719c37dd787c1cae1b3509f3b300943b5",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.network_resource_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5a2be201e2815cdbb047d05e98d735e8130fe47f99b9ce9ea3a3c971f78f2824",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.persistent_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8cc16cbadad74f2ff57c9da4af2326fcbc313ebb5e999850179e7096c999a38e",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.restconf_config_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8202fa525ea6fe95d25f578c612b7aab8cc75d97c0f59b233420cfb342de807c",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.restconf_get_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6ec64e2c0ec91b10bc1df3cdb3ce58076615f7f258b3ffc1032e8efe9237fd7a",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.restconf_httpapi.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9dfac86340b98f8cefbb7046415e72d1a6dd3b33ec40b3111888a01e6650ec43",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible.netcommon.telnet_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "97b242bc1dd7bc16d6708cc6d9e457817ae86c6b77e244b3d20b9bb5ab6d27b3",
+   "format": 1
+  },
+  {
+   "name": "meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "meta/runtime.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "99a003fc1a66c3ee7a1ee3efcb54ee8322126d3e248c702a5ee448ef936b097f",
    "format": 1
   },
   {
@@ -344,24 +281,213 @@
    "format": 1
   },
   {
+   "name": "plugins/action",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/action/cli_command.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0d81de0cd84fae877a81b40a96b743aef1ffd0ff90ea42246e0bb27bdca56bd8",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/cli_config.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4314b5eed38c55a401f6559a35f3740ee7db4aeeb1ebba9bb6f1e3f9085ea57a",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/grpc.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0f04ecd9735166000405cf29e1310efe56d549cf5c5d8f5ef70a89c4a3a7f8ed",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/net_get.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "467758c226bc7473a9237eeaf1d157a8fb327298e4a4b0c3e760161cab552e05",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/net_ping.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "eb7aef514c35992ed1ff745574ebf7dd3f9747a8b6a87ce886e6fc0e81ff3fb2",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/net_put.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3c9580c3a5165fe563afbf0874c9e42d74b8e692e6811d4b363bbb6102a69024",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/netconf.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6bdb9ae246f857aeec315051d630404530fedf1f4fa411d22f09fbdebbd5e5ce",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/network.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "430a768004f3474a2a86c3fad7f49bf5084239dbda366aada565783cc26d60f0",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/network_resource.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d492a68f43c56307d6807aa98a7dfa25e2122fd79b1750140b56bd39e23962dd",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/telnet.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6d29eff3a5060d5d7b7c06c86663f1d77a66db82182f5da8a0bdc8465a52ca8",
+   "format": 1
+  },
+  {
+   "name": "plugins/become",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/become/enable.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "eda4f332efafd229ac516351e639dce18ce9001349b183e2ab9bf83a8d3abb7b",
+   "format": 1
+  },
+  {
+   "name": "plugins/cache",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/cache/memory.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2bf2e73f25650347d9eb6813631b0a6cd3e2dcdd31c2bb40d2b2519484d47814",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/grpc.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b974f72a7042b3e0e8df409b5d535194319d3468d627c99e5d74087a16a5f560",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/httpapi.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7826bd32b23ba7ffddfe4cc1499f7fbb6173c3b17d7340204034aa30f7f2da2a",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/libssh.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f23c2342efd6562358295efd7d7c854dd0a308b55a1394c7ab29b4a659dcdb12",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/netconf.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5eb3af13e5127a91517a565e23eff64f314639af8b827bdf36e58d4a97fa23b4",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/network_cli.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5015572d56c3aeaa2fbf4902c93a393f480763aa4523cb0e93f5090e5b352db8",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/persistent.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7c34cfdbeb0b4fc692724358109c07d2f319b4c7f5e87bbaeabdeab4e1009f0c",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/connection_persistent.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9616633bfdc7c682774b36e00b753ddd496b46efc1b0b084be8ea55b3d0d4af8",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/network_agnostic.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6661716b76be47c3249359c339b4772df0024ed963e73d7df8edbf179c8b1500",
+   "format": 1
+  },
+  {
+   "name": "plugins/filter",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/filter/network.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9ffc266454602328a62d96532472074ca0e7f1dfa4fe89262b1562900652d5f3",
+   "format": 1
+  },
+  {
+   "name": "plugins/httpapi",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/httpapi/restconf.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7d13a0d56908c56f9cf6dded24d1eb28add02013d542b2315c6773744fd3f90f",
+   "format": 1
+  },
+  {
    "name": "plugins/module_utils",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/utils",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/utils/data.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "099a32a5933bf74d4ee2d3202ea71e19b5300b8a888637b640fc3efb1a6ec584",
    "format": 1
   },
   {
@@ -375,14 +501,14 @@
    "name": "plugins/module_utils/cli_parser/cli_parserbase.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "be670c08c16d57a0b094810358d0421f4ce524dbb3f07c0c9177958b25caa95c",
+   "chksum_sha256": "d89b39cc5571063ab3cd23b96c373d4a33a0585830478f142d4a7162c87353d1",
    "format": 1
   },
   {
    "name": "plugins/module_utils/cli_parser/cli_parsertemplate.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "b57ab9b9029d158d0b59708efbcf340cb13f1479c8bb7196b6eac00808527592",
+   "chksum_sha256": "2ea84079653b9531c30a1aa2150aeecc2357e2333ccc46ed7158fdfb3ce31f87",
    "format": 1
   },
   {
@@ -400,10 +526,17 @@
    "format": 1
   },
   {
-   "name": "plugins/module_utils/network/common/resource_module.py",
+   "name": "plugins/module_utils/network/common/cfg",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/network/common/cfg/base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "ab06db4fb2657ba135a077d121c1814db71324a9a6efa01345a6e9f359aaa244",
+   "chksum_sha256": "3b9b65ac454dc3f8366048a196fb2ecedbcaac3be0513a48d2afd9e5dc1f1d50",
    "format": 1
   },
   {
@@ -417,42 +550,7 @@
    "name": "plugins/module_utils/network/common/facts/facts.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "804a1cfcf5d63396a411049f97d43fc803dc6fe4105b7a599a3c0e44a0ca516b",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/facts/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/netconf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "1d482a621867dd61980f6b5bf17217c8a4f3ac721d6e0f1eaa54e533b79b31e1",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/network_template.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "b7953eb4d3da04e25edd60c837d48a8c44035cc91a6ecaa4737c7fc7d2b6782a",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/config.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "912bfcaa12a221e9194ec7ef3a643617e6751ea2d01262573cd4f3094b721e16",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/utils.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "14ec6a8dd9af3ad292b78fb0c8966ca655f38d102d6659509d294451db6f6761",
+   "chksum_sha256": "fca5f6f39c8e5470fd163424dec92b29950037b9959918a30ec48e81129d73d5",
    "format": 1
   },
   {
@@ -463,66 +561,87 @@
    "format": 1
   },
   {
+   "name": "plugins/module_utils/network/common/rm_base/network_template.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9172f2a3146998c491997f2915ef9e2b3fcaacfaf942f8f3c01267646ac4e7df",
+   "format": 1
+  },
+  {
    "name": "plugins/module_utils/network/common/rm_base/resource_module.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "29b7155afa52948e0c0dbcbba4b91ea7fa76bc8e9a127b9e9de3c2e1aaae655c",
+   "chksum_sha256": "86153cfe4007a15c80c5b47a543ab19d2f3f43907880288de4f6809c186f2376",
    "format": 1
   },
   {
    "name": "plugins/module_utils/network/common/rm_base/resource_module_base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "38fdcb1c47304684061d8a1882a97b1860e559db3f8f0c16f1dbb524bb6a52b3",
+   "chksum_sha256": "91528c9adc4f4330c042f1195a4035462e18a2b5506c4202157f1bd6a98799f2",
    "format": 1
   },
   {
-   "name": "plugins/module_utils/network/common/rm_base/network_template.py",
+   "name": "plugins/module_utils/network/common/config.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "64fdc22467f1dc16bd3887d2e6172a61750b4b74c9ce56a9d3dc5adf2bff967b",
+   "chksum_sha256": "1438b1fd02454dc6a24a6c04c1dca799ed849a0bdf4c61fa0b36dcf6e1d9af00",
    "format": 1
   },
   {
-   "name": "plugins/module_utils/network/common/cfg",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/cfg/__init__.py",
+   "name": "plugins/module_utils/network/common/netconf.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/common/cfg/base.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "90d5121c9d594cd4b13da1d5d6a77744fbb18864528fd30402d41dfd48af8a96",
+   "chksum_sha256": "b56c110a65931ddbd60584a96afececb0006d6d82d6cf4ada69f24f5a08a2df8",
    "format": 1
   },
   {
    "name": "plugins/module_utils/network/common/network.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "9edd6e6f1f39f55aee0e719f6eec76bc1efd0aeb0a2226ee427dbc98326be580",
+   "chksum_sha256": "2a0cdebd9c8c154a818f004098f47cc51a9ae730dc09864abf6445c7a310de20",
    "format": 1
   },
   {
-   "name": "plugins/module_utils/network/common/__init__.py",
+   "name": "plugins/module_utils/network/common/network_template.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "09435df2e9369701c85a47a6c60289cfd1fa4785e921cc923006567049c2e003",
    "format": 1
   },
   {
    "name": "plugins/module_utils/network/common/parsing.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "4aaf575f5fa8b3deb5ea0a064d18438b92c6d41f0ea4f9314b506af9da7d7358",
+   "chksum_sha256": "7c59302e544d6bb98074b82c7f43221e08734b62923deb20e43d280628f050ef",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/network/common/resource_module.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0c093a30db3673cea39ec4bff4ee9884193a9b0ae9c1d5261b14c419e890b66c",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/network/common/utils.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7af405b31901c9799bbc3cd8152fdd2acd124694dbc3296ab3b3c495a9948169",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/network/grpc",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/network/grpc/grpc.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "283a09ba5e42b407d0c1de14580f288027dad9496e2becc414a7913eaf1ef344",
    "format": 1
   },
   {
@@ -536,14 +655,7 @@
    "name": "plugins/module_utils/network/netconf/netconf.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "09bbb546a4036dbd66c296db2a7008950f2c108cb86698611190def58b3fd1c8",
-   "format": 1
-  },
-  {
-   "name": "plugins/module_utils/network/netconf/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "02039fc4981ec0669eae1a3328cc62618b6a75ab90dc0dcf52e97df9c330ad64",
    "format": 1
   },
   {
@@ -554,45 +666,129 @@
    "format": 1
   },
   {
-   "name": "plugins/module_utils/network/restconf/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
    "name": "plugins/module_utils/network/restconf/restconf.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "6976b78a06c16a85f424c66974d1fde4f6a9da5abea34969be7a1d9951525978",
+   "chksum_sha256": "e3e257be45f1ba6c3771f9fe661f837f6476fb52e56a6c0e3d80cadbaf12d8b7",
    "format": 1
   },
   {
-   "name": "plugins/module_utils/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/cache",
+   "name": "plugins/module_utils/utils",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "plugins/cache/__init__.py",
+   "name": "plugins/module_utils/utils/data.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "70d7965a8a1f00d738c645fd2e63f8451b86e36f8067bdc745778cf2da775bce",
+   "chksum_sha256": "0218aa99a5669a7f2dabd69b7f58d741715768170fac5f76d804c69a96d8aa6d",
    "format": 1
   },
   {
-   "name": "plugins/cache/memory.py",
+   "name": "plugins/modules",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/cli_command.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "08d3ff54b3d133bb8e54eb07eabc3ec92608c39c539a1d0eb87366fb282f7255",
+   "chksum_sha256": "131f8b266724eff7b3d8a595b6380e828f455d0ea6156c499a0ebdda5d77a763",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/cli_config.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "abad22149218f1d9a3c899371896bf710effea0d8e54ad09b583528958b693e1",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/grpc_config.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "81badaf5e03471838d9f9f8c624e0fd8f83da4b84abad2fe817f31eadcc472e8",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/grpc_get.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "590106b3e040cc21459d25c0426d577e08e612246163ed4de60b4d3b5156762c",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/net_get.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5fdc4677a4ea9cb6d6b958d9fbb9427deaf8685463734327300010cbe01b1d75",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/net_ping.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "96f85d7d1fa69d903780dc2b34ae217d9dd4d0be30639c558fe9a1de5bdcf1db",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/net_put.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bca8fd8b355b296dd16bc54fffa72f2eb310effa2681ea963beffc6ab74efedd",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/netconf_config.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d4ca495c16c7fd4a0d0cace5e996410f39208d4df1a99f0e4c132187162db8ae",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/netconf_get.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d9675cf16d7be41bd0a881f2595c11d9dbf7d5a6a5e889a7642c7f58548b4c8",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/netconf_rpc.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fa07ff47f7877188f218572bef6971c0091d988254039484fa818226dd915db7",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/network_resource.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "74c2b239e25ce9b8d850b46d251b561b97a4a6c1c50b296c9edc93b0a9ee7186",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/restconf_config.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "604144a4079108514a8f78ab557046956feae365242d193ca72825899484ad60",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/restconf_get.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bf9b697d3155ac06d2d1c6fa3a87985476d245997ee7c212c436d3a4d18ea871",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/telnet.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7e0951138232feb668e12ede791198cb1870878be03def98da2f18f0a35b9374",
    "format": 1
   },
   {
@@ -606,224 +802,56 @@
    "name": "plugins/netconf/default.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "60d6cef04949fad222f74bd739fbef52c491bd209e73bd91105b1d83094b4b3a",
+   "chksum_sha256": "12177abd9838c0a67fc55d9809fe4937f8720839584e18886869e1e84916e4aa",
    "format": 1
   },
   {
-   "name": "plugins/netconf/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/doc_fragments",
+   "name": "plugins/plugin_utils",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "plugins/doc_fragments/network_agnostic.py",
+   "name": "plugins/plugin_utils/cliconf_base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "bec91d56b8ad3dda159a96096d69fd3a5f40402efbaefeeec5e54e592bb708a0",
+   "chksum_sha256": "818e00f5ff23a01ad6fc3328d0f26838470083e4be9ee39cd6af9cbc8fbe9678",
    "format": 1
   },
   {
-   "name": "plugins/doc_fragments/__init__.py",
+   "name": "plugins/plugin_utils/connection_base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "b03b7cbe73dbd932b0013e2def2e45c35428f1e812f843cce33c0666203a7e3c",
    "format": 1
   },
   {
-   "name": "plugins/modules",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
+   "name": "plugins/plugin_utils/httpapi_base.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5c8e3b1b27a7dfa0d02a2c6cfcbd2b58078f8bb51d94138249ed787569ef12b6",
    "format": 1
   },
   {
-   "name": "plugins/modules/net_static_route.py",
+   "name": "plugins/plugin_utils/netconf_base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "61f98bccfa172d0384110f292089abd7fa2f9624cd709e9622b8105e33b71276",
+   "chksum_sha256": "c50674cc27e2fc05054d6a9de3a0516d542d1f6402ba048c0d5bdfc9351773ba",
    "format": 1
   },
   {
-   "name": "plugins/modules/netconf_rpc.py",
+   "name": "plugins/plugin_utils/terminal_base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "4d994c69ca58fca4d59d35cd1c71221f2d55c0016cbea473936a0660c712a1ee",
+   "chksum_sha256": "56c4e32877659dc7cfb0c4c65faf8a5169563a9bad90835e6dd186329d676b2b",
    "format": 1
   },
   {
-   "name": "plugins/modules/restconf_get.py",
+   "name": "plugins/plugin_utils/version.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "13ad74600f1b48e2bd74f3252d5b57fdaa9589ea89e293b8006bbee7992a1e8a",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/telnet.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ea2216b5ecaf84c0e9eead8d57f47bd3af80648d4f548aaf6133b7c2461fdc6a",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_get.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "2aa0d934c8502d5a26b1ec688a6c03a9b782505e8d5f4e97f221fcb68279a6d3",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_vlan.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e7e10c330dc5a3a785faeeeca5975590528bfc980c96621bb6dc0d9cde952590",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_linkagg.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d562f536fc3cfcd26640f405c41161f87a580a543573cceb6c32d6e13ef1a9c5",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/cli_config.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dc8218b579f218eb18d8bcaec9b2384494d12f9d777aa16999a0255b42eb2258",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/restconf_config.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "4ecb7c98ab65daa5b4be11d5af81f73e50fdc58d46e400820fff99435116895f",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_vrf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6c87a29305d57b8db34b74155a3923dea25b0ede056f85f9a78501f343b67fc1",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_system.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ed5f092e7cd04da093d821a947dc6c127174867f6b3d3810a4db4d7481c600b3",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/cli_parse.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "615b229126dce0c1cb9c380b0ffbb087e9f1aba3df9850c06f8ea1747755bf02",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_lldp.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d9fe4e5018e937772b471b082d4938aa7b2549ad22f157c730998ea0dc8d7251",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_lldp_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "4adfc83fc1344c2cdd2fde9192065f3e13574112549457546371475699087bcd",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/cli_command.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "60114901c5fa59dabcf6d920f9e831fff6eaba295f00409ee28292c4ec215514",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_l3_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dd518a1a22c5745753ca8948bcd0253399397dca498709f4acf8bc75871ef9d9",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_user.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "3c6b38e224d0b8ce3642c6e1d4113ab0c36f32157f15bc1a8c79929bfa4b8bad",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_banner.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "03578564f48afa061e36043b91f85b16b23f53306eb0e158bed3b1a6371f68fb",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_put.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "358b2c881254ffd73979412eaf9e85d631c745eb6d2f2262276cfeac2b511bd3",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/netconf_get.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e1e50f8c35af93682508c1e63847cf916efe6d2665b2c3cd9fa45c0f2d311966",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_ping.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e49e15aaa8e7153a01358e0c9a2d25cd3ae205ddbb1c9abbbfe92887e5e1eb77",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_logging.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "c01af7f84b35470808498a0fec4b59453c20c11c781118ee81505c30d61c8a2d",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "0cdf64d10b385928c8c9f7f1ec03d53336fc166e8aff38d43ac3782469e1f0b6",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/netconf_config.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d155b8bc2f76a10bede12e7596f42257a0aaf6c9c44b01d2febce57f67351fd3",
-   "format": 1
-  },
-  {
-   "name": "plugins/modules/net_l2_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "15546965bdd7eb4db0a4b95e2a148150016dfc05090be1e966745df21f7d48be",
+   "chksum_sha256": "d0475e03bc0ee63858b559554d410408e3cef3af7a6e5881e0a401ced102a48a",
    "format": 1
   },
   {
@@ -841,353 +869,45 @@
    "format": 1
   },
   {
-   "name": "plugins/sub_plugins/cli_parser/pyats_parser.py",
+   "name": "plugins/sub_plugins/cli_parser/content_templates_parser.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "4c118f89e6f28417cab3d3eec5c3cea7723d83e512ecca6e527e56b06a46cd81",
-   "format": 1
-  },
-  {
-   "name": "plugins/sub_plugins/cli_parser/ntc_templates_parser.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "fc119f6c88bdbdc831b855d6a919051fae0ed0588b51520995c5b3adc1251fbc",
+   "chksum_sha256": "5d6da2680ca5dc2cb01b4cf7d95509e5d463f3ef6ff6598e4a9ba39abadeef2a",
    "format": 1
   },
   {
    "name": "plugins/sub_plugins/cli_parser/native_parser.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "6a5af658a1fbd9091e1808fd590112431a306f09f6be7e52cc7263d0e2d56a58",
+   "chksum_sha256": "7d7f96d9cfce578e523709aff2103809ebb2b76f8d2d7cf4bd9c0533f7f25def",
    "format": 1
   },
   {
-   "name": "plugins/become",
+   "name": "plugins/sub_plugins/cli_parser/ntc_templates_parser.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "76f866c02733c45092bd6ed9e8a6c5b30bb0125a301041d58739c2ff852cc1c8",
+   "format": 1
+  },
+  {
+   "name": "plugins/sub_plugins/cli_parser/pyats_parser.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8508879df0f518664646b47cdd7fc139843e302c3d83a914b72ce74aeef3b786",
+   "format": 1
+  },
+  {
+   "name": "plugins/sub_plugins/grpc",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "plugins/become/enable.py",
+   "name": "plugins/sub_plugins/grpc/base.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "6e96993e805925d0f2cb7861bfc3149058789c42594d16620d5da448c91a05eb",
-   "format": 1
-  },
-  {
-   "name": "plugins/become/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/filter",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/filter/ipaddr.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "2229a2b88b9b9c1ccac331f45f4a10a8952a4a88712dec7279cd271763338e87",
-   "format": 1
-  },
-  {
-   "name": "plugins/filter/network.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "75aaae179dcd6a114f9e0a1eabef5cddb015304e2a2d00facbd673c6775fe12c",
-   "format": 1
-  },
-  {
-   "name": "plugins/filter/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/httpapi",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/httpapi/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/httpapi/restconf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d68e7f11ee6099bf8d1f8d5b5bfc88f34225945dab420aa24ca2e191cd8a0005",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/napalm.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "bf8820ec202394ecf20a0ef2e6c692c63cb7f3f0c465d3502e1118f5ffcb87b8",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/netconf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "f55996a898724c8e7efbfaf9201928f7bc937baefc658af0d5d57f4c1aee1c20",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/httpapi.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "282195a75731f2f2a165c4e9fc435d444f4a0108acddbf35f940d0613a44876f",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/libssh.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "7f2ddff423a04a4d500cac45fbf35226a5e8011eb9206f8bb3166d7230abf5d0",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/network_cli.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "7b2dcfef8736e46b01dc141e313bb7977b1bd4ce26477e58c7ef82babf92c259",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/persistent.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "955aa3319c09fd856aea5c15099cec986904009db02f4b0b60ef4ae1cb273b33",
-   "format": 1
-  },
-  {
-   "name": "plugins/connection/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/action",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_static_route.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/telnet.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "fe5e8cff2fd52e6756c840a8f76cf13f51dba8dcd5411b037dab4c9c961042ff",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_get.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "bdf11c703de38646848e50a8b5e5eb7ae218cb448befb53e413ac0a985e18776",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/netconf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "8e75659bd83c44297f83fc7923e9078a0964d8f684b25c02a357fee9ce889964",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_vlan.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_linkagg.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a1d3887af5e0b2e0c5363da014fd549e0f1236ba7371ec2de0cbd9488963c92d",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/cli_config.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6b03e0340e9391b234de07fd3381460f62ac25d2b7f7f3ecb7fa95f897abf334",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_vrf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_system.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a1d3887af5e0b2e0c5363da014fd549e0f1236ba7371ec2de0cbd9488963c92d",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/cli_parse.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "b095bf5f16f3ce3871f636a8c711d02f5d66c5fed91a053fcaabaa3d1f6cc5bb",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_lldp.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_lldp_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/cli_command.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "9435d26a8d8ca3662a4807853e63fbfea733b82e4ad9c1adab80cdf306b04d94",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/network.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ff62c3cadd531c9d28f8e72ca61423502823d7310ac7d94c8afd8dc534bcd1b0",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_l3_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_user.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a1d3887af5e0b2e0c5363da014fd549e0f1236ba7371ec2de0cbd9488963c92d",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_banner.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6850601c7cee12b8323fe3230f880a04a2e7323eb96d1b1bda34a433fbf08c88",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_put.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "0ab72246adaa2b5d78d65aeb350ad0fa0b45ac16f650315050b94da038cb6382",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_base.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "1ccee3cb35dddd7449d8c3ce189fd85b5541c57d33c4e0e19a1214260d63d0d5",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_ping.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "5ff2f3adf4eced40c6ab2d06dc43e6bc2c6be387911c2fc310bdd064bbf8b5f9",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_logging.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a1d3887af5e0b2e0c5363da014fd549e0f1236ba7371ec2de0cbd9488963c92d",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a1d3887af5e0b2e0c5363da014fd549e0f1236ba7371ec2de0cbd9488963c92d",
-   "format": 1
-  },
-  {
-   "name": "plugins/action/net_l2_interface.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "a1d3887af5e0b2e0c5363da014fd549e0f1236ba7371ec2de0cbd9488963c92d",
-   "format": 1
-  },
-  {
-   "name": ".pre-commit-config.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "39881069af3e94623755d230e6f6777fa59ee72f2a835ec0c3d240b8bc412176",
-   "format": 1
-  },
-  {
-   "name": "meta",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "meta/runtime.yml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "549da8f031fd86fa7ce403bda38c8a2b53c7fd108e3b4b409edc9b60374642e7",
-   "format": 1
-  },
-  {
-   "name": "test-requirements.txt",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "085b80a3b6d78ae48966c0c0fa2cf43463864b089e0af6fb3d10f8c11376f05a",
+   "chksum_sha256": "904d766a9c5a92bdaa9a1aedce4b2e0c6447e8d918bd1747aae81443902386d8",
    "format": 1
   },
   {
@@ -1205,13 +925,6 @@
    "format": 1
   },
   {
-   "name": "tests/integration/target-prefixes.network",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "66e61daf39e7e2c2a9552a89077f0639597f408ff901e24cdac843e6ffc12b47",
-   "format": 1
-  },
-  {
    "name": "tests/integration/targets",
    "ftype": "dir",
    "chksum_type": null,
@@ -1219,220 +932,318 @@
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_junos_tests",
+   "name": "tests/integration/targets/cli_parse",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_junos_tests/tasks",
+   "name": "tests/integration/targets/cli_parse/tasks",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_junos_tests/tasks/main.yml",
+   "name": "tests/integration/targets/cli_parse/tasks/centos_native.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "9f4b5e3cf2532a7e617a5caa3ab82ca89ca81b8d9c52f8d2c63125e085a4409b",
+   "chksum_sha256": "d827491d34783b4ddef835541a867c45fc26e19a7562461418d6fe10f56989b6",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get",
+   "name": "tests/integration/targets/cli_parse/tasks/fedora_native.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0f532b7f4de0ad1ab835969b8121424271b13c1eba062c656c57821fe71ffc06",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5e00773dca7fa6fa60c8e701dcc32e3b98bd2567f1baaad258bde635dd66a6ad",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/tasks/nxos_native.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "701201bf4b1ffde6dff10f3bca37ffe3e8ac19b27d15c8dadb0c2b0d0fd06f0f",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/tasks/nxos_ntc_templates.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e08b8e4235c2140a5e2893ddef29fca8a54b7caa3f0f3132831b3c93c44a3f65",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/tasks/nxos_pyats.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d55c53144c0a21e3289d622e52d8f82831b9acb2f5d7d512d1e1187e8e024ff3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/defaults",
+   "name": "tests/integration/targets/cli_parse/templates/centos_ps_-ef.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "839e6e4d259258b34851d64fd27a692c54c16062c104fb1caef0355c8e6cd258",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates/centos_touch_test_output.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f52d711103d50a437830c6fbcd04fb4bab49a0f82f6d26d1c791c6e8488dd090",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates/fedora_iptables_--list.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "41f749e88e4d6a959350d34a9e887112d76e3f14a5bc15f2ce0485c2b17c7410",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates/fedora_ps_-ef.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "839e6e4d259258b34851d64fd27a692c54c16062c104fb1caef0355c8e6cd258",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates/nxos_show_interface.ttp",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7b54c727fb9ab5731dbef7b5c271a41276278b15b7408bd24e25eda28e5c1a09",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates/nxos_show_interface.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bcebc3ef1d3e94fd156e655704999ee16837a1c95b90c6d8bbd567e47e4ce272",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/cli_parse/templates/nxos_show_version.textfsm",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dfd59adde11de6285a62179e45db7b4e20e9ca61f276f6567c86c8455f796887",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/defaults/main.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "c8e82c716422654d049fd043bbf84d624ed532f96741e032f52f14c19e970d3e",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/restconf_get/tasks",
+   "name": "tests/integration/targets/grpc_config/defaults",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/tasks/main.yaml",
+   "name": "tests/integration/targets/grpc_config/defaults/main.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "638550f551ea9d7310d86f81f711179aef48a7b6ab1c6fc85b1249bd05312ab2",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/tasks/restconf.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dacaffcf46ae3c15e43b1954efaa2ba3792ec33c353de513eb321135efa0b98e",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/restconf_get/meta",
+   "name": "tests/integration/targets/grpc_config/meta",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/meta/main.yml",
+   "name": "tests/integration/targets/grpc_config/meta/main.yml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "f217b1000606ebe64f449135a62b62813f672461ce258e4168b48ef56fdf7b55",
+   "chksum_sha256": "d25d95206718d482774753d23b1563530440c6c3c76e2b40afd18ad95595cddd",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/tests",
+   "name": "tests/integration/targets/grpc_config/tasks",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/tests/iosxe",
+   "name": "tests/integration/targets/grpc_config/tasks/iosxr.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a1c213242cf65c7918b89d1cb827d09561c986d73477456da1c4d1a386a15554",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config/tasks/junos.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a72f5acd6ee50fd954997cbfe033e562d8351fb2d398f77f2599c43b2bc6b0bd",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "77d299299067a79d3a9633acfef60fdcd02f25cd124851ec8a42391ba52f4ee4",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config/tasks/nxos.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ae7cd855932665a6250d95fc733ce39ac902d297e2fbd0a251bff55aa3e8e35b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config/tests",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_get/tests/iosxe/basic.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "24c621004d39e45adac857d00e2ea4f985439b277342a1c1ea888cbcef5d930e",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_rpc",
+   "name": "tests/integration/targets/grpc_config/tests/iosxr",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/defaults",
+   "name": "tests/integration/targets/grpc_config/tests/iosxr/fixtures",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/defaults/main.yaml",
+   "name": "tests/integration/targets/grpc_config/tests/iosxr/fixtures/bgp_delete.yml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "c8e82c716422654d049fd043bbf84d624ed532f96741e032f52f14c19e970d3e",
+   "chksum_sha256": "e3ba3ba7b0dab60faee2bd21b4ce7401cf416901ec983ffa28a3956f4575a050",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tasks",
+   "name": "tests/integration/targets/grpc_config/tests/iosxr/fixtures/bgp_start.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "688fa378b5dbe6c30e1063e4466ff407d07d60cf7c5f9c55e3d501d3b2d16751",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config/tests/iosxr/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3bfddd10067d86820889a3a997bc723ccb39276da62da91b4c6fb4b98e7fcf99",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_config/vars",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tasks/main.yaml",
+   "name": "tests/integration/targets/grpc_config/vars/main.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "ec66f7ca5da6f152b691918c84f59a6cff2ceeef18b6f16823ce16a6156fd8a9",
+   "chksum_sha256": "a50f43b84486b9cff7f927e79c55df0b65ebd7e8caa47259cf997d14bbbca600",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tasks/iosxr.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "39d7cdaf4164535f2a440f30b9fae8cae7a1ef081dfb864315e675378fe7959f",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_rpc/tasks/sros.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d2cff3632c828a69dfec105586b8f48659ce515d608811e6b951f7c6fc07016b",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_rpc/tasks/junos.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "07b28bd4350fd321396d56d21cbca74532f4d688dbee584196644118ecc2336b",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_rpc/meta",
+   "name": "tests/integration/targets/grpc_get",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/meta/main.yml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "46e396f49311101eff0f58b4da2d90d75b0c228cbf950bcb899cf063bec95178",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_rpc/tests",
+   "name": "tests/integration/targets/grpc_get/defaults",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tests/iosxr",
+   "name": "tests/integration/targets/grpc_get/defaults/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_get/meta",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tests/iosxr/basic.yaml",
+   "name": "tests/integration/targets/grpc_get/meta/main.yml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "37d7c5b1fbf423f45d3145b7f991a996a3a46ae4c1ccd709e7b162e1b9fc294c",
+   "chksum_sha256": "d25d95206718d482774753d23b1563530440c6c3c76e2b40afd18ad95595cddd",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tests/junos",
+   "name": "tests/integration/targets/grpc_get/tasks",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tests/junos/basic.yaml",
+   "name": "tests/integration/targets/grpc_get/tasks/iosxr.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "56a1966a7052d93b6280cb2513075acfc9d1cdb8139e884fbe1de00dd02a8ad0",
+   "chksum_sha256": "a1c213242cf65c7918b89d1cb827d09561c986d73477456da1c4d1a386a15554",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tests/sros",
+   "name": "tests/integration/targets/grpc_get/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9720e9f4d86b70a25f3ec865ba9d69560ca0485a3e6ab9b703f7480c50977171",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_get/tests",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/netconf_rpc/tests/sros/basic.yaml",
+   "name": "tests/integration/targets/grpc_get/tests/iosxr",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/grpc_get/tests/iosxr/basic.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "f92fb3b2183b7c898f1441ec954efc3a4b9d4d49f3c12907040db94fae7b4d06",
+   "chksum_sha256": "b3796d7e1a25ee4aa3fd7850e67da8c8fb8a6c0477d1fb494672ed261ad51c81",
    "format": 1
   },
   {
@@ -1453,42 +1264,7 @@
    "name": "tests/integration/targets/netconf_config/defaults/main.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "c8e82c716422654d049fd043bbf84d624ed532f96741e032f52f14c19e970d3e",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tasks",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tasks/main.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "140dcab7489595a57a901aa22bae3f6ad6dd54475d833ea5f6fa8b50310c4ec9",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tasks/iosxr.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "15d0cc96b1ee3e1eef5c9094ddcfc20d565de7c33c23c6e2b306bedd5f6019a1",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tasks/nxos.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "887867fd59366dac81f6dd6245d5ef8fd7ec851b80e9f6915516f4c1c8adfd1a",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tasks/junos.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "07b28bd4350fd321396d56d21cbca74532f4d688dbee584196644118ecc2336b",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
    "format": 1
   },
   {
@@ -1506,38 +1282,45 @@
    "format": 1
   },
   {
+   "name": "tests/integration/targets/netconf_config/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_config/tasks/iosxr.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3d645006cfb96a930f9e24ea1b821e8431dab0acda9f1aafe9a4f29c24225ed9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_config/tasks/junos.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b787c1a44f3c9c0c2bbb58ddf7c452ec3b7d0a220319f7ecad8ff1e5758306bb",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_config/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "140dcab7489595a57a901aa22bae3f6ad6dd54475d833ea5f6fa8b50310c4ec9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_config/tasks/nxos.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d820a1fe1e78af725a3e2b63168b6b1c13b5a167d39a68e2488634c91ada0e4",
+   "format": 1
+  },
+  {
    "name": "tests/integration/targets/netconf_config/tests",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tests/nxos",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tests/nxos/fixtures",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tests/nxos/fixtures/config.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3a40f3ed26a7d2d6a361d82ffa3848d0913340f4c7b6e5c43c40afcf89486cb",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_config/tests/nxos/basic.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "3d5e05ea2718e82441fba21c106a2c105aba6c7a0549808b8b112fe33de6ebbe",
    "format": 1
   },
   {
@@ -1551,7 +1334,7 @@
    "name": "tests/integration/targets/netconf_config/tests/iosxr/basic.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "73c53c5cff67d6c9cf3f0c47f75a1f9ea712a154cc1343de43202033b8d8656d",
+   "chksum_sha256": "dfc308fc2743595a553c7fb998a9f46d94f64e6b3477a910e2d54d59438cb53b",
    "format": 1
   },
   {
@@ -1586,84 +1369,273 @@
    "name": "tests/integration/targets/netconf_config/tests/junos/basic.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "55b3b217f36c4f632ab4c2ee65442126cb89f365b5b27852bc6954b802da9693",
+   "chksum_sha256": "1ea03d6c833790e420cba36674bd809bdf7155fdd3f8854507f7ec9f73d64fe4",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config",
+   "name": "tests/integration/targets/netconf_config/tests/nxos",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/defaults",
+   "name": "tests/integration/targets/netconf_config/tests/nxos/fixtures",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/defaults/main.yaml",
+   "name": "tests/integration/targets/netconf_config/tests/nxos/fixtures/config.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "c8e82c716422654d049fd043bbf84d624ed532f96741e032f52f14c19e970d3e",
+   "chksum_sha256": "f9ba47cabeb67066eefc95614931221e4679c2bce0209c8ebc392098eb76ac7f",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/tasks",
+   "name": "tests/integration/targets/netconf_config/tests/nxos/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3d5e05ea2718e82441fba21c106a2c105aba6c7a0549808b8b112fe33de6ebbe",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/tasks/main.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "638550f551ea9d7310d86f81f711179aef48a7b6ab1c6fc85b1249bd05312ab2",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/restconf_config/tasks/restconf.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dacaffcf46ae3c15e43b1954efaa2ba3792ec33c353de513eb321135efa0b98e",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/restconf_config/meta",
+   "name": "tests/integration/targets/netconf_get/defaults",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/meta/main.yml",
+   "name": "tests/integration/targets/netconf_get/defaults/main.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "f217b1000606ebe64f449135a62b62813f672461ce258e4168b48ef56fdf7b55",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/tests",
+   "name": "tests/integration/targets/netconf_get/meta",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/tests/iosxe",
+   "name": "tests/integration/targets/netconf_get/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dd9eb0bcc7ddb59a2e64954bd6c9213d715705b3928aa12e7cd34ee1cebeaca6",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tasks",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/restconf_config/tests/iosxe/basic.yaml",
+   "name": "tests/integration/targets/netconf_get/tasks/iosxr.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "ff4b6188157975c3ba7b396443e415b264965d11029b6a7972e6927688458172",
+   "chksum_sha256": "3d645006cfb96a930f9e24ea1b821e8431dab0acda9f1aafe9a4f29c24225ed9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tasks/junos.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b787c1a44f3c9c0c2bbb58ddf7c452ec3b7d0a220319f7ecad8ff1e5758306bb",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ec66f7ca5da6f152b691918c84f59a6cff2ceeef18b6f16823ce16a6156fd8a9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tasks/sros.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f31763f2915db0a8f618b49863e72241a9cf010a833f6b6965ab4bb1ba51978a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests/iosxr",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests/iosxr/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "054b9614669e5cb6cf0843782cac5df5dce7ffef6ddb16085663266700c8feb3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests/junos",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests/junos/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bb5c5b379e5e0c8325f82929af0ac53e2b619d4ae86e692cf25d489cac031325",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests/sros",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_get/tests/sros/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d85290ce180158ecbb9a86840c79ed9966d3d7e27591537f75b0715df902ec36",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/defaults/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "46e396f49311101eff0f58b4da2d90d75b0c228cbf950bcb899cf063bec95178",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tasks/iosxr.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0685eee2ab845137aaa2955990233e5e35a854ade938d8ae3329338554afef91",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tasks/junos.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b787c1a44f3c9c0c2bbb58ddf7c452ec3b7d0a220319f7ecad8ff1e5758306bb",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ec66f7ca5da6f152b691918c84f59a6cff2ceeef18b6f16823ce16a6156fd8a9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tasks/sros.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f31763f2915db0a8f618b49863e72241a9cf010a833f6b6965ab4bb1ba51978a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests/iosxr",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests/iosxr/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "57f49d0b2c38a17997be86a240f7e97850c55345904aac6d03c4a65aab2514a9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests/junos",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests/junos/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "47502bae6b7bf9e00f3d69c55d9dfa3b780978d2116fe27992884b041eafab8e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests/sros",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/netconf_rpc/tests/sros/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6331e1e7c98fd776bb8199cda76eb0c3ab009fe9bf4d3bbfea41aa936393664",
    "format": 1
   },
   {
@@ -1688,6 +1660,69 @@
    "format": 1
   },
   {
+   "name": "tests/integration/targets/prepare_iosxr_tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_iosxr_tests/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_iosxr_tests/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e9980962b35a3f3fb8b9cdd59d3c49961b616285928c0bc1f45e3c2758de4be6",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_iosxr_tests/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_iosxr_tests/templates/config.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a21d7b66f513ecb424fd6e23df9f0737c855281f3a5d0be6c856a0d2ce7af23b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_iosxr_tests/templates/config_grpc.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4ab4bbfb41335abe51b4f0d03087c1df2ccb9bac7d0097685a28659113d1b9fd",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_junos_tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_junos_tests/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/prepare_junos_tests/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "21c728adedbda80277513736a67ffb1bdd13eca9733c20428072c673d3abd04e",
+   "format": 1
+  },
+  {
    "name": "tests/integration/targets/prepare_nxos_tests",
    "ftype": "dir",
    "chksum_type": null,
@@ -1705,259 +1740,7 @@
    "name": "tests/integration/targets/prepare_nxos_tests/tasks/main.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "a44cb13f3cad166cd18f32b486161416585776041f4b383008c45ac3e565cac8",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/defaults",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/defaults/main.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "c8e82c716422654d049fd043bbf84d624ed532f96741e032f52f14c19e970d3e",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tasks",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tasks/main.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ec66f7ca5da6f152b691918c84f59a6cff2ceeef18b6f16823ce16a6156fd8a9",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tasks/iosxr.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "15d0cc96b1ee3e1eef5c9094ddcfc20d565de7c33c23c6e2b306bedd5f6019a1",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tasks/sros.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d2cff3632c828a69dfec105586b8f48659ce515d608811e6b951f7c6fc07016b",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tasks/junos.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "07b28bd4350fd321396d56d21cbca74532f4d688dbee584196644118ecc2336b",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/meta",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/meta/main.yml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dd9eb0bcc7ddb59a2e64954bd6c9213d715705b3928aa12e7cd34ee1cebeaca6",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests/iosxr",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests/iosxr/basic.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "182d471aac4ff7d4092c44c0bac9f16cdeb6b8b78176a289d9177cb3eb068bf7",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests/junos",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests/junos/basic.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "d9cff7ffb7226ab48ccc24fb7e12c0277d0aaf0a46c34a135c0cdde6767e96d0",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests/sros",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/netconf_get/tests/sros/basic.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "95bc0bec6bacc479ed556c40a7d5fddc6221074653e0ea9f3d0c69f97ad41b35",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates/nxos_show_interface.ttp",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "7b54c727fb9ab5731dbef7b5c271a41276278b15b7408bd24e25eda28e5c1a09",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates/nxos_show_version.textfsm",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dfd59adde11de6285a62179e45db7b4e20e9ca61f276f6567c86c8455f796887",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates/nxos_show_interface.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "bcebc3ef1d3e94fd156e655704999ee16837a1c95b90c6d8bbd567e47e4ce272",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates/centos_ps_-ef.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6497e39603f40dabb317dc27d7f7a7c1774ada9635636e032c426f372e674889",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates/fedora_ps_-ef.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6497e39603f40dabb317dc27d7f7a7c1774ada9635636e032c426f372e674889",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/templates/fedora_iptables_--list.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "cb4a6d3f03a64003a1c6354663208e6d292a99b072f50eebf51b54a845242723",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/main.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "eb467652ba8dcd2e7c1e7cddc02df1ae67d9659d7d1a97c07278627c9722089c",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/fedora_native.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "0f532b7f4de0ad1ab835969b8121424271b13c1eba062c656c57821fe71ffc06",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_native.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "701201bf4b1ffde6dff10f3bca37ffe3e8ac19b27d15c8dadb0c2b0d0fd06f0f",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_json.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "5be1aa1a5a57cc3d7b4a6425884700557c994f9d79a70bc07700c2742f7fa3a6",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_textfsm.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "1b6a9f2c73fd9b3fd46cd8519885fbcffccf2fe60cde0c957ddeb0d33f31233f",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_ttp.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "197b1f4dee3565acebf396fd7a380325c77fa93a46f85cc229abb25b4e507f84",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_pyats.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "c1dfeff7bfe5320656e32959d5480a954c5797eafa0d92cd9405910bdca14e9f",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/centos_native.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "fc247aee8551857fd0fa58f06b1252b4c9d64218b3f8e2f32faf8447cbb6ccc4",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_ntc_templates.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e08b8e4235c2140a5e2893ddef29fca8a54b7caa3f0f3132831b3c93c44a3f65",
-   "format": 1
-  },
-  {
-   "name": "tests/integration/targets/cli_parse/tasks/nxos_xml.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "6967dc807453c2b7c3f607258528db4c8708868e58b235b3daf0932713a0b8db",
+   "chksum_sha256": "b416fe11a13c1c952f79a660153582a4c66008c8b80cb323bbca62f57d99bb6a",
    "format": 1
   },
   {
@@ -1982,38 +1765,220 @@
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_iosxr_tests",
+   "name": "tests/integration/targets/restconf_config",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_iosxr_tests/templates",
+   "name": "tests/integration/targets/restconf_config/defaults",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_iosxr_tests/templates/config.j2",
+   "name": "tests/integration/targets/restconf_config/defaults/main.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "a21d7b66f513ecb424fd6e23df9f0737c855281f3a5d0be6c856a0d2ce7af23b",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_iosxr_tests/tasks",
+   "name": "tests/integration/targets/restconf_config/meta",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/integration/targets/prepare_iosxr_tests/tasks/main.yml",
+   "name": "tests/integration/targets/restconf_config/meta/main.yml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "be72e331af68859c94e6106693906f8eedc7e0f1e0f1871cec6063d6573469fc",
+   "chksum_sha256": "f217b1000606ebe64f449135a62b62813f672461ce258e4168b48ef56fdf7b55",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_config/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_config/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "638550f551ea9d7310d86f81f711179aef48a7b6ab1c6fc85b1249bd05312ab2",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_config/tasks/restconf.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "52d07c969efe675d4e01cd10481727ec542bd4f1cbab12e29c318ed0e1dda3c7",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_config/tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_config/tests/iosxe",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_config/tests/iosxe/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ff4b6188157975c3ba7b396443e415b264965d11029b6a7972e6927688458172",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/defaults/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6cec8117492a3110c2e9066aa77a54abd2b9774cea08d60eb42b01c51c3e032",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f217b1000606ebe64f449135a62b62813f672461ce258e4168b48ef56fdf7b55",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/tasks/main.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "638550f551ea9d7310d86f81f711179aef48a7b6ab1c6fc85b1249bd05312ab2",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/tasks/restconf.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "52d07c969efe675d4e01cd10481727ec542bd4f1cbab12e29c318ed0e1dda3c7",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/tests/iosxe",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/restconf_get/tests/iosxe/basic.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "24c621004d39e45adac857d00e2ea4f985439b277342a1c1ea888cbcef5d930e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/target-prefixes.network",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f44e56f8603c9ed8dbb4997dfadab9103c04098cb355329e2f3dee14254c7f85",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.10.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.11.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.12.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.13.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.14.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.15.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.9.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc643ee2a6fce68c2130b51325ef31a63fc1b7f9417cbb2dfe281045b80b81fe",
    "format": 1
   },
   {
@@ -2024,17 +1989,59 @@
    "format": 1
   },
   {
-   "name": "tests/unit/module_utils",
+   "name": "tests/unit/mock",
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
    "format": 1
   },
   {
-   "name": "tests/unit/module_utils/conftest.py",
+   "name": "tests/unit/mock/__init__.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "bd7bcff0ae42171fb35c036f81b260a61c0e821746df78b33f495426d6d5f3fd",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/mock/loader.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "06833106788ff277b24dac660f5b6374906bdf4e901fbc5fcce8731ba7a80c59",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/mock/path.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "af69a9d367702e8db3cc50e6cd2b3ff17a08029ff2940234e9f1e7aa2cda0623",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/mock/procenv.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "48f9bad11a8e8ae7b559ae61e23b073a363b933100ef8bc5e9422719001c4ab3",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/mock/vault_helper.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "586e26849dbd0852be1eeff4e2a111bd22b72f4a001f554ec64fc6c92fc90665",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/mock/yaml_helper.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7bc0ad4df31c3d517d745043deb53348e73a2db33a8ea49131af92a4b55f8ce5",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
    "format": 1
   },
   {
@@ -2052,31 +2059,31 @@
    "format": 1
   },
   {
-   "name": "tests/unit/module_utils/network/common/test_config.py",
+   "name": "tests/unit/module_utils/network/common/__init__.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "af330753e2e029dff36f757cf671f0654ec799d75da8fb1db16f5230645506e2",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
    "format": 1
   },
   {
-   "name": "tests/unit/module_utils/network/common/test_utils.py",
+   "name": "tests/unit/module_utils/network/common/test_config.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "b19d978c5162b4b734003541145a0578fe477b6d8545ad50da3edde495fbb122",
+   "chksum_sha256": "f7355e82c1677b1c4c9868fbd71787c325d5e7c7f40194285c6db760fbbb2457",
    "format": 1
   },
   {
    "name": "tests/unit/module_utils/network/common/test_parsing.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "61387ec75feb3905b485b06b3c10d9ec1a291f859cc47d9844c52ff0d84fd51e",
+   "chksum_sha256": "482777aa8e4991d18a6f4180d77a3aeb98d5cc0c38c0b4b66a90b18a7d71f60b",
    "format": 1
   },
   {
-   "name": "tests/unit/module_utils/network/common/__init__.py",
+   "name": "tests/unit/module_utils/network/common/test_utils.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "b009003af0630fd2eb60bc7cbaa08148d337ca0ae688088edfaddfe8c916ca2e",
    "format": 1
   },
   {
@@ -2101,20 +2108,6 @@
    "format": 1
   },
   {
-   "name": "tests/unit/modules/utils.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "2840476d2023fb1a9da8b3fdc3846a4a0ee52b44b80dbb3a5c2206442f2efbf2",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/modules/conftest.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "2af4846e50d461a131ad3edfb609fbb39a9eb1796048c62e4ead8234bcf5c6a1",
-   "format": 1
-  },
-  {
    "name": "tests/unit/modules/network",
    "ftype": "dir",
    "chksum_type": null,
@@ -2129,24 +2122,24 @@
    "format": 1
   },
   {
+   "name": "tests/unit/modules/network/cli/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
    "name": "tests/unit/modules/network/cli/cli_module.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "ce90d015e338ce885c3fe09ba3b43e8bb9d5477c66a6a7fda1e8b4118f5c2d43",
+   "chksum_sha256": "7c8ab1b9d3912ef4c8f08696290d7069ab4d31c1462a5c0d715600694c1992e1",
    "format": 1
   },
   {
    "name": "tests/unit/modules/network/cli/test_cli_config.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e97e6f59117d4c4375c6977091e20b18f2f279668fd531ff7d50c8d119284687",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/modules/network/cli/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "9c941229b619b6b09e9b636705978b5532010ba4ff0d00299cc85562652142ee",
    "format": 1
   },
   {
@@ -2164,45 +2157,10 @@
    "format": 1
   },
   {
-   "name": "tests/unit/requirements.txt",
+   "name": "tests/unit/modules/utils.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "f77f08772cb3883dfff37c11cc3a09bcf53b1293d3338d422e5832d72d1250ee",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/compat",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/compat/unittest.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "3ed698b1faec43d87a2c1ebcb15a2aae48b09ff355bb9a598e5f5a1c928dbb30",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/compat/mock.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "65d232e01e0a1883512f8da1dee31a393425c64fa9379fce683b9017e0399e17",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/compat/builtins.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ba13a350ade8ef804336f888d5883b8e54f8bddfb9d0fadc10277a8ca6540f4e",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/compat/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "4af152dfed334e2389b9102d475c1c59b99b87d304f656f3a58081369aa83bb0",
    "format": 1
   },
   {
@@ -2210,6 +2168,27 @@
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/action",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/action/network",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/action/network/test_network.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9bcf8cedc361486e1e0b6f1ff51eac110b93636c8baf2b37f1825dc00033fd67",
    "format": 1
   },
   {
@@ -2227,13 +2206,6 @@
    "format": 1
   },
   {
-   "name": "tests/unit/plugins/cli_parsers/fixtures/nxos_show_version.cfg",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "280b9a49752bd9ebddf26798b7df94115c3f3402877d350e60b3236a33fb3f68",
-   "format": 1
-  },
-  {
    "name": "tests/unit/plugins/cli_parsers/fixtures/ios_show_ip_interface_brief.cfg",
    "ftype": "file",
    "chksum_type": "sha256",
@@ -2241,10 +2213,52 @@
    "format": 1
   },
   {
+   "name": "tests/unit/plugins/cli_parsers/fixtures/nxos_show_version.cfg",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "280b9a49752bd9ebddf26798b7df94115c3f3402877d350e60b3236a33fb3f68",
+   "format": 1
+  },
+  {
    "name": "tests/unit/plugins/cli_parsers/test_pyats_parser.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "2c890802d22b91c4b07ed35b72c65922a03935bc6789b1fb46aa99c3ceceda0a",
+   "chksum_sha256": "55052b9d2d9040bb6912c0781da7afe5a353fced3370daa0b46a7dd1606a4256",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/connection",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/connection/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/connection/test_libssh.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f21412d6bfc65ca10fbd9caa996c87afa80ad55ea28daec78283a868a596edd2",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/connection/test_netconf.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1e35cf052048c9b4b71ae5fb16bad8599013d559da995eb216ee47e623f5211f",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/connection/test_network_cli.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8cf6fb0be75bb08a80d16e742efca4abf992d0710f4dba4430e86f2a3e348b5d",
    "format": 1
   },
   {
@@ -2252,20 +2266,6 @@
    "ftype": "dir",
    "chksum_type": null,
    "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/filter/test_network.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "5280997e555ed972ca72a626a6f36e4d17c85ca4761a962c1d3919c246e79c7a",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/filter/test_ipaddr.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "999dc1d6f0d6af4fc0b74d6c1e596c2c2f516c4175ec3de077499822403d3639",
    "format": 1
   },
   {
@@ -2283,10 +2283,24 @@
    "format": 1
   },
   {
+   "name": "tests/unit/plugins/filter/fixtures/network/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
    "name": "tests/unit/plugins/filter/fixtures/network/show_vlans_xml_output.txt",
    "ftype": "file",
    "chksum_type": "sha256",
    "chksum_sha256": "c7ed33a3859e92f8bd04a8e07f3c782200b68e07aaa0e4ec3321bf8ef13a01dc",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/filter/fixtures/network/show_vlans_xml_single_value_spec.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "806a7c949715a66e5337e7b9755395d9534a348646412bdc22fc0544587e33bf",
    "format": 1
   },
   {
@@ -2311,20 +2325,6 @@
    "format": 1
   },
   {
-   "name": "tests/unit/plugins/filter/fixtures/network/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/filter/fixtures/network/show_vlans_xml_single_value_spec.yml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "806a7c949715a66e5337e7b9755395d9534a348646412bdc22fc0544587e33bf",
-   "format": 1
-  },
-  {
    "name": "tests/unit/plugins/filter/fixtures/__init__.py",
    "ftype": "file",
    "chksum_type": "sha256",
@@ -2339,38 +2339,10 @@
    "format": 1
   },
   {
-   "name": "tests/unit/plugins/connection",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/connection/test_libssh.py",
+   "name": "tests/unit/plugins/filter/test_network.py",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "3ecfbce7c9c08379b65ad8a987f17f2a7fd664e141c292aa97b587885d8feff7",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/connection/test_network_cli.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "26a5e98f45a741ccf6e2f15fa832eaed85a04fbcef17f5517762d77535accd4e",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/connection/test_netconf.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ad527a7648c3669a9fcc1ae546950c5161a0e08227b0834235d5b9f3c59cb21e",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/connection/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "chksum_sha256": "665cace7cb613ac07f74841e0c491c9d37936233265714b4dde65fb75c9e6df7",
    "format": 1
   },
   {
@@ -2381,108 +2353,17 @@
    "format": 1
   },
   {
-   "name": "tests/unit/plugins/action",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/action/cli_parse",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/action/cli_parse/fixtures",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/action/cli_parse/fixtures/nxos_show_version.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "ecc75910a654cf1173e258d66728814e83766a4bd3cea4fb4c2479da9dc081c8",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/action/cli_parse/fixtures/nxos_show_version.txt",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "dc4ab2b1c2a8c82c81cd1c61338d0d48737f751d4f859da0509168ea4c5d3dfd",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/action/cli_parse/fixtures/nxos_empty_parser.yaml",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/plugins/action/cli_parse/test_cli_parse.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "06d09b37cac1a93d717a0ed46ca9d604fdc09a16ea89392a6887e308e8f708e2",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock/vault_helper.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "feae23166b6eb502f7d9b77c314970516c9a99aaad7de01295b4dfdad53c5c09",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock/yaml_helper.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "94e2f3c867d2582c9f7a0e99e544718e355025c4a51c9925e70158fa89b3609e",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock/path.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "57fabd18af9ec077b8a4201260d683a5550e5c0d79c35d35375f7dc5375cb2ff",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock/loader.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "0cfbf4c710a5d5725f84d5f34ab76ec1a0e853397cd945c90fd97769f89dddc5",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock/__init__.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "format": 1
-  },
-  {
-   "name": "tests/unit/mock/procenv.py",
-   "ftype": "file",
-   "chksum_type": "sha256",
-   "chksum_sha256": "adcaf9c10269e51c9fd39e7eab276c6b95dc113004bac57375986df86f8bfd1d",
-   "format": 1
-  },
-  {
    "name": "tests/unit/__init__.py",
    "ftype": "file",
    "chksum_type": "sha256",
    "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/requirements.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "91401b9f07eb48ca9c342fae731b446a52c24eb6977aff975ee8757b1ffdaa8d",
    "format": 1
   },
   {
@@ -2493,31 +2374,52 @@
    "format": 1
   },
   {
-   "name": "tests/sanity",
-   "ftype": "dir",
-   "chksum_type": null,
-   "chksum_sha256": null,
+   "name": ".flake8",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f43a7ce8a1c40ac79e786f4fb5d1cbb84193e198715c292071995845f5aa2046",
    "format": 1
   },
   {
-   "name": "tests/sanity/ignore-2.9.txt",
+   "name": ".gitignore",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "95091fad5edd3e25e9735db6ff495cd0114e03dd3764a7bfc0d3deb7bef26c25",
+   "chksum_sha256": "680a6c8fde484dca7b38cf9db05f79cb23c2106617b711997e8cf602c19cb96a",
    "format": 1
   },
   {
-   "name": "tests/sanity/ignore-2.11.txt",
+   "name": ".isort.cfg",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e6106df072e11f6d7551c8b7bce8c90172a1b0f3d37add9624e908f52b93c6d8",
+   "chksum_sha256": "63756a7d7f9d1f7c365da186ec8ae38292970014c50a0aa4c23d7009769fe3ee",
    "format": 1
   },
   {
-   "name": "tests/sanity/ignore-2.10.txt",
+   "name": ".pre-commit-config.yaml",
    "ftype": "file",
    "chksum_type": "sha256",
-   "chksum_sha256": "e6106df072e11f6d7551c8b7bce8c90172a1b0f3d37add9624e908f52b93c6d8",
+   "chksum_sha256": "9346f2f1ea50effae4caa3bc981c87d9829a6d0960aeeb7cca3fffd073e24bd6",
+   "format": 1
+  },
+  {
+   "name": ".prettierignore",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e696270d185b0a5b2b3a6087a748f805e2b7dbaf00d3dc99bc935e4bfa380397",
+   "format": 1
+  },
+  {
+   "name": ".yamllint",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "386fa31449c09e5df093aa72eabcb7653011a90181dc30b539ac67dbe3b17bf4",
+   "format": 1
+  },
+  {
+   "name": "CHANGELOG.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c501aa9f44ec85e1dc5209c58fa65c6e4e0976cea3331cdadb7c7275161cf98f",
    "format": 1
   },
   {
@@ -2525,6 +2427,48 @@
    "ftype": "file",
    "chksum_type": "sha256",
    "chksum_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+   "format": 1
+  },
+  {
+   "name": "README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a942cdc998818e4673a4899141079915172b49b5e877023820e751cec8b2acea",
+   "format": 1
+  },
+  {
+   "name": "bindep.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "476689e7df100dd7eaf0c6e1f772599e5e20e5f804b73956119a9141bd4e32b8",
+   "format": 1
+  },
+  {
+   "name": "pyproject.toml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3ecb9ab9054afb7fb47aa660fa8df80964e13307972d715383b70d68c408630",
+   "format": 1
+  },
+  {
+   "name": "requirements.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "be1d32c772e4fc0a8a5da8e408ff93c681f749c15b393162dad6643da794e5d0",
+   "format": 1
+  },
+  {
+   "name": "test-requirements.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e31021f3a833ad8081604528c1a0f4bd9ce0ba0c0b700f9b1f17340e79599165",
+   "format": 1
+  },
+  {
+   "name": "tox.ini",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8bab7b483e32f4b1e68ece66140512c0bed5b82f39193a9f647a3b14d66ba2f5",
    "format": 1
   }
  ],

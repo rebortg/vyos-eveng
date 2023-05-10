@@ -3,6 +3,7 @@ The base class for validator
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import os
@@ -10,16 +11,14 @@ import os
 from importlib import import_module
 
 from ansible.errors import AnsibleError
+from ansible.module_utils._text import to_native, to_text
 from ansible.module_utils.six import iteritems
-from ansible.module_utils._text import to_text, to_native
 
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
     check_argspec,
 )
+from ansible_collections.ansible.utils.plugins.module_utils.common.utils import to_list
 
-from ansible_collections.ansible.utils.plugins.module_utils.common.utils import (
-    to_list,
-)
 
 try:
     import yaml
@@ -48,8 +47,10 @@ class ValidateBase(object):
         self._sub_plugin_options = {}
 
         cref = dict(zip(["corg", "cname", "plugin"], engine.split(".")))
-        validatorlib = "ansible_collections.{corg}.{cname}.plugins.sub_plugins.validate.{plugin}".format(
-            **cref
+        validatorlib = (
+            "ansible_collections.{corg}.{cname}.plugins.sub_plugins.validate.{plugin}".format(
+                **cref
+            )
         )
 
         validatordoc = getattr(import_module(validatorlib), "DOCUMENTATION")
@@ -66,7 +67,7 @@ class ValidateBase(object):
                     err=to_text(exc, errors="surrogate_or_strict"),
                     engine=self._engine,
                     argspec=doc,
-                )
+                ),
             )
         options = argspec_obj.get("options", {})
 
@@ -97,7 +98,7 @@ class ValidateBase(object):
                             " should to be type dict".format(
                                 var_name_type=type(var_name_entry),
                                 var_name_entry=var_name_entry,
-                            )
+                            ),
                         )
                     var_name = var_name_entry.get("name")
                     if var_name and var_name in self._plugin_vars:
@@ -115,7 +116,7 @@ class ValidateBase(object):
                             " should to be type dict".format(
                                 env_name_entry_type=type(env_name_entry),
                                 env_name_entry=env_name_entry,
-                            )
+                            ),
                         )
                     env_name = env_name_entry.get("name")
                     if env_name in os.environ:
@@ -130,7 +131,7 @@ class ValidateBase(object):
                 "{argspec_result} with errors: {argspec_errors}".format(
                     argspec_result=argspec_result.get("msg"),
                     argspec_errors=argspec_result.get("errors"),
-                )
+                ),
             )
 
         if updated_params:
@@ -140,9 +141,7 @@ class ValidateBase(object):
         return self._sub_plugin_options.get(name)
 
 
-def _load_validator(
-    engine, data, criteria, plugin_vars=None, cls_name="Validate", kwargs=None
-):
+def _load_validator(engine, data, criteria, plugin_vars=None, cls_name="Validate", kwargs=None):
     """
     Load the validate plugin from engine name
     :param engine: Name of the validate engine in format <org-name>.<collection-name>.<validate-plugin>
@@ -161,14 +160,12 @@ def _load_validator(
 
     if len(engine.split(".")) != 3:
         result["failed"] = True
-        result[
-            "msg"
-        ] = "Parser name should be provided as a full name including collection"
+        result["msg"] = "Parser name should be provided as a full name including collection"
         return None, result
 
     cref = dict(zip(["corg", "cname", "plugin"], engine.split(".")))
-    validatorlib = "ansible_collections.{corg}.{cname}.plugins.sub_plugins.validate.{plugin}".format(
-        **cref
+    validatorlib = (
+        "ansible_collections.{corg}.{cname}.plugins.sub_plugins.validate.{plugin}".format(**cref)
     )
 
     try:
@@ -186,6 +183,7 @@ def _load_validator(
         result[
             "msg"
         ] = "For engine '{engine}' error loading the corresponding validate plugin: {err}".format(
-            engine=engine, err=to_native(exc)
+            engine=engine,
+            err=to_native(exc),
         )
         return None, result

@@ -39,7 +39,7 @@ description: This module manage global policies or configurations for firewall o
 version_added: 1.0.0
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 author:
 - Rohit Thakur (@rohitthakur2590)
 options:
@@ -123,6 +123,15 @@ options:
             type: list
             elements: dict
             suboptions:
+              afi:
+                description:
+                - Specifies IP address type
+                type: str
+                default: ipv4
+                choices:
+                - ipv4
+                - ipv6
+                required: false
               name:
                 description:
                 - Name of the firewall address group.
@@ -149,6 +158,15 @@ options:
             type: list
             elements: dict
             suboptions:
+              afi:
+                description:
+                - Specifies network address type
+                type: str
+                default: ipv4
+                choices:
+                - ipv4
+                - ipv6
+                required: false
               name:
                 description:
                 - Name of the firewall network group.
@@ -207,7 +225,7 @@ options:
         type: bool
       twa_hazards_protection:
         description:
-        - RFC1337 TCP TIME-WAIT assasination hazards protection.
+        - RFC1337 TCP TIME-WAIT assassination hazards protection.
         type: bool
       state_policy:
         description:
@@ -267,7 +285,7 @@ EXAMPLES = """
 # vyos@vyos# run show  configuration commands | grep firewall
 #
 #
-- name: Merge the provided configuration with the exisiting running configuration
+- name: Merge the provided configuration with the existing running configuration
   vyos.vyos.vyos_firewall_global:
     config:
       validation: strict

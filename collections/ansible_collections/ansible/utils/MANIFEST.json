@@ -2,7 +2,7 @@
  "collection_info": {
   "namespace": "ansible",
   "name": "utils",
-  "version": "2.0.2",
+  "version": "2.9.0",
   "authors": [
    "Ansible Community"
   ],
@@ -24,13 +24,13 @@
   "repository": "https://github.com/ansible-collections/ansible.utils",
   "documentation": null,
   "homepage": null,
-  "issues": null
+  "issues": "https://github.com/ansible-collections/ansible.utils/issues"
  },
  "file_manifest_file": {
   "name": "FILES.json",
   "ftype": "file",
   "chksum_type": "sha256",
-  "chksum_sha256": "bf99b96765012e803422a70c6a9413a3541918e782c0e96a823533119adf1182",
+  "chksum_sha256": "a6d8affe206c092be7f2f3fe262458aa8aff0081c7fe4a8935c8945bbf76275f",
   "format": 1
  },
  "format": 1

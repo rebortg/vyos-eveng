@@ -5,6 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 DOCUMENTATION = """
     name: validate
@@ -74,15 +75,13 @@ RETURN = """
 
 from ansible.errors import AnsibleError
 from ansible.module_utils._text import to_text
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.validate import (
-    _load_validator,
-)
-from ansible_collections.ansible.utils.plugins.module_utils.common.utils import (
-    to_list,
-)
+
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
     check_argspec,
 )
+from ansible_collections.ansible.utils.plugins.module_utils.common.utils import to_list
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.validate import _load_validator
+
 
 ARGSPEC_CONDITIONALS = {}
 
@@ -91,7 +90,7 @@ def validate(*args, **kwargs):
     if not len(args):
         raise AnsibleError(
             "Missing either 'data' value in test plugin input,"
-            "refer ansible.utils.validate test plugin documentation for details"
+            "refer ansible.utils.validate test plugin documentation for details",
         )
 
     params = {"data": args[0]}
@@ -101,17 +100,14 @@ def validate(*args, **kwargs):
             params.update({item: kwargs[item]})
 
     valid, argspec_result, updated_params = check_argspec(
-        DOCUMENTATION,
-        "validate test",
-        schema_conditionals=ARGSPEC_CONDITIONALS,
-        **params
+        DOCUMENTATION, "validate test", schema_conditionals=ARGSPEC_CONDITIONALS, **params
     )
     if not valid:
         raise AnsibleError(
             "{argspec_result} with errors: {argspec_errors}".format(
                 argspec_result=argspec_result.get("msg"),
                 argspec_errors=argspec_result.get("errors"),
-            )
+            ),
         )
 
     validator_engine, validator_result = _load_validator(
@@ -122,8 +118,7 @@ def validate(*args, **kwargs):
     )
     if validator_result.get("failed"):
         raise AnsibleError(
-            "validate lookup plugin failed with errors: %s"
-            % validator_result.get("msg")
+            "validate lookup plugin failed with errors: %s" % validator_result.get("msg"),
         )
 
     try:
@@ -135,7 +130,7 @@ def validate(*args, **kwargs):
             "Unhandled exception from validator '{validator}'. Error: {err}".format(
                 validator=updated_params["engine"],
                 err=to_text(exc, errors="surrogate_then_replace"),
-            )
+            ),
         )
 
     errors = to_list(result.get("errors", []))

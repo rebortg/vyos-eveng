@@ -1,24 +1,28 @@
 # (c) 2020 Ansible Project
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 from __future__ import absolute_import, division, print_function
 
 __metaclass__ = type
 
 DOCUMENTATION = """
-    author: Ansible Team
-    connection: libssh
-    short_description: (Tech preview) Run tasks using libssh for ssh connection
+    author:
+      - Ansible Networking Team (@ansible-network)
+    name: libssh
+    short_description: Run tasks using libssh for ssh connection
     description:
         - Use the ansible-pylibssh python bindings to connect to targets
         - The python bindings use libssh C library (https://www.libssh.org/) to connect to targets
         - This plugin borrows a lot of settings from the ssh plugin as they both cover the same protocol.
-    version_added: "2.10"
+    version_added: 1.1.0
     options:
       remote_addr:
         description:
             - Address of the remote target
         default: inventory_hostname
         vars:
+            - name: inventory_hostname
             - name: ansible_host
             - name: ansible_ssh_host
             - name: ansible_libssh_host
@@ -48,6 +52,14 @@ DOCUMENTATION = """
             - name: ansible_ssh_password
             - name: ansible_libssh_pass
             - name: ansible_libssh_password
+      password_prompt:
+        description:
+          - Text to match when using keyboard-interactive authentication to determine if the prompt is
+            for the password.
+          - Requires ansible-pylibssh version >= 1.0.0
+        vars:
+          - name: ansible_libssh_password_prompt
+        version_added: 3.1.0
       host_key_auto_add:
         description: 'TODO: write it'
         env: [{name: ANSIBLE_LIBSSH_HOST_KEY_AUTO_ADD}]
@@ -64,11 +76,15 @@ DOCUMENTATION = """
       proxy_command:
         default: ''
         description:
-            - Proxy information for running the connection via a jumphost
+            - Proxy information for running the connection via a jumphost.
             - Also this plugin will scan 'ssh_args', 'ssh_extra_args' and 'ssh_common_args' from the 'ssh' plugin settings for proxy information if set.
-        env: [{name: ANSIBLE_LIBSSH_PROXY_COMMAND}]
+        env:
+          - name: ANSIBLE_LIBSSH_PROXY_COMMAND
         ini:
           - {key: proxy_command, section: libssh_connection}
+        vars:
+          - name: ansible_paramiko_proxy_command
+          - name: ansible_libssh_proxy_command
       pty:
         default: True
         description: 'TODO: write it'
@@ -104,33 +120,81 @@ DOCUMENTATION = """
         ini:
           - section: defaults
             key: use_persistent_connections
+      ssh_args:
+          version_added: 3.2.0
+          description:
+           - Arguments to pass to all ssh CLI tools.
+           - ProxyCommand is the only supported argument.
+           - This option is deprecated in favor of I(proxy_command).
+          ini:
+              - section: 'ssh_connection'
+                key: 'ssh_args'
+          env:
+              - name: ANSIBLE_SSH_ARGS
+          vars:
+              - name: ansible_ssh_args
+          cli:
+              - name: ssh_args
+      ssh_common_args:
+          version_added: 3.2.0
+          description:
+           - Common extra arguments for all ssh CLI tools.
+           - ProxyCommand is the only supported argument.
+           - This option is deprecated in favor of I(proxy_command).
+          ini:
+              - section: 'ssh_connection'
+                key: 'ssh_common_args'
+          env:
+              - name: ANSIBLE_SSH_COMMON_ARGS
+          vars:
+              - name: ansible_ssh_common_args
+          cli:
+              - name: ssh_common_args
+      ssh_extra_args:
+          version_added: 3.2.0
+          description:
+           - Extra arguments exclusive to the 'ssh' CLI tool.
+           - ProxyCommand is the only supported argument.
+           - This option is deprecated in favor of I(proxy_command).
+          vars:
+              - name: ansible_ssh_extra_args
+          env:
+            - name: ANSIBLE_SSH_EXTRA_ARGS
+          ini:
+            - key: ssh_extra_args
+              section: ssh_connection
+          cli:
+            - name: ssh_extra_args
 # TODO:
 #timeout=self._play_context.timeout,
 """
+import logging
 import os
-import socket
 import re
+import socket
 import sys
-
-from termios import tcflush, TCIFLUSH
+from termios import TCIFLUSH, tcflush
 
 from ansible.errors import (
     AnsibleConnectionFailure,
     AnsibleError,
     AnsibleFileNotFound,
 )
+from ansible.module_utils._text import to_bytes, to_native, to_text
+from ansible.module_utils.basic import missing_required_lib
 from ansible.module_utils.six.moves import input
 from ansible.plugins.connection import ConnectionBase
 from ansible.utils.display import Display
-from ansible.module_utils._text import to_bytes, to_native, to_text
-from ansible.module_utils.basic import missing_required_lib
-import logging
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.version import (
+    Version,
+)
 
 display = Display()
 
 try:
+    from pylibsshext import __version__ as PYLIBSSH_VERSION
+    from pylibsshext.errors import LibsshSCPException, LibsshSessionException
     from pylibsshext.session import Session
-    from pylibsshext.errors import LibsshSessionException, LibsshSCPException
 
     HAS_PYLIBSSH = True
 except ImportError:
@@ -180,7 +244,8 @@ class MyAddPolicy(object):
                 # don't print the prompt string since the user cannot respond
                 # to the question anyway
                 raise AnsibleError(
-                    AUTHENTICITY_MSG[1:92] % (hostname, key_type, fingerprint)
+                    AUTHENTICITY_MSG.rsplit("\n", 2)[0]
+                    % (hostname, message, key_type, fingerprint)
                 )
 
             self.connection.connection_lock()
@@ -211,7 +276,7 @@ SFTP_CONNECTION_CACHE = {}
 
 
 class Connection(ConnectionBase):
-    """ SSH based connections with Paramiko """
+    """SSH based connections with Paramiko"""
 
     transport = "ansible.netcommon.libssh"
     _log_channel = None
@@ -239,12 +304,12 @@ class Connection(ConnectionBase):
         proxy_command = None
         # Parse ansible_ssh_common_args, specifically looking for ProxyCommand
         ssh_args = [
-            getattr(self._play_context, "ssh_extra_args", "") or "",
-            getattr(self._play_context, "ssh_common_args", "") or "",
-            getattr(self._play_context, "ssh_args", "") or "",
+            self.get_option("ssh_extra_args") or "",
+            self.get_option("ssh_common_args") or "",
+            self.get_option("ssh_args") or "",
         ]
 
-        if ssh_args is not None:
+        if any(ssh_args):
             args = self._split_ssh_args(" ".join(ssh_args))
             for i, arg in enumerate(args):
                 if arg.lower() == "proxycommand":
@@ -274,22 +339,24 @@ class Connection(ConnectionBase):
         return proxy_command
 
     def _connect_uncached(self):
-        """ activates the connection object """
+        """activates the connection object"""
 
         if not HAS_PYLIBSSH:
             raise AnsibleError(missing_required_lib("ansible-pylibssh"))
+        display.vvv(
+            "USING PYLIBSSH VERSION %s" % PYLIBSSH_VERSION,
+            host=self._play_context.remote_addr,
+        )
 
         ssh_connect_kwargs = {}
 
+        remote_user = self.get_option("remote_user")
+        remote_addr = self.get_option("remote_addr")
         port = self._play_context.port or 22
         display.vvv(
             "ESTABLISH LIBSSH CONNECTION FOR USER: %s on PORT %s TO %s"
-            % (
-                self._play_context.remote_user,
-                port,
-                self._play_context.remote_addr,
-            ),
-            host=self._play_context.remote_addr,
+            % (remote_user, port, remote_addr),
+            host=remote_addr,
         )
 
         self.ssh = Session()
@@ -315,16 +382,26 @@ class Connection(ConnectionBase):
             if proxy_command:
                 ssh_connect_kwargs["proxycommand"] = proxy_command
 
+            if self.get_option("password_prompt") and (
+                Version(PYLIBSSH_VERSION) < "1.0.0"
+            ):
+                raise AnsibleError(
+                    "Configuring password prompt is not supported in ansible-pylibssh version %s. "
+                    "Please upgrade to ansible-pylibssh 1.0.0 or newer."
+                    % PYLIBSSH_VERSION
+                )
+
             self.ssh.set_missing_host_key_policy(
                 MyAddPolicy(self._new_stdin, self)
             )
 
             self.ssh.connect(
-                host=self._play_context.remote_addr.lower(),
-                user=self._play_context.remote_user,
+                host=remote_addr.lower(),
+                user=remote_user,
                 look_for_keys=self.get_option("look_for_keys"),
                 host_key_checking=self.get_option("host_key_checking"),
-                password=self._play_context.password,
+                password=self.get_option("password"),
+                password_prompt=self.get_option("password_prompt"),
                 private_key=private_key,
                 timeout=self._play_context.timeout,
                 port=port,
@@ -340,7 +417,7 @@ class Connection(ConnectionBase):
         return self.ssh
 
     def exec_command(self, cmd, in_data=None, sudoable=True):
-        """ run a command on the remote host """
+        """run a command on the remote host"""
 
         super(Connection, self).exec_command(
             cmd, in_data=in_data, sudoable=sudoable
@@ -357,9 +434,9 @@ class Connection(ConnectionBase):
             self.chan = self.ssh.new_channel()
         except Exception as e:
             text_e = to_text(e)
-            msg = u"Failed to open session"
+            msg = "Failed to open session"
             if text_e:
-                msg += u": %s" % text_e
+                msg += ": %s" % text_e
             raise AnsibleConnectionFailure(to_native(msg))
 
         # sudo usually requires a PTY (cf. requiretty option), therefore
@@ -450,7 +527,7 @@ class Connection(ConnectionBase):
         return rc, out, err
 
     def put_file(self, in_path, out_path, proto="sftp"):
-        """ transfer a file from local to remote """
+        """transfer a file from local to remote"""
 
         super(Connection, self).put_file(in_path, out_path)
 
@@ -505,7 +582,7 @@ class Connection(ConnectionBase):
             return result
 
     def fetch_file(self, in_path, out_path, proto="sftp"):
-        """ save a remote file to the specified path """
+        """save a remote file to the specified path"""
 
         super(Connection, self).fetch_file(in_path, out_path)
 
@@ -548,7 +625,7 @@ class Connection(ConnectionBase):
         self._connect()
 
     def close(self):
-        """ terminate the connection """
+        """terminate the connection"""
 
         cache_key = self._cache_key()
         SSH_CONNECTION_CACHE.pop(cache_key, None)

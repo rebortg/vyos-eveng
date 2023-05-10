@@ -94,6 +94,7 @@ Parameters
                         <b>Default:</b><br/><div style="color: blue">"inventory_hostname"</div>
                 </td>
                     <td>
+                                <div>var: inventory_hostname</div>
                                 <div>var: ansible_host</div>
                     </td>
                 <td>
@@ -110,11 +111,11 @@ Parameters
                     </div>
                 </td>
                 <td>
-                        <b>Default:</b><br/><div style="color: blue">"no"</div>
+                        <b>Default:</b><br/><div style="color: blue">"yes"</div>
                 </td>
                     <td>
                             <div> ini entries:
-                                    <p>[ansible_network]<br>import_modules = no</p>
+                                    <p>[ansible_network]<br>import_modules = yes</p>
                             </div>
                                 <div>env:ANSIBLE_NETWORK_IMPORT_MODULES</div>
                                 <div>var: ansible_network_import_modules</div>
@@ -229,6 +230,25 @@ Parameters
                 <td>
                         <div>This flag will enable logging the command executed and response received from target device in the ansible log file. For this option to work &#x27;log_path&#x27; ansible configuration option is required to be set to a file path with write access.</div>
                         <div>Be sure to fully understand the security implications of enabling this option as it could create a security vulnerability by logging sensitive information in log file.</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>platform_type</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">-</span>
+                    </div>
+                </td>
+                <td>
+                </td>
+                    <td>
+                                <div>env:ANSIBLE_PLATFORM_TYPE</div>
+                                <div>var: ansible_platform_type</div>
+                    </td>
+                <td>
+                        <div>Set type of platform.</div>
                 </td>
             </tr>
             <tr>
@@ -371,7 +391,7 @@ Status
 Authors
 ~~~~~~~
 
-- Ansible Networking Team
+- Ansible Networking Team (@ansible-network)
 
 
 .. hint::

@@ -21,14 +21,16 @@ def _check_argspec(self):
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import re
+
 from ansible.module_utils.basic import AnsibleModule
-from ansible_collections.ansible.utils.plugins.module_utils.common.utils import (
-    dict_merge,
-)
 from ansible.module_utils.six import iteritems
+
+from ansible_collections.ansible.utils.plugins.module_utils.common.utils import dict_merge
+
 
 try:
     import yaml
@@ -46,9 +48,7 @@ except ImportError:
 # ansible-base 2.11 should expose argspec validation outside of the
 # ansiblemodule class
 try:
-    from ansible.module_utils.somefile import (  # noqa: F401
-        FutureBaseArgspecValidator,
-    )
+    from ansible.module_utils.common.arg_spec import ArgumentSpecValidator
 
     HAS_ANSIBLE_ARG_SPEC_VALIDATOR = True
 except ImportError:
@@ -106,9 +106,7 @@ class MonkeyModule(AnsibleModule):
         :type msg: str
         """
         if self.name:
-            msg = re.sub(
-                r"\(basic\.pyc?\)", "'{name}'".format(name=self.name), msg
-            )
+            msg = re.sub(r"\(basic\.pyc?\)", "'{name}'".format(name=self.name), msg)
         self._valid = False
         self._errors = msg
 
@@ -143,7 +141,7 @@ class AnsibleArgSpecValidator:
         other_args=None,
     ):
         """Validate some data against a schema
-        :param data: The data to valdiate
+        :param data: The data to validate
         :type data: dict
         :param schema: A schema in ansible argspec format
         :type schema: dict
@@ -183,9 +181,7 @@ class AnsibleArgSpecValidator:
                 if metakey == "suboptions":
                     temp_schema[okey].update({"options": {}})
                     suboptions_obj = {"options": ovalue["suboptions"]}
-                    self._extract_schema_from_doc(
-                        suboptions_obj, temp_schema[okey]["options"]
-                    )
+                    self._extract_schema_from_doc(suboptions_obj, temp_schema[okey]["options"])
                 elif metakey in OPTION_METADATA + OPTION_CONDITIONALS:
                     temp_schema[okey].update({metakey: ovalue[metakey]})
 
@@ -216,19 +212,15 @@ class AnsibleArgSpecValidator:
             self._schema = dict_merge(self._schema, self._schema_conditionals)
         if self._other_args is not None:
             self._schema = dict_merge(self._schema, self._other_args)
-        invalid_keys = [
-            k for k in self._schema.keys() if k not in VALID_ANSIBLEMODULE_ARGS
-        ]
+        invalid_keys = [k for k in self._schema.keys() if k not in VALID_ANSIBLEMODULE_ARGS]
         if invalid_keys:
             valid = False
             errors = "Invalid schema. Invalid keys found: {ikeys}".format(
-                ikeys=",".join(invalid_keys)
+                ikeys=",".join(invalid_keys),
             )
             updated_data = {}
         else:
-            mm = MonkeyModule(
-                data=self._data, schema=self._schema, name=self._name
-            )
+            mm = MonkeyModule(data=self._data, schema=self._schema, name=self._name)
             valid, errors, updated_data = mm.validate()
         return valid, errors, updated_data
 
@@ -238,14 +230,34 @@ class AnsibleArgSpecValidator:
         that is coming in 2.11, change the check according above
         """
         if HAS_ANSIBLE_ARG_SPEC_VALIDATOR:
-            return self._validate()
+            if self._schema_format == "doc":
+                self._convert_doc_to_schema()
+            if self._schema_conditionals is not None:
+                self._schema = dict_merge(self._schema, self._schema_conditionals)
+            invalid_keys = [k for k in self._schema.keys() if k not in VALID_ANSIBLEMODULE_ARGS]
+            if invalid_keys:
+                valid = False
+                errors = [
+                    "Invalid schema. Invalid keys found: {ikeys}".format(
+                        ikeys=",".join(invalid_keys),
+                    ),
+                ]
+                updated_data = {}
+                return valid, errors, updated_data
+            else:
+                validator = ArgumentSpecValidator(**self._schema)
+                result = validator.validate(self._data)
+                valid = not bool(result.error_messages)
+                return (
+                    valid,
+                    result.error_messages,
+                    result.validated_parameters,
+                )
         else:
             return self._validate()
 
 
-def check_argspec(
-    schema, name, schema_format="doc", schema_conditionals=None, **args
-):
+def check_argspec(schema, name, schema_format="doc", schema_conditionals=None, **args):
     if schema_conditionals is None:
         schema_conditionals = {}
 
@@ -261,8 +273,6 @@ def check_argspec(
     if not valid:
         result["errors"] = errors
         result["failed"] = True
-        result["msg"] = "argspec validation failed for {name} plugin".format(
-            name=name
-        )
+        result["msg"] = "argspec validation failed for {name} plugin".format(name=name)
 
     return valid, result, updated_params

@@ -30,9 +30,9 @@ short_description: Tests reachability using ping from VyOS network devices
 description:
 - Tests reachability using ping from a VyOS device to a remote destination.
 - Tested against VyOS 1.1.8 (helium)
-- For a general purpose network module, see the M(net_ping) module.
-- For Windows targets, use the M(win_ping) module instead.
-- For targets running Python, use the M(ping) module instead.
+- For a general purpose network module, see the M(ansible.netcommon.net_ping) module.
+- For Windows targets, use the M(ansible.windows.win_ping) module instead.
+- For targets running Python, use the M(ansible.builtin.ping) module instead.
 version_added: 1.0.0
 author:
 - Nilashish Chakraborty (@NilashishC)
@@ -73,10 +73,10 @@ options:
     default: present
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- For a general purpose network module, see the M(net_ping) module.
-- For Windows targets, use the M(win_ping) module instead.
-- For targets running Python, use the M(ping) module instead.
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- For a general purpose network module, see the M(ansible.netcommon.net_ping) module.
+- For Windows targets, use the M(ansible.windows.win_ping) module instead.
+- For targets running Python, use the M(ansible.builtin.ping) module instead.
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 extends_documentation_fragment:
 - vyos.vyos.vyos
 """
@@ -92,7 +92,7 @@ EXAMPLES = """
     source: eth0
     ttl: 128
 
-- name: Test unreachability to 10.30.30.30 using interval
+- name: Test reachability to 10.30.30.30 using interval
   vyos.vyos.vyos_ping:
     dest: 10.30.30.30
     interval: 3
@@ -138,9 +138,6 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
     run_commands,
 )
-from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    vyos_argument_spec,
-)
 import re
 
 
@@ -157,8 +154,6 @@ def main():
             type="str", choices=["absent", "present"], default="present"
         ),
     )
-
-    argument_spec.update(vyos_argument_spec)
 
     module = AnsibleModule(argument_spec=argument_spec)
 

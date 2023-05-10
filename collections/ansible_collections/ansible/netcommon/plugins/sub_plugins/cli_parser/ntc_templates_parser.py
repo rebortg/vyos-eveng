@@ -1,3 +1,6 @@
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """
 ntc_templates parser
 
@@ -38,7 +41,6 @@ EXAMPLES = r"""
 """
 
 from ansible.module_utils._text import to_native
-
 from ansible.module_utils.basic import missing_required_lib
 from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import (
     CliParserBase,
@@ -62,7 +64,7 @@ ANSIBLE_NETWORK_OS = {
 
 
 class CliParser(CliParserBase):
-    """ The ntc_templates parser class
+    """The ntc_templates parser class
     Convert raw text to structured data using textfsm and predefined templates in
     the ntc-templates python package
     """
@@ -71,7 +73,7 @@ class CliParser(CliParserBase):
     PROVIDE_TEMPLATE_CONTENTS = False
 
     def _check_reqs(self):
-        """ Check the prerequisites for the ntc template parser
+        """Check the prerequisites for the ntc template parser
 
         :return: A dict with errors or a network_os and command
         :rtype: dict
@@ -103,7 +105,7 @@ class CliParser(CliParserBase):
         return {"network_os": network_os, "command": command}
 
     def parse(self, *_args, **_kwargs):
-        """ Std entry point for a cli_parse parse execution
+        """Std entry point for a cli_parse parse execution
 
         :return: Errors or parsed text as structured data
         :rtype: dict

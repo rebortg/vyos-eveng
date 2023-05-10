@@ -2,7 +2,7 @@
  "collection_info": {
   "namespace": "vyos",
   "name": "vyos",
-  "version": "2.1.0",
+  "version": "4.0.0",
   "authors": [
    "Ansible Network Community (ansible-network)"
   ],
@@ -15,18 +15,18 @@
   "license": [],
   "license_file": "LICENSE",
   "dependencies": {
-   "ansible.netcommon": ">=2.0.0"
+   "ansible.netcommon": ">=2.5.1"
   },
   "repository": "https://github.com/ansible-collections/vyos.vyos",
   "documentation": null,
   "homepage": null,
-  "issues": null
+  "issues": "https://github.com/ansible-collections/vyos.vyos/issues"
  },
  "file_manifest_file": {
   "name": "FILES.json",
   "ftype": "file",
   "chksum_type": "sha256",
-  "chksum_sha256": "71b21accbedcb59864f6359cbc68480bae9cb4dde409258f0bdadfbb43bfe339",
+  "chksum_sha256": "d81ecfee57474dfd19ab2241f93b01c1552e1ac331fda79e32a933959c2823f0",
   "format": 1
  },
  "format": 1

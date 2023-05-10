@@ -5,21 +5,22 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import unittest
+
+from ansible.errors import AnsibleActionFail
 from ansible.playbook.task import Task
 from ansible.template import Templar
-from ansible.errors import AnsibleActionFail
 
-from ansible_collections.ansible.utils.plugins.action.validate import (
-    ActionModule,
-)
+from ansible_collections.ansible.utils.plugins.action.validate import ActionModule
+
 
 try:
     from unittest.mock import MagicMock  # pylint:disable=syntax-error
 except ImportError:
-    from mock import MagicMock
+    from mock import MagicMock  # pyright: ignore[reportMissingModuleSource]
 
 
 DATA = {
@@ -61,21 +62,15 @@ CRITERIA_CRC_ERROR_CHECK = {
         "^.*": {
             "type": "object",
             "properties": {
-                "counters": {
-                    "properties": {
-                        "in_crc_errors": {"type": "number", "maximum": 0}
-                    }
-                }
+                "counters": {"properties": {"in_crc_errors": {"type": "number", "maximum": 0}}},
             },
-        }
+        },
     },
 }
 
 CRITERIA_ENABLED_CHECK = {
     "type": "object",
-    "patternProperties": {
-        "^.*": {"type": "object", "properties": {"enabled": {"enum": [True]}}}
-    },
+    "patternProperties": {"^.*": {"type": "object", "properties": {"enabled": {"enum": [True]}}}},
 }
 
 CRITERIA_OPER_STATUS_UP_CHECK = {
@@ -84,7 +79,7 @@ CRITERIA_OPER_STATUS_UP_CHECK = {
         "^.*": {
             "type": "object",
             "properties": {"oper_status": {"type": "string", "pattern": "up"}},
-        }
+        },
     },
 }
 
@@ -96,16 +91,23 @@ CRITERIA_IN_RATE_CHECK = {
             "properties": {
                 "counters": {
                     "properties": {
-                        "rate": {
-                            "properties": {
-                                "in_rate": {"type": "number", "maximum": 0}
-                            }
-                        }
-                    }
-                }
+                        "rate": {"properties": {"in_rate": {"type": "number", "maximum": 0}}},
+                    },
+                },
             },
-        }
+        },
     },
+}
+
+VALID_DATA = {"name": "ansible", "email": "ansible@redhat.com"}
+
+IN_VALID_DATA = {"name": "ansible", "email": "redhatcom"}
+
+CRITERIA_FORMAT_SUPPORT_CHECK = {
+    "$schema": "https://json-schema.org/schema#",
+    "type": "object",
+    "properties": {"name": {"type": "string"}, "email": {"format": "email"}},
+    "required": ["email"],
 }
 
 
@@ -133,9 +135,11 @@ class TestValidate(unittest.TestCase):
         # missing required arguments
         self._plugin._task.args = {"engine": "ansible.utils.jsonschema"}
         result = self._plugin.run(task_vars=None)
-        msg = "missing required arguments criteria data"
-        for word in msg.split():
-            self.assertIn(word, result["errors"])
+        msg = "missing required arguments:"
+        if isinstance(result["errors"], list):
+            self.assertIn(msg, result["errors"][0])
+        else:
+            self.assertIn(msg, result["errors"])
 
         # invalid engine option value
         self._plugin._task.args = {
@@ -169,9 +173,7 @@ class TestValidate(unittest.TestCase):
 
         with self.assertRaises(AnsibleActionFail) as error:
             self._plugin.run(task_vars=None)
-        self.assertIn(
-            "'criteria' option value is invalid", str(error.exception)
-        )
+        self.assertIn("'criteria' option value is invalid", str(error.exception))
 
     def test_invalid_validate_plugin_config_options(self):
         """Check passing invalid validate plugin options"""
@@ -182,13 +184,47 @@ class TestValidate(unittest.TestCase):
             "criteria": CRITERIA_IN_RATE_CHECK,
         }
 
-        result = self._plugin.run(
-            task_vars={"ansible_validate_jsonschema_draft": "draft0"}
-        )
+        result = self._plugin.run(task_vars={"ansible_validate_jsonschema_draft": "draft0"})
         self.assertIn(
             "value of draft must be one of: draft3, draft4, draft6, draft7, got: draft0",
             result["msg"],
         )
+
+    def test_validate_plugin_config_options_with_draft3(self):
+        """Check passing invalid validate plugin options"""
+
+        self._plugin._task.args = {
+            "engine": "ansible.utils.jsonschema",
+            "data": DATA,
+            "criteria": CRITERIA_IN_RATE_CHECK,
+        }
+
+        result = self._plugin.run(task_vars={"ansible_validate_jsonschema_draft": "draft3"})
+        self.assertIn("All checks passed", result["msg"])
+
+    def test_validate_plugin_config_options_with_draft4(self):
+        """Check passing invalid validate plugin options"""
+
+        self._plugin._task.args = {
+            "engine": "ansible.utils.jsonschema",
+            "data": DATA,
+            "criteria": CRITERIA_IN_RATE_CHECK,
+        }
+
+        result = self._plugin.run(task_vars={"ansible_validate_jsonschema_draft": "draft4"})
+        self.assertIn("All checks passed", result["msg"])
+
+    def test_validate_plugin_config_options_with_draft6(self):
+        """Check passing invalid validate plugin options"""
+
+        self._plugin._task.args = {
+            "engine": "ansible.utils.jsonschema",
+            "data": DATA,
+            "criteria": CRITERIA_IN_RATE_CHECK,
+        }
+
+        result = self._plugin.run(task_vars={"ansible_validate_jsonschema_draft": "draft6"})
+        self.assertIn("All checks passed", result["msg"])
 
     def test_invalid_data(self):
         """Check passing invalid data as per criteria"""
@@ -208,9 +244,7 @@ class TestValidate(unittest.TestCase):
             "patternProperties.^.*.properties.counters.properties.in_crc_errors.maximum",
             result["msg"],
         )
-        self.assertIn(
-            "patternProperties.^.*.properties.enabled.enum", result["msg"]
-        )
+        self.assertIn("patternProperties.^.*.properties.enabled.enum", result["msg"])
         self.assertIn(
             "'patternProperties.^.*.properties.oper_status.pattern",
             result["msg"],
@@ -226,4 +260,28 @@ class TestValidate(unittest.TestCase):
         }
 
         result = self._plugin.run(task_vars=None)
-        self.assertIn("all checks passed", result["msg"])
+        self.assertIn("All checks passed", result["msg"])
+
+    def test_support_for_format(self):
+        """Check passing valid data as per criteria"""
+
+        self._plugin._task.args = {
+            "engine": "ansible.utils.jsonschema",
+            "data": VALID_DATA,
+            "criteria": CRITERIA_FORMAT_SUPPORT_CHECK,
+        }
+
+        result = self._plugin.run(task_vars=None)
+        self.assertIn("All checks passed", result["msg"])
+
+    def test_support_for_format_with_invalid_data(self):
+        """Check passing valid data as per criteria"""
+
+        self._plugin._task.args = {
+            "engine": "ansible.utils.jsonschema",
+            "data": IN_VALID_DATA,
+            "criteria": CRITERIA_FORMAT_SUPPORT_CHECK,
+        }
+
+        result = self._plugin.run(task_vars=None)
+        self.assertIn("Validation errors were found", result["msg"])

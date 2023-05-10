@@ -6,8 +6,7 @@
 - include_tasks: _remove_config.yaml
 
 - block:
-
-    - name: Merge the provided configuration with the exisiting running configuration
+    - name: Merge the provided configuration with the existing running configuration
       register: result
       vyos.vyos.vyos_ospf_interfaces: &id001
         config:
@@ -27,8 +26,7 @@
                 passive: true
         state: merged
 
-    - become: true
-      vyos.vyos.vyos_facts:
+    - vyos.vyos.vyos_facts:
         gather_network_resources: ospf_interfaces
 
     - assert:
@@ -38,7 +36,8 @@
           - result.commands|symmetric_difference(merged.commands) == []
           - result.after|symmetric_difference(ansible_facts['network_resources']['ospf_interfaces']) == []
 
-    - name: Merge the provided configuration with the existing running configuration
+    - name:
+        Merge the provided configuration with the existing running configuration
         (IDEMPOTENT)
       register: result
       vyos.vyos.vyos_ospf_interfaces: *id001
@@ -49,5 +48,4 @@
           - result['changed'] == false
 
   always:
-
     - include_tasks: _remove_config.yaml

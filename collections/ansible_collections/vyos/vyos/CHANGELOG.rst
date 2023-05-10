@@ -5,6 +5,189 @@ Vyos Collection Release Notes
 .. contents:: Topics
 
 
+v4.0.0
+======
+
+Major Changes
+-------------
+
+- Use of connection: local and the provider option are no longer valid on any modules in this collection.
+
+Minor Changes
+-------------
+
+- Update fact gathering to support v1.3 show version output
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- vyos_interface - use vyos_interfaces instead.
+- vyos_l3_interface - use vyos_l3_interfaces instead.
+- vyos_linkagg - use vyos_lag_interfaces instead.
+- vyos_lldp - use vyos_lldp_global instead.
+- vyos_lldp_interface - use vyos_lldp_interfaces instead.
+- vyos_static_route - use vyos_static_routes instead.
+
+v3.0.1
+======
+
+Minor Changes
+-------------
+
+- firewall_rules - icmpv6 type - add support for vyos sw >= 1.4.
+
+v3.0.0
+======
+
+Major Changes
+-------------
+
+- Minimum required ansible.netcommon version is 2.5.1.
+- Updated base plugin references to ansible.netcommon.
+- `vyos_facts` - change default gather_subset to `min` from `!config` (https://github.com/ansible-collections/vyos.vyos/issues/231).
+
+Minor Changes
+-------------
+
+- Change preconfig hostname from vyos to vyosuser
+
+Bugfixes
+--------
+
+- Add symlink of modules under plugins/action
+
+v2.8.0
+======
+
+Minor Changes
+-------------
+
+- Add vyos_hostname resource module.
+- Rename V4-EGRESS/V6-EGRESS to EGRESS in the tests to test the same-name situation
+- Update vyos_facts to support IPv4 and IPv6 rule sets having the same name
+- Update vyos_firewall_rules to support IPv4 and IPv6 rule sets having the same name
+- vyos_firewall_rules - Add support for log enable on individual rules
+- vyos_firewall_rules - fixed incorrect option 'disabled' passed to the rules.
+
+New Modules
+-----------
+
+- vyos_hostname - Manages hostname resource module
+
+v2.7.0
+======
+
+Major Changes
+-------------
+
+- Add 'pool' as value to server key in ntp_global.
+
+Minor Changes
+-------------
+
+- Add vyos_snmp_server resource module.
+
+New Modules
+-----------
+
+- vyos_snmp_server - Manages snmp_server resource module
+
+v2.6.0
+======
+
+Minor Changes
+-------------
+
+- Add vyos_ntp Resource Module
+- Adds support for specifying an `afi` for an `address_group` for `vyos.vyos.firewall_global`.  As a result, `address_group` now supports IPv6.
+- Adds support for specifying an `afi` for an `network_group` for `vyos.vyos.firewall_global`.  As a result, `network_group` now supports IPv6.
+
+Bugfixes
+--------
+
+- Fix vyos_firewall_rules with state replaced to only replace the specified rules.
+
+v2.5.1
+======
+
+Bugfixes
+--------
+
+- fix issue in firewall rules facts code when IPV6 ICMP type name in vyos.vyos.vyos_firewall_rules is not idempotent
+
+v2.5.0
+======
+
+Minor Changes
+-------------
+
+- vyos_logging_global logging resource module.
+
+Deprecated Features
+-------------------
+
+- The vyos_logging module has been deprecated in favor of the new vyos_logging_global resource module and will be removed in a release after "2023-08-01".
+
+Bugfixes
+--------
+
+- fix issue in route-maps facts code when route-maps facts are empty.
+
+v2.4.0
+======
+
+Minor Changes
+-------------
+
+- Add vyos_prefix_lists Resource Module.
+
+New Modules
+-----------
+
+- vyos_prefix_lists - Prefix-Lists resource module for VyOS
+
+v2.3.1
+======
+
+Bugfixes
+--------
+
+- Fix KeyError 'source' - vyos_firewall_rules
+- Updated docs resolving spelling typos
+- change interface to next-hop-interface while generating static_routes nexthop command.
+
+v2.3.0
+======
+
+Minor Changes
+-------------
+
+- Add vyos_route_maps resource module (https://github.com/ansible-collections/vyos.vyos/pull/156.).
+
+Bugfixes
+--------
+
+- change admin_distance to distance while generating static_routes nexthop command.
+- firewall_global - port-groups were not added (https://github.com/ansible-collections/vyos.vyos/issues/107)
+
+New Modules
+-----------
+
+- vyos_route_maps - Route Map Resource Module.
+
+v2.2.0
+======
+
+Minor Changes
+-------------
+
+- Add support for available_network_resources key, which allows to fetch the available resources for a platform (https://github.com/ansible-collections/vyos.vyos/issues/138).
+
+Security Fixes
+--------------
+
+- Mask values of sensitive keys in module result.
+
 v2.1.0
 ======
 
@@ -40,14 +223,11 @@ Minor Changes
 Bugfixes
 --------
 
-- Update docs to clarify the idemptonecy releated caveat and add it in the output warnings (https://github.com/ansible-collections/ansible.netcommon/pull/189)
+- Update docs to clarify the idemptonecy related caveat and add it in the output warnings (https://github.com/ansible-collections/ansible.netcommon/pull/189)
 - cliconf plugin - Prevent `get_capabilities()` from getting larger every time it is called
 
 New Modules
 -----------
-
-ansible.collections.ansible_collections.vyos.vyos.plugins.modules
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - vyos_bgp_global - BGP Global Resource Module.
 
@@ -72,7 +252,7 @@ Minor Changes
 New Modules
 -----------
 
-- vyos_ospf_interfaces - OSPF Interfaces resource module
+- vyos_ospf_interfaces - OSPF Interfaces Resource Module.
 
 v1.0.5
 ======
@@ -128,7 +308,7 @@ New Plugins
 -----------
 
 Cliconf
-^^^^^^^
+~~~~~~~
 
 - vyos - Use vyos cliconf to run command on VyOS platform
 

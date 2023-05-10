@@ -5,6 +5,246 @@ Ansible Netcommon Collection Release Notes
 .. contents:: Topics
 
 
+v4.1.0
+======
+
+Minor Changes
+-------------
+
+- Add implementation for content_templates_parser.
+
+Bugfixes
+--------
+
+- restconf_get - fix direction of XML deserialization when ``output == 'xml'``
+
+v4.0.0
+======
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- napalm - Removed unused connection plugin.
+- net_banner - Use <network_os>_banner instead.
+- net_interface - Use <network_os>_interfaces instead.
+- net_l2_interface - Use <network_os>_l2_interfaces instead.
+- net_l3_interface - Use <network_os>_l3_interfaces instead.
+- net_linkagg - Use <network_os>_lag_interfaces instead.
+- net_lldp - Use <network_os>_lldp_global instead.
+- net_lldp_interface - Use <network_os>_lldp_interfaces instead.
+- net_logging - Use <network_os>_logging_global instead.
+- net_static_route - Use <network_os>_static_routes instead.
+- net_system - Use <network_os>_system instead.
+- net_user - Use <network_os>_user instead.
+- net_vlan - Use <network_os>_vlans instead.
+- net_vrf - Use <network_os>_vrf instead.
+
+v3.1.3
+======
+
+Release Summary
+---------------
+
+The v3.1.2 is unavailable on Ansible Automation Hub because a technical issue. Please download and use v3.1.3 from Automation Hub.
+
+v3.1.2
+======
+
+Bugfixes
+--------
+
+- libssh - check for minimum ansible-pylibssh version before using password_prompt option. (https://github.com/ansible-collections/ansible.netcommon/pull/467)
+
+v3.1.1
+======
+
+Bugfixes
+--------
+
+- Fix a small number of potential use-before-assignment issues.
+- Fix to set connection plugin options correctly.
+- libssh - Removed the wording "Tech preview". From version 3.0.0 the default if installed.
+- libssh - add ssh_args, ssh_common_args, and ssh_extra_args options. These options are exclusively for collecting proxy information from as an alternative to the proxy_command option.
+
+v3.1.0
+======
+
+Minor Changes
+-------------
+
+- Add grpc connection plugin support.
+- Adds a new option `terminal_errors` in network_cli, that determines how terminal setting failures are handled.
+- libssh - Added `password_prompt` option to override default "password:" prompt used by pylibssh
+
+New Plugins
+-----------
+
+Connection
+~~~~~~~~~~
+
+- grpc - Provides a persistent connection using the gRPC protocol
+
+New Modules
+-----------
+
+- grpc_config - Fetch configuration/state data from gRPC enabled target hosts.
+- grpc_get - Fetch configuration/state data from gRPC enabled target hosts.
+
+v3.0.1
+======
+
+Bugfixes
+--------
+
+- httpapi - Fix for improperly set hostname in url
+- libssh - Fix for improperly set hostname in connect
+- restconf - When non-JSON data is encountered, return the bytes found instead of nothing.
+
+v3.0.0
+======
+
+Major Changes
+-------------
+
+- cli_parse - this module has been moved to the ansible.utils collection. ``ansible.netcommon.cli_parse`` will continue to work to reference the module in its new location, but this redirect will be removed in a future release
+- network_cli - Change default value of `ssh_type` option from `paramiko` to `auto`. This value will use libssh if the ansible-pylibssh module is installed, otherwise will fallback to paramiko.
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- httpapi - Change default value of ``import_modules`` option from ``no`` to ``yes``
+- netconf - Change default value of ``import_modules`` option from ``no`` to ``yes``
+- network_cli - Change default value of ``import_modules`` option from ``no`` to ``yes``
+
+Known Issues
+------------
+
+- eos - When using eos modules on Ansible 2.9, tasks will occasionally fail with ``import_modules`` enabled. This can be avoided by setting ``import_modules: no``
+
+v2.6.1
+======
+
+Release Summary
+---------------
+
+Rereleased 2.6.0 with updated utils dependancy.
+
+Bugfixes
+--------
+
+- Fix validate-module sanity test.
+
+v2.6.0
+======
+
+Minor Changes
+-------------
+
+- Redirected ipaddr filters to ansible.utils (https://github.com/ansible-collections/ansible.netcommon/pull/359).
+- httpapi - new parameter retries in send() method limits the number of times a request is retried when a HTTP error that can be worked around is encountered. The default is to retry indefinitely to maintain old behavior, but this default may change in a later breaking release.
+
+Bugfixes
+--------
+
+- Fix issue with cli_parse native_parser plugin when input is empty (https://github.com/ansible-collections/ansible.netcommon/issues/347).
+- No activity on the transport's channel was triggering a socket.timeout() after 30 secs, even if persistent_command_timeout is set to a higher value. This patch fixes it.
+
+v2.5.1
+======
+
+Bugfixes
+--------
+
+- Fixed plugins inheriting from netcommon's base plugins (for example httpapi/restconf or netconf/default) so that they can be properly loaded (https://github.com/ansible-collections/ansible.netcommon/issues/356).
+
+v2.5.0
+======
+
+Minor Changes
+-------------
+
+- Copied the cliconf, httpapi, netconf, and terminal base plugins and NetworkConnectionBase into netcommon. These base plugins may now be imported from netcommmon instead of ansible if a collection depends on netcommon versions newer than this version, allowing features and bugfixes to flow to those collections without upgrading ansible.
+- Make ansible_network_os as optional param for httpapi connection plugin.
+- Support removal of non-config lines from running config while taking backup.
+- `network_cli` - added new option 'become_errors' to determine how privilege escalation failures are handled.
+
+Bugfixes
+--------
+
+- network_cli - Provide clearer error message when a prompt regex fails to compile
+- network_cli - fix issue when multiple terminal_initial_(prompt|answer) values are given (https://github.com/ansible-collections/ansible.netcommon/issues/331).
+
+v2.4.0
+======
+
+Minor Changes
+-------------
+
+- Add network_resource plugin to manage and provide single entry point for all resource modules for higher oder roles.
+
+Deprecated Features
+-------------------
+
+- network_cli - The paramiko_ssh setting ``look_for_keys`` was set automatically based on the values of the ``password`` and ``private_key_file`` options passed to network_cli. This option can now be set explicitly, and the automatic setting of ``look_for_keys`` will be removed after 2024-01-01  (https://github.com/ansible-collections/ansible.netcommon/pull/271).
+
+Bugfixes
+--------
+
+- network_cli - Add ability to set options inherited from paramiko/libssh in ansible >= 2.11 (https://github.com/ansible-collections/ansible.netcommon/pull/271).
+
+New Modules
+-----------
+
+- network_resource - Manage resource modules
+
+v2.3.0
+======
+
+Minor Changes
+-------------
+
+- Add vlan_expander filter
+- Persistent connection options (persistent_command_timeout, persistent_log_messages, etc.) have been unified across all persistent connections. New persistent connections may also now get these options by extending the connection_persistent documentation fragment.
+
+v2.2.0
+======
+
+Minor Changes
+-------------
+
+- Add variable to control ProxyCommand with libssh connection.
+- NetworkTemplate and ResouceModule base classes have been moved under module_utils.network.common.rm_base. Stubs have been kept for backwards compatibility. These will be removed after 2023-01-01. Please update imports for existing modules that subclass them. The `cli_rm_builder <https://github.com/ansible-network/cli_rm_builder>`_ has been updated to use the new imports.
+
+Bugfixes
+--------
+
+- libssh - Fix fromatting of authenticity error message when not prompting for input (https://github.com/ansible-collections/ansible.netcommon/issues/283)
+- netconf - Fix connection with ncclient versions < 0.6.10
+- network_cli - Fix for execution failing when ansible_ssh_password is used to specify password (https://github.com/ansible-collections/ansible.netcommon/issues/288)
+
+v2.1.0
+======
+
+Minor Changes
+-------------
+
+- Add support for ProxyCommand with netconf connection.
+
+Bugfixes
+--------
+
+- Variables in play_context will now be updated for netconf connections on each task run.
+- fix SCP/SFTP when using network_cli with libssh
+
+v2.0.2
+======
+
+Bugfixes
+--------
+
+- Fix cli_parse issue with parsers in utils collection (https://github.com/ansible-collections/ansible.netcommon/pull/270)
+- Support single_user_mode with Ansible 2.9.
+
 v2.0.1
 ======
 
@@ -152,11 +392,6 @@ Bugfixes
 
 - cli_config fixes issue when rollback_id = 0 evalutes to False
 - sort_list will sort a list of dicts using the sorted method with key as an argument.
-
-New Modules
------------
-
-- cli_parse - Parse cli output or text using a variety of parsers
 
 v1.1.2
 ======

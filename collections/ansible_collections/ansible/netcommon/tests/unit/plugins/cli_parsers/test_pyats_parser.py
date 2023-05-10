@@ -1,15 +1,15 @@
 # (c) 2020 Ansible Project
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import absolute_import, division, print_function
 
 __metaclass__ = type
 
 import os
+import unittest
 
 import pytest
-
-from ansible_collections.ansible.netcommon.tests.unit.compat import unittest
 from ansible_collections.ansible.netcommon.plugins.sub_plugins.cli_parser.pyats_parser import (
     CliParser,
 )
@@ -145,7 +145,7 @@ class TestPyatsParser(unittest.TestCase):
         error = {
             "errors": [
                 "The pyats library return an error for 'show inventory' for 'wrong_os'. "
-                "Error: Could not find parser for 'show inventory' under ('wrong_os',)."
+                "Error: Could not find parser for show inventory under ('wrong_os',)."
             ]
         }
         self.assertEqual(result, error)

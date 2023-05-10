@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # (c) 2018, Ansible by Red Hat, inc
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import absolute_import, division, print_function
 
@@ -224,14 +225,13 @@ backup_path:
 
 import json
 
+from ansible.module_utils._text import to_text
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.connection import Connection
-from ansible.module_utils._text import to_text
 
 
 def validate_args(module, device_operations):
-    """validate param if it is supported on the platform
-    """
+    """validate param if it is supported on the platform"""
     feature_list = [
         "replace",
         "rollback",
@@ -394,8 +394,7 @@ def run(
 
 
 def main():
-    """main entry point for execution
-    """
+    """main entry point for execution"""
     backup_spec = dict(filename=dict(), dir_path=dict(type="path"))
     argument_spec = dict(
         backup=dict(default=False, type="bool"),

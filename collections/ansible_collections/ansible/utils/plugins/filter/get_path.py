@@ -9,6 +9,7 @@ flatten a complex object to dot bracket notation
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -148,27 +149,27 @@ EXAMPLES = r"""
 """
 
 from ansible.errors import AnsibleFilterError
-from jinja2.filters import environmentfilter
-
-from ansible_collections.ansible.utils.plugins.module_utils.common.get_path import (
-    get_path,
-)
 
 from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
     AnsibleArgSpecValidator,
 )
+from ansible_collections.ansible.utils.plugins.module_utils.common.get_path import get_path
 
 
-@environmentfilter
+try:
+    from jinja2.filters import pass_environment
+except ImportError:
+    from jinja2.filters import environmentfilter as pass_environment
+
+
+@pass_environment
 def _get_path(*args, **kwargs):
     """Retrieve the value in a variable using a path."""
     keys = ["environment", "var", "path"]
     data = dict(zip(keys, args))
     data.update(kwargs)
     environment = data.pop("environment")
-    aav = AnsibleArgSpecValidator(
-        data=data, schema=DOCUMENTATION, name="get_path"
-    )
+    aav = AnsibleArgSpecValidator(data=data, schema=DOCUMENTATION, name="get_path")
     valid, errors, updated_data = aav.validate()
     if not valid:
         raise AnsibleFilterError(errors)
@@ -177,7 +178,7 @@ def _get_path(*args, **kwargs):
 
 
 class FilterModule(object):
-    """ path filters """
+    """path filters"""
 
     def filters(self):
         return {"get_path": _get_path}

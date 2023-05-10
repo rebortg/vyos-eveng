@@ -30,9 +30,13 @@ short_description: Manage logging on network devices
 description:
 - This module provides declarative management of logging on Vyatta Vyos devices.
 version_added: 1.0.0
+deprecated:
+    alternative: vyos_logging_global
+    why: Updated module released with more functionality.
+    removed_at_date: '2023-08-01'
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 options:
   dest:
     description:
@@ -161,9 +165,6 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.u
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
     get_config,
     load_config,
-)
-from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    vyos_argument_spec,
 )
 
 
@@ -304,7 +305,6 @@ def main():
 
     argument_spec.update(element_spec)
 
-    argument_spec.update(vyos_argument_spec)
     required_if = [
         ("dest", "host", ["name", "facility", "level"]),
         ("dest", "file", ["name", "facility", "level"]),

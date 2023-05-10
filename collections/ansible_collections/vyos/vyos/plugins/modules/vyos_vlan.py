@@ -18,7 +18,7 @@ description:
 version_added: 1.0.0
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 options:
   name:
     description:
@@ -176,9 +176,6 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.u
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
     load_config,
     run_commands,
-)
-from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    vyos_argument_spec,
 )
 
 
@@ -375,7 +372,6 @@ def main():
     )
 
     argument_spec.update(element_spec)
-    argument_spec.update(vyos_argument_spec)
 
     required_one_of = [
         ["vlan_id", "aggregate"],

@@ -5,10 +5,8 @@
 
 - include_tasks: _remove_config.yaml
 
-
 - block:
-
-    - name: Merge the provided configuration with the exisiting running configuration
+    - name: Merge the provided configuration with the existing running configuration
       register: baseconfig
       vyos.vyos.vyos_ospf_interfaces: &id001
         config:
@@ -28,8 +26,7 @@
                 passive: true
         state: merged
 
-    - become: true
-      vyos.vyos.vyos_facts:
+    - vyos.vyos.vyos_facts:
         gather_network_resources: ospf_interfaces
 
     - assert:
@@ -40,7 +37,6 @@
           - baseconfig.after|symmetric_difference(ansible_facts['network_resources']['ospf_interfaces']) == []
 
     - name: Apply the provided configuration (config to be reverted)
-      become: true
       register: result
       vyos.vyos.vyos_ospf_interfaces:
         config:
@@ -53,9 +49,7 @@
               - afi: "ipv6"
                 dead_interval: 39
 
-
     - name: Revert back to base config using facts round trip
-      become: true
       register: revert
       vyos.vyos.vyos_ospf_interfaces:
         config: "{{ ansible_facts['network_resources']['ospf_interfaces'] }}"
@@ -66,5 +60,4 @@
         that: baseconfig.after == revert.after
 
   always:
-
     - include_tasks: _remove_config.yaml

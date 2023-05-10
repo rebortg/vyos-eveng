@@ -6,6 +6,7 @@ https://github.com/martinblech/xmltodict
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -38,9 +39,8 @@ EXAMPLES = r"""
 
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import missing_required_lib
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import (
-    CliParserBase,
-)
+
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import CliParserBase
 
 
 try:
@@ -52,7 +52,7 @@ except ImportError:
 
 
 class CliParser(CliParserBase):
-    """ The xml parser class
+    """The xml parser class
     Convert an xml string to structured data using xmltodict
     """
 
@@ -61,8 +61,7 @@ class CliParser(CliParserBase):
 
     @staticmethod
     def _check_reqs():
-        """ Check the prerequisites for the xml parser
-        """
+        """Check the prerequisites for the xml parser"""
         errors = []
         if not HAS_XMLTODICT:
             errors.append(missing_required_lib("xmltodict"))
@@ -70,7 +69,7 @@ class CliParser(CliParserBase):
         return errors
 
     def parse(self, *_args, **_kwargs):
-        """ Std entry point for a cli_parse parse execution
+        """Std entry point for a cli_parse parse execution
 
         :return: Errors or parsed text as structured data
         :rtype: dict
@@ -88,9 +87,9 @@ class CliParser(CliParserBase):
 
         cli_output = self._task_args.get("text")
 
-        network_os = self._task_args.get("parser").get(
-            "os"
-        ) or self._task_vars.get("ansible_network_os")
+        network_os = self._task_args.get("parser").get("os") or self._task_vars.get(
+            "ansible_network_os",
+        )
         # the nxos | xml includes a odd garbage line at the end, so remove it
         if not network_os:
             self._debug("network_os value is not set")

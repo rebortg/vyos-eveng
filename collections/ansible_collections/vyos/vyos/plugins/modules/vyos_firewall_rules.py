@@ -38,7 +38,7 @@ description: This module manages firewall rule-set attributes on VyOS devices
 version_added: 1.0.0
 notes:
 - Tested against VyOS 1.1.8 (helium).
-- This module works with connection C(network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
+- This module works with connection C(ansible.netcommon.network_cli). See L(the VyOS OS Platform Options,../network/user_guide/platform_vyos.html).
 author:
 - Rohit Thakur (@rohitthakur2590)
 options:
@@ -86,7 +86,7 @@ options:
             type: bool
           rules:
             description:
-            - A ditionary that specifies the rule-set configurations.
+            - A dictionary that specifies the rule-set configurations.
             type: list
             elements: dict
             suboptions:
@@ -144,10 +144,11 @@ options:
                     - The whole list can also be "negated" using '!'.
                     - For example:'!22,telnet,http,123,1001-1005'.
                     type: str
-              disabled:
+              disable:
                 description:
                 - Option to disable firewall rule.
                 type: bool
+                aliases: ["disabled"]
               fragment:
                 description:
                 - IP fragment match.
@@ -215,11 +216,18 @@ options:
                     type: int
               ipsec:
                 description:
-                - Inboud ip sec packets.
+                - Inbound ip sec packets.
                 type: str
                 choices:
                 - match-ipsec
                 - match-none
+              log:
+                description:
+                - Option to log packets matching rule
+                type: str
+                choices:
+                - disable
+                - enable
               limit:
                 description:
                 - Rate limit using a token bucket filter.
@@ -662,7 +670,7 @@ EXAMPLES = """
 # vyos@vyos# run show  configuration commands | grep firewall
 # set firewall group address-group 'inbound'
 #
-- name: Merge the provided configuration with the exisiting running configuration
+- name: Merge the provided configuration with the existing running configuration
   vyos.vyos.vyos_firewall_rules:
     config:
     - afi: ipv6

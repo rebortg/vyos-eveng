@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 # (c) 2016, Leandro Lisboa Penz <lpenz at lpenz.org>
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from __future__ import absolute_import, division, print_function
 
@@ -393,20 +394,20 @@ diff:
 from ansible.module_utils._text import to_text
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.connection import Connection, ConnectionError
-from ansible_collections.ansible.netcommon.plugins.module_utils.utils.data import (
-    validate_and_normalize_data,
-    dict_to_xml,
-)
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.netconf.netconf import (
     get_capabilities,
     get_config,
     sanitize_xml,
 )
+from ansible_collections.ansible.netcommon.plugins.module_utils.utils.data import (
+    dict_to_xml,
+    validate_and_normalize_data,
+)
 
 try:
-    from lxml.etree import tostring, fromstring
+    from lxml.etree import fromstring, tostring
 except ImportError:
-    from xml.etree.ElementTree import tostring, fromstring
+    from xml.etree.ElementTree import fromstring, tostring
 
 
 def validate_config(module, config, format="xml"):
@@ -425,8 +426,7 @@ def validate_config(module, config, format="xml"):
 
 
 def main():
-    """ main entry point for module execution
-    """
+    """main entry point for module execution"""
     backup_spec = dict(filename=dict(), dir_path=dict(type="path"))
     argument_spec = dict(
         content=dict(aliases=["xml"], type="raw"),

@@ -1,3 +1,6 @@
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 """
 native parser
 
@@ -39,14 +42,12 @@ EXAMPLES = r"""
 """
 
 from ansible.module_utils._text import to_native
-
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import (
-    CliParserBase,
-)
 from ansible_collections.ansible.netcommon.plugins.module_utils.cli_parser.cli_parsertemplate import (
     CliParserTemplate,
 )
-
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import (
+    CliParserBase,
+)
 
 try:
     import yaml
@@ -61,7 +62,7 @@ except ImportError:
 
 
 class CliParser(CliParserBase):
-    """ The native parser class
+    """The native parser class
     Convert raw text to structured data using the resource module parser
     """
 
@@ -69,7 +70,7 @@ class CliParser(CliParserBase):
     PROVIDE_TEMPLATE_CONTENTS = True
 
     def parse(self, *_args, **kwargs):
-        """ Std entry point for a cli_parse parse execution
+        """Std entry point for a cli_parse parse execution
 
         :return: Errors or parsed text as structured data
         :rtype: dict
@@ -87,7 +88,7 @@ class CliParser(CliParserBase):
 
         template_contents = kwargs["template_contents"]
         parser = CliParserTemplate(
-            lines=self._task_args.get("text").splitlines()
+            lines=self._task_args.get("text", "").splitlines()
         )
         try:
             template_obj = yaml.load(template_contents, SafeLoader)

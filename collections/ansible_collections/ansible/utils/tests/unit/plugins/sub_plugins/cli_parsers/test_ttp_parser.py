@@ -3,27 +3,27 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import os
 
 import pytest
 
+from ansible_collections.ansible.utils.plugins.sub_plugins.cli_parser.ttp_parser import CliParser
 from ansible_collections.ansible.utils.tests.unit.compat import unittest
-from ansible_collections.ansible.utils.plugins.sub_plugins.cli_parser.ttp_parser import (
-    CliParser,
-)
+
 
 textfsm = pytest.importorskip("ttp")
 
 
 class TestTextfsmParser(unittest.TestCase):
     def test_ttp_parser(self):
-        nxos_cfg_path = os.path.join(
-            os.path.dirname(__file__), "fixtures", "nxos_show_version.cfg"
-        )
+        nxos_cfg_path = os.path.join(os.path.dirname(__file__), "fixtures", "nxos_show_version.cfg")
         nxos_template_path = os.path.join(
-            os.path.dirname(__file__), "fixtures", "nxos_show_version.ttp"
+            os.path.dirname(__file__),
+            "fixtures",
+            "nxos_show_version.ttp",
         )
 
         with open(nxos_cfg_path) as fhand:
@@ -47,7 +47,7 @@ class TestTextfsmParser(unittest.TestCase):
                 "os": "7.0(3)I7(1)",
                 "platform": "9000v",
                 "uptime": "12 day(s), 23 hour(s), 48 minute(s), 10 second(s)",
-            }
+            },
         ]
         self.assertEqual(result["parsed"][0][0], parsed_output)
 
@@ -63,9 +63,5 @@ class TestTextfsmParser(unittest.TestCase):
         }
         parser = CliParser(task_args=task_args, task_vars=[], debug=False)
         result = parser.parse()
-        errors = {
-            "errors": "error while reading template_path file {0}".format(
-                fake_path
-            )
-        }
+        errors = {"errors": "error while reading template_path file {0}".format(fake_path)}
         self.assertEqual(result, errors)

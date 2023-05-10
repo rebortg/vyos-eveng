@@ -6,6 +6,7 @@ https://github.com/google/textfsm
 """
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = """
@@ -40,9 +41,9 @@ import os
 
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import missing_required_lib
-from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import (
-    CliParserBase,
-)
+
+from ansible_collections.ansible.utils.plugins.plugin_utils.base.cli_parser import CliParserBase
+
 
 try:
     import textfsm
@@ -53,7 +54,7 @@ except ImportError:
 
 
 class CliParser(CliParserBase):
-    """ The textfsm parser class
+    """The textfsm parser class
     Convert raw text to structured data using textfsm
     """
 
@@ -62,7 +63,7 @@ class CliParser(CliParserBase):
 
     @staticmethod
     def _check_reqs():
-        """ Check the prerequisites for the textfsm parser
+        """Check the prerequisites for the textfsm parser
 
         :return dict: A dict with errors or a template_path
         """
@@ -74,7 +75,7 @@ class CliParser(CliParserBase):
         return {"errors": errors}
 
     def parse(self, *_args, **_kwargs):
-        """ Std entry point for a cli_parse parse execution
+        """Std entry point for a cli_parse parse execution
 
         :return: Errors or parsed text as structured data
         :rtype: dict
@@ -95,8 +96,8 @@ class CliParser(CliParserBase):
         if template_path and not os.path.isfile(template_path):
             return {
                 "errors": "error while reading template_path file {file}".format(
-                    file=template_path
-                )
+                    file=template_path,
+                ),
             }
         try:
             template = open(self._task_args.get("parser").get("template_path"))

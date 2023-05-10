@@ -17,8 +17,8 @@ Version added: 1.0.0
 
 Synopsis
 --------
-- Use a ``path`` to retrieve a nested value from a ``var``
-- ``get_path`` is also available as a ``filter plugin`` for convenience
+- Use a *path* to retrieve a nested value from a *var*
+- **get_path** is also available as a **filter plugin** for convenience
 - Using the parameters below- ``lookup('ansible.utils.get_path', var, path, wantlist``)
 
 
@@ -51,7 +51,8 @@ Parameters
                     <td>
                     </td>
                 <td>
-                        <div>The <code>path</code> in the <code>var</code> to retrieve the value of. The <code>path</code> needs to a be a valid jinja path.</div>
+                        <div>The <em>path</em> in the <em>var</em> to retrieve the value of.</div>
+                        <div>The <em>path</em> needs to a be a valid jinja path.</div>
                 </td>
             </tr>
             <tr>
@@ -90,7 +91,9 @@ Parameters
                     <td>
                     </td>
                 <td>
-                        <div>If set to <code>True</code>, the return value will always be a list. This can also be accomplished using <code>query</code> or <code>q</code> instead of <code>lookup</code>. <a href='https://docs.ansible.com/ansible/latest/plugins/lookup.html'>https://docs.ansible.com/ansible/latest/plugins/lookup.html</a>.</div>
+                        <div>If set to <code>True</code>, the return value will always be a list.</div>
+                        <div>This can also be accomplished using <code>query</code> or <code>q</code> instead of <code>lookup</code>.</div>
+                        <div><a href='https://docs.ansible.com/ansible/latest/plugins/lookup.html'>https://docs.ansible.com/ansible/latest/plugins/lookup.html</a>.</div>
                 </td>
             </tr>
     </table>
