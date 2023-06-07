@@ -1,6 +1,6 @@
 ---
 
-- name: Login to EVE-NG and get Cookie
+- name: "{{ lab }}: Login to EVE-NG and get Cookie"
   uri:
     method: POST
     url: "{{ eve_ng_base_url }}/api/auth/login"
@@ -15,7 +15,7 @@
     validate_certs: False
   register: login
   
-- name: get running lab list
+- name: "{{ lab }}: get running lab list"
   uri:
     method: GET
     url: "{{ eve_ng_base_url }}/api/runninglabs"
@@ -28,21 +28,20 @@
   register: response
 
 # look if lab is running and try to kill it
+- name: "{{ lab }}: kill running lab"
+  uri:
+    method: GET
+    url: "{{ eve_ng_base_url }}/api/kill/lab/{{ item.labid }}"
+    return_content: True
+    headers:
+      Accept: application/json
+      Cookie: "{{ login.cookies_string }}"
+    validate_certs: False
+  with_items: "{{ response.json.data }}"
+  when: item.labname == "{{ eve_ng_folder_name }}/{{ lab }}"
+  register: response
 
-#- name: kill running lab
-#  uri:
-#    method: GET
-#    url: "{{ eve_ng_base_url }}/api/kill/lab/{{ item.labid }}"
-#    return_content: True
-#    headers:
-#      Accept: application/json
-#      Cookie: "{{ login.cookies_string }}"
-#    validate_certs: False
-#  with_items: "{{ response.json.data }}"
-#  when: item.labname == "{{ eve_ng_folder_name }}/{{ lab }}"
-#  register: response
-
-- name: delete existing lab
+- name: "{{ lab }}: delete existing lab"
   uri:
     method: DELETE
     url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl"

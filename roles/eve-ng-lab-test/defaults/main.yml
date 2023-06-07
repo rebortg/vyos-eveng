@@ -17,8 +17,5 @@ node_template_name: "{{ node_template_os }}-{{ node_template_version }}-{{ node_
 upgrade_iso: ""
 upgrade_iso_version: ""
 
-upgrade_iso: ""
-upgrade_iso_version: ""
-
 output_dir: "vyos-documentation/docs/configexamples/autotest/{{ lab }}"
 output_include_dir: "_include"

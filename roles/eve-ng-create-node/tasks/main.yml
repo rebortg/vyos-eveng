@@ -1,20 +1,22 @@
 ---
 # tasks file for eve-ng-create-node
 
-- fail: msg="The variable 'node_template_iso' is empty"
+- name: "{{ lab }}: fail if node_template_iso is empty"
+  fail: msg="The variable 'node_template_iso' is empty"
   when: node_template_iso == ""
 
-- fail: msg="The variable 'node_template_version' is empty"
+- name: "{{ lab }}: fail if node_template_version is empty"
+  fail: msg="The variable 'node_template_version' is empty"
   when: node_template_version == ""
 
 
-- name: install requirements
+- name: "{{ lab }}: install requirements"
   ansible.builtin.apt:
     name: expect
     state: present
     update_cache: true
 
-- name: Login to EVE-NG and get Cookie
+- name: "{{ lab }}: Login to EVE-NG and get Cookie"
   uri:
     method: POST
     url: "{{ eve_ng_base_url }}/api/auth/login"
@@ -30,7 +32,7 @@
   register: login
   
 
-- name: get template facts
+- name: "{{ lab }}: get template facts"
   uri:
     method: GET
     url: "{{ eve_ng_base_url }}/api/list/templates/{{ node_template_os }}"
@@ -42,31 +44,31 @@
   register: response
 
 
-- name: Register path status
+- name: "{{ lab }}: Register path status"
   stat:
     path: "/opt/unetlab/addons/qemu/{{ node_template_name }}"  
   register: path_status
 
 # only if node_template don't exist
 - block:
-  - name: create path
+  - name: "{{ lab }}: create path"
     file:
       path: "/opt/unetlab/addons/qemu/{{ node_template_name }}"  
       state: directory
 
 
-  - name: Upload iso to eve-ng
+  - name: "{{ lab }}: Upload iso to eve-ng"
     uri:
       url: "{{ node_template_iso }}"
       method: GET
       dest: "/opt/unetlab/addons/qemu/{{ node_template_name }}/cdrom.iso"
 
       
-  - name: create virtioa.qcow2 file
+  - name: "{{ lab }}: create virtioa.qcow2 file"
     ansible.builtin.shell: |
       /opt/qemu/bin/qemu-img create -f qcow2 /opt/unetlab/addons/qemu/{{ node_template_name }}/virtioa.qcow2 10G
 
-  - name: Login to EVE-NG and get Cookie
+  - name: "{{ lab }}: Login to EVE-NG and get Cookie"
     uri:
       method: POST
       url: "{{ eve_ng_base_url }}/api/auth/login"
@@ -82,7 +84,7 @@
     register: login
 
 
-  - name: create lab for node install
+  - name: "{{ lab }}: create lab for node install"
     uri:
       method: POST
       url: "{{ eve_ng_base_url }}/api/labs"
@@ -99,7 +101,7 @@
     register: response
 
 
-  - name: open lab
+  - name: "{{ lab }}: open lab"
     uri:
       method: GET
       url: "{{ eve_ng_base_url }}/api/labs/{{ node_create_lab_name }}.unl"
@@ -114,7 +116,7 @@
       lab_temp_id: "{{response.json.data.id}}"
 
 
-  - name: add node to lab
+  - name: "{{ lab }}: add node to lab"
     uri:
       method: POST
       url: "{{ eve_ng_base_url }}/api/labs/{{ node_create_lab_name }}.unl/nodes"
@@ -147,7 +149,7 @@
       validate_certs: False
     register: response
 
-  - name: start node
+  - name: "{{ lab }}: start node"
     uri:
       method: GET
       url: "{{ eve_ng_base_url }}/api/labs/{{ node_create_lab_name }}.unl/nodes/1/start"
@@ -162,7 +164,7 @@
       msg: "{{ response }}"
 
 
-  - name: get node infos
+  - name: "{{ lab }}: get node infos"
     uri:
       method: GET
       url: "{{ eve_ng_base_url }}/api/labs/{{ node_create_lab_name }}.unl/nodes"
@@ -176,16 +178,16 @@
   - set_fact:
       telnet_port: "{{response.json.data['1'].url.split(':')[2]}}"
 
-  - name: copy file
+  - name: "{{ lab }}: copy file"
     template: 
       src: install_image.expect.j2
       dest: /tmp/install_image.expect
       mode: "+x"
 
-  - name: run expect script
+  - name: "{{ lab }}: run expect script"
     ansible.builtin.shell: "/tmp/install_image.expect"
 
-  - name: Login to EVE-NG and get Cookie (due timeout)
+  - name: "{{ lab }}: Login to EVE-NG and get Cookie (due timeout)"
     uri:
       method: POST
       url: "{{ eve_ng_base_url }}/api/auth/login"
@@ -200,7 +202,7 @@
       validate_certs: False
     register: login
 
-  - name: stop node
+  - name: "{{ lab }}: stop node"
     uri:
       method: GET
       url: "{{ eve_ng_base_url }}/api/labs/{{ node_create_lab_name }}.unl/nodes/1/stop/stopmode=3"
@@ -211,21 +213,21 @@
       validate_certs: False
     register: response
 
-  - name: Pause to wait node is shutdown
+  - name: "{{ lab }}: Pause to wait node is shutdown"
     pause:
       seconds: 10
 
-  - name: delete iso
+  - name: "{{ lab }}: delete iso"
     file:
       path: "/opt/unetlab/addons/qemu/{{ node_template_name }}/cdrom.iso"
       state: absent
 
-  - name: commit virtioa.qcow2
+  - name: "{{ lab }}: commit virtioa.qcow2"
     ansible.builtin.shell: | 
       cd /opt/unetlab/tmp/1/{{ lab_temp_id }}/1
       qemu-img commit virtioa.qcow2
 
-  - name: delete lab for node install
+  - name: "{{ lab }}: delete lab for node install"
     uri:
       method: DELETE
       url: "{{ eve_ng_base_url }}/api/labs/{{ node_create_lab_name }}.unl"

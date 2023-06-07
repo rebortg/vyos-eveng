@@ -1,44 +1,49 @@
 ---
 
-- include: 01_env_vars.yml
+- import_tasks: 01_env_vars.yml
 
-- fail: msg="The variable 'node_template_version' is empty"
+- debug:
+    msg: "{{ node_template_name }}"
+
+
+- name: "{{ lab }}: fail if node_template_version is empty"
+  fail: msg="The variable 'node_template_version' is empty"
   when: node_template_version == ""
 
-- include: 10_pretest_lab.yml
+- import_tasks: 10_pretest_lab.yml
   when: inventory_hostname in groups['eve']
 
-- include: 20_prepare_lab.yml
+- import_tasks: 20_prepare_lab.yml
 
 
 - name: include {{ lab }} lab_config.yml
-  include: "labs/{{ lab }}/lab_config.yml"
-  when: inventory_hostname in groups['vyos']
+  import_tasks: "labs/{{ lab }}/lab_config.yml"
+  #when: inventory_hostname in groups['vyos']
 
-- include: 30_test_lab.yml
+- import_tasks: 30_test_lab.yml
 
 # reboot and test again
 
-- include: 22_reboot_vyos.yml
+- import_tasks: 22_reboot_vyos.yml
   when: inventory_hostname in groups['vyos']
 
-- include: 30_test_lab.yml
+- import_tasks: 30_test_lab.yml
 
 - name: include upgrade and 2nd test
   block:
-    - include: 21a_handle_iso.yml
+    - import_tasks: 21a_handle_iso.yml
       when: inventory_hostname in groups['eve']
 
-    - include: 21_upgrade_vyos.yml
+    - import_tasks: 21_upgrade_vyos.yml
       when: inventory_hostname in groups['vyos']
 
-    - include: 30_test_lab.yml
+    - import_tasks: 30_test_lab.yml
   when: upgrade
 
 
-- include: 40_generate_output.yml
+- import_tasks: 40_generate_output.yml
   when: inventory_hostname in groups['eve']
 
-- include: 50_destroy_lab.yml
+- import_tasks: 50_destroy_lab.yml
   when: inventory_hostname in groups['eve']
 

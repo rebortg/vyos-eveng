@@ -1,7 +1,5 @@
 ---
 
-# destroy the lab after all is fine
-
 - name: "{{ lab }}: Login to EVE-NG and get Cookie"
   uri:
     method: POST
@@ -39,34 +37,3 @@
     validate_certs: False
   register: response
   with_items: "{{ response.json.data }}"
-
-# maybe this is not enough if the lab have more nodes
-- name: "{{ lab }}: wait while shutdown"
-  pause:
-    seconds: 30
-
-- name: "{{ lab }}: Login to EVE-NG and get Cookie"
-  uri:
-    method: POST
-    url: "{{ eve_ng_base_url }}/api/auth/login"
-    return_content: yes
-    body_format: json
-    body:
-      username: "{{ eve_ng_user }}"
-      password: "{{ eve_ng_password}}"
-      html5: "-1"
-    headers:
-      Accept: application/json
-    validate_certs: False
-  register: login
-
-- name: "{{ lab }}: delte lab"
-  uri:
-    method: DELETE
-    url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl"
-    return_content: True
-    headers:
-      Accept: application/json
-      Cookie: "{{ login.cookies_string }}"
-    validate_certs: False
-  register: response

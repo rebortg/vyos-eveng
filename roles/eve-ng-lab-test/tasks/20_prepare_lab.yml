@@ -1,6 +1,6 @@
 ---
 
-- name: Ensure {{ eve_ng_folder_name }} is present
+- name: "{{ lab }}: Ensure {{ eve_ng_folder_name }} is present"
   file: 
     path: "/opt/unetlab/labs/{{ eve_ng_folder_name }}"
     recurse: yes
@@ -10,7 +10,7 @@
   when: inventory_hostname in groups['eve']
   
 
-- name: Create {{ lab }} Lab
+- name: "{{ lab }}: Create {{ lab }} Lab"
   template: 
     src: labs/{{ lab }}/{{ lab }}.unl.j2
     dest: /opt/unetlab/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl
@@ -18,7 +18,7 @@
     group: www-data
   when: inventory_hostname in groups['eve']
 
-- name: Login to EVE-NG and get Cookie
+- name: "{{ lab }}: Login to EVE-NG and get Cookie"
   uri:
     method: POST
     url: "{{ eve_ng_base_url }}/api/auth/login"
@@ -34,7 +34,7 @@
   register: login
   when: inventory_hostname in groups['eve']
   
-- name: start vyos-oobm
+- name: "{{ lab }}: start vyos-oobm"
   uri:
     method: GET
     url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/1/start"
@@ -46,13 +46,13 @@
   register: response
   when: inventory_hostname in groups['eve']
 
-- name: Wait for vyos-oobm
+- name: "{{ lab }}: Wait for vyos-oobm"
   wait_for_connection:
   when: inventory_hostname in groups['oobm']
 
 # Start other nodes
 
-- name: Login to EVE-NG and get Cookie
+- name: "{{ lab }}: Login to EVE-NG and get Cookie"
   uri:
     method: POST
     url: "{{ eve_ng_base_url }}/api/auth/login"
@@ -69,7 +69,7 @@
   when: inventory_hostname in groups['eve']
 
 
-- name: get lab status
+- name: "{{ lab }}: get lab status"
   uri:
     method: GET
     url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes"
@@ -81,7 +81,7 @@
   register: response
   when: inventory_hostname in groups['eve']
 
-- name: start all nodes
+- name: "{{ lab }}: start all nodes"
   uri:
     method: GET
     url: "{{ eve_ng_base_url }}/api/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl/nodes/{{ item }}/start"
@@ -95,6 +95,6 @@
   when: inventory_hostname in groups['eve']
 
 
-- name: Wait for vyos nodes
+- name: "{{ lab }}: Wait for vyos nodes"
   wait_for_connection:
   when: inventory_hostname in groups['vyos']

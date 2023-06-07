@@ -1,0 +1,12 @@
+---
+# tasks file for eve-ng-cleanup
+
+- import_tasks: 01_stop_nodes.yml
+  when: inventory_hostname in groups['eve']
+  tags:
+    - stopnodes
+
+#- import_tasks: 02_delete_qemu.yml
+#  when: inventory_hostname in groups['eve']
+#  tags:
+#    - clean_qemu

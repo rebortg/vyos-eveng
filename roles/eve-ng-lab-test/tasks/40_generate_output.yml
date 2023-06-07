@@ -2,40 +2,40 @@
 
 # genertate outputfiles
 
-- name: make sure output dir exist
+- name: "{{ lab }}: make sure output dir exist"
   delegate_to: localhost
   ansible.builtin.file:
     path: "{{ output_dir }}"
     state: directory
 
-- name: make sure output include dir exist
+- name: "{{ lab }}: make sure output include dir exist"
   delegate_to: localhost
   ansible.builtin.file:
     path: "{{ output_dir }}/{{ output_include_dir }}"
     state: directory
 
-- name: Get timestamp from the system
+- name: "{{ lab }}: Get timestamp from the system"
   shell: "date +%Y-%m-%d"
   register: tstamp
 
-- name: Set variables
+- name: "{{ lab }}: Set variables"
   set_fact:
     current_date: "{{ tstamp.stdout }}"
 
-- name: generate lab rst file
+- name: "{{ lab }}: generate lab rst file"
   delegate_to: localhost
   template: 
     src: labs/{{ lab }}/{{ lab }}.rst.j2
     dest: "{{ output_dir }}/{{ lab }}.rst"
 
-- name: find all *.conf files in Lab
+- name: "{{ lab }}: find all *.conf files in Lab"
   delegate_to: localhost
   find:
     paths: labs/{{ lab }}
     patterns: '*.conf'
   register: conf_files
 
-- name: copy all *.conf files
+- name: "{{ lab }}: copy all *.conf files"
   delegate_to: localhost
   template: 
     src: "{{ item.path }}"
@@ -43,21 +43,36 @@
   with_items: "{{ conf_files.files }}"
 
 
-- name: find all *.png files in Lab
+- name: "{{ lab }}: find all *.config files in Lab"
+  delegate_to: localhost
+  find:
+    paths: labs/{{ lab }}
+    patterns: '*.config'
+  register: config_files
+
+- name: "{{ lab }}: copy all *.config files"
+  delegate_to: localhost
+  template: 
+    src: "{{ item.path }}"
+    dest: "{{ output_dir }}/{{ output_include_dir }}/{{ item.path.split('/')[-1] }}"
+  with_items: "{{ config_files.files }}"
+
+
+- name: "{{ lab }}: find all *.png files in Lab"
   delegate_to: localhost
   find:
     paths: labs/{{ lab }}
     patterns: '*.png'
   register: png_files
 
-- name: copy all *.png files
+- name: "{{ lab }}: copy all *.png files"
   delegate_to: localhost
   copy: 
     src: "{{ item.path }}"
     dest: "{{ output_dir }}/{{ output_include_dir }}/{{ item.path.split('/')[-1] }}"
   with_items: "{{ png_files.files }}"
 
-- name: copy ansible log files
+- name: "{{ lab }}: copy ansible log files"
   delegate_to: localhost
   copy: 
     src: "logs/{{ lab }}.log"

@@ -1,0 +1,13 @@
+---
+# defaults file for eve-ng-cleanup
+
+eve_ng_base_url: "https://127.0.0.1"
+eve_ng_user: "ansible"
+eve_ng_password: "ansible"
+
+eve_ng_folder_name: "labtest"
+
+node_template_os: vyos
+node_template_arch: amd64
+node_template_version: ""
+node_template_name: "{{ node_template_os }}-{{ node_template_version }}-{{ node_template_arch }}"

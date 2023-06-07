@@ -1,0 +1,8 @@
+- name: Automatic VyOS Lab test cleanup
+  hosts: all
+  gather_facts: False
+  any_errors_fatal: True
+
+  roles:
+    - role: eve-ng-cleanup
+

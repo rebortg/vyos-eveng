@@ -1,31 +1,31 @@
 ---
 
-- name: Copy iso to host
+- name: "{{ lab }}: Copy iso to host"
   ansible.netcommon.net_put:
     src: "tmp/{{ upgrade_iso.split('/')[-1] }}"
     dest: "/config/iso.iso"
     mode: binary
 
-- name: upgrade vyos
+- name: "{{ lab }}: upgrade vyos"
   vyos.vyos.vyos_command:
     commands: printf '%s\n' "" "Yes" "Yes" | add system image /config/iso.iso
 
 # reboot drive me crazy.
 # Workaround: reboot in 1 minute, the task don't fail, b/c the connection will not be lost
-- name: Reboot vyos
+- name: "{{ lab }}: Reboot vyos"
   vyos.vyos.vyos_command:
     commands: reboot in 1
 
 # wait to boot, 60 + x seconds
-- name: wait while shutdown
+- name: "{{ lab }}: wait while shutdown"
   pause:
     seconds: 70
 
 # wait until vyos ist booted
-- name: Wait for vyos nodes
+- name: "{{ lab }}: Wait for vyos nodes"
   wait_for_connection:
 
-- name: clear tmp dir
+- name: "{{ lab }}: clear tmp dir"
   delegate_to: localhost
   ansible.builtin.file:
     path: tmp

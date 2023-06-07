@@ -1,4 +1,4 @@
-- name: prepare node and Lab
+- name: Automatic VyOS Lab test 
   hosts: all
   gather_facts: False
   any_errors_fatal: True
@@ -8,3 +8,5 @@
       when: inventory_hostname in groups['eve']
 
     - role: eve-ng-lab-test
+
+

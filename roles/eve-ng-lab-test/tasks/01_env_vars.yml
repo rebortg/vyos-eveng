@@ -6,6 +6,6 @@
     src: facts_file.json
   register: facts_file_content
 
-- name: Load facts
+- name: "{{ lab }}: Load facts"
   set_fact:
     env_data: "{{ facts_file_content['content'] | b64decode }}"

@@ -22,7 +22,7 @@ parser_run.add_argument("--iso_version", type=str, help="Versionname")
 parser_run.add_argument("--upgrade_iso_path", type=str, help="ISO Upgrade URL")
 parser_run.add_argument("--upgrade_iso_version", type=str, help="Upgrade Versionname")
 parser_run.add_argument("--upgrade", "-u", action="store_true", help="do an upgrade")
-parser_run.add_argument("--branch", "-b", type=str, help="the lab and documentation branchname", required=True,     choices=['master', 'equuleus'])
+parser_run.add_argument("--branch", "-b", type=str, help="the lab and documentation branchname", required=True, choices=['master', 'equuleus'])
 
 # ssh commands
 parser_ssh = subparsers.add_parser("ssh", help="connect to a running ssh host")
@@ -58,6 +58,7 @@ if args.command == "run":
 
 
     # TODO think over git workflow
+
     try:
         os.system(f"rm -rf vyos-documentation")
     except:
@@ -65,7 +66,7 @@ if args.command == "run":
     os.system(f"git clone --branch {args.branch} git@github.com:vyos/vyos-documentation.git")
     os.system(f"git submodule set-branch --branch {args.branch} -- labs")
     os.system(f"git submodule update --remote -- labs")
-    
+
     # fill labs var
     run_labs = []
     if args.lab:
@@ -74,6 +75,8 @@ if args.command == "run":
         run_labs = labs
 
     failed_labs = []
+    # global exitcode
+    exit_code = 0
     for l in run_labs:
         # open ansible.cfg template
         template_f = open('ansible.cfg.j2')
@@ -91,7 +94,8 @@ if args.command == "run":
         
 
         command_string = f'ansible-playbook -i labinventory.py -e lab={l} {iso} {upgrade} playbook.yml'
-        exit_code = os.WEXITSTATUS(os.system(command_string))
+        print(command_string)
+        exit_code_lab = os.WEXITSTATUS(os.system(command_string))
 
         # delete upgrade temp files which where written from andible/paramiko upload module
         for entry in os.listdir():
@@ -102,12 +106,16 @@ if args.command == "run":
                 pass
 
 
-        if exit_code != 0:
-            failed_labs.append(l)
+        if exit_code_lab != 0:
+            exit_code = exit_code_lab
+            failed_labs.append((l,log_path))
+            #stop lab b/c only one vyos-oobm can be up at the same time
+            command_string_cleanup = f'ansible-playbook -i labinventory.py -e lab={l} {iso} {upgrade} playbook-cleanup.yml'
+            os.system(command_string_cleanup)
     
     for fail in failed_labs:
-        print(f"Lab {fail} failed, please check output and log ({log_path})")
-        exit(exit_code)
+        print(f"Lab {fail[0]} failed, please check output, log ({fail[1]}) and the lab on eve-ng")
+    exit(exit_code)
 
 if args.command == "ssh":
     os.system(f'ssh -o ProxyCommand="{paramiko_proxy_command}" -o StrictHostKeyChecking=no vyos@{args.host}')

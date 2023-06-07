@@ -1,17 +1,17 @@
 ---
-- name: make sure tmp dir exist
+
+- name: "{{ lab }}: ake sure tmp dir exist"
   delegate_to: localhost
   ansible.builtin.file:
     path: tmp
     state: directory
 
-
-- name: "register status of tmp/{{ upgrade_iso.split('/')[-1] }}"
+- name: "{{ lab }}: register status of tmp/{{ upgrade_iso.split('/')[-1] }}"
   stat:
     path: "tmp/{{ upgrade_iso.split('/')[-1] }}"
   register: temp_iso
 
-- name: Download upgrade_iso
+- name: "{{ lab }}: ownload upgrade_iso"
   delegate_to: localhost
   get_url:
     url: "{{ upgrade_iso }}"
