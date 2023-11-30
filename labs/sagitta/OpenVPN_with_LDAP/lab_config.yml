@@ -1,0 +1,171 @@
+---
+
+# openvpn server
+- name: generate openv-server CA
+  vyos.vyos.vyos_command:
+    commands:
+      - printf "%s\n" "" "4096" "" "" "" "" "" "3650" "" | generate pki ca install OVPN-CA
+  when: inventory_hostname == "ovpn-server"
+  register: install_ca
+
+- name: install openv-server CA
+  vyos.vyos.vyos_config:
+    lines: 
+      - "{{ install_ca.stdout_lines[0][-1] }}"
+      - "{{ install_ca.stdout_lines[0][-2] }}"
+  when: inventory_hostname == "ovpn-server"
+
+- name: generate openv-server SRV
+  vyos.vyos.vyos_command:
+    commands:
+      - printf "%s\n" "" "" "4096" "" "" "" "" "ovpn-server" "" "3650" "server" "" | generate pki certificate sign OVPN-CA install SRV
+  when: inventory_hostname == "ovpn-server"
+  register: install_srv
+
+- name: install openv-server SRV
+  vyos.vyos.vyos_config:
+    lines: 
+      - "{{ install_srv.stdout_lines[0][-1] }}"
+      - "{{ install_srv.stdout_lines[0][-2] }}"
+  when: inventory_hostname == "ovpn-server"
+
+- name: generate openv-server Client Cert
+  vyos.vyos.vyos_command:
+    commands:
+      - printf "%s\n" "" "" "4096" "" "" "" "" "client" "" "3650" "client" "" | generate pki certificate sign OVPN-CA install CLIENT
+  when: inventory_hostname == "ovpn-server"
+  register: install_client
+
+- name: install openv-server Client Cert
+  vyos.vyos.vyos_config:
+    lines: 
+      - "{{ install_client.stdout_lines[0][-1] }}"
+      - "{{ install_client.stdout_lines[0][-2] }}"
+  when: inventory_hostname == "ovpn-server"
+
+- name: generate openv-server DH
+  vyos.vyos.vyos_command:
+    commands:
+      - printf "%s\n" "" | generate pki dh install DH
+  when: inventory_hostname == "ovpn-server"
+  register: install_dh
+
+- name: install openv-server DH
+  vyos.vyos.vyos_config:
+    lines: 
+      - "{{ install_dh.stdout_lines[0][-1] }}"
+  when: inventory_hostname == "ovpn-server"
+
+- name: create ldap-auth.config
+  ansible.netcommon.net_put:
+    src: "labs/{{ lab }}/ldap-auth.config"
+    dest: "/config/auth/ldap-auth.config"
+  when: inventory_hostname == "ovpn-server"
+
+- name: setup openv-server
+  vyos.vyos.vyos_config:
+    src: "labs/{{ lab }}/ovpn-server.conf"
+    save: True
+  when: inventory_hostname == "ovpn-server"
+
+- name: generate openvpn client conifg
+  vyos.vyos.vyos_command:
+    commands: generate openvpn client-config interface vtun10 ca OVPN-CA certificate CLIENT
+  register: ovpn_client_config
+  when: inventory_hostname == "ovpn-server"
+
+- ansible.builtin.set_fact:
+    ovpn_client_config: "{{ ovpn_client_config.stdout[0][10:] }}" # erase fist 10 charaters due clearscren print statement
+  when: inventory_hostname == "ovpn-server"
+
+# Windows Active Directory
+- name: get hostname and IP of WIN server
+  vyos.vyos.vyos_command:
+    commands: 
+      - "show dhcp server leases | grep WIN"
+  register: dhcp_leases
+  when: inventory_hostname == "vyos-oobm"
+  
+- name: set Win IP-Address
+  set_fact:
+    win_ip_address: "{{ dhcp_leases.stdout.0 | regex_search('^\\S*') }}"
+  when: inventory_hostname == "vyos-oobm"
+
+- debug:
+    msg: "{{ win_ip_address }}"
+  when: inventory_hostname == "vyos-oobm"
+
+
+- name: setup windows portforwarding
+  vyos.vyos.vyos_config:
+    lines:
+      - "set nat destination rule 1 destination port '5986'"
+      - "set nat destination rule 1 inbound-interface 'eth0'"
+      - "set nat destination rule 1 protocol 'tcp'"
+      - "set nat destination rule 1 translation address '{{ win_ip_address }}'"
+    save: True
+  when: inventory_hostname == "vyos-oobm"
+
+- name: set IP on Ethernet 2
+  win_shell: "New-NetIpAddress -InterfaceAlias 'Ethernet 2' -IpAddress 192.168.1.10 -PrefixLength 24"
+  when: inventory_hostname == "ldap-server"
+
+- name: enable Active Directory
+  ansible.windows.win_feature:
+    name: AD-Domain-Services
+    state: present
+    include_management_tools: yes
+    include_sub_features: yes
+    register: result
+  when: inventory_hostname == "ldap-server"
+  register: win_feature
+
+- name: Create Domain
+  win_domain:
+     dns_domain_name: vyos.local
+     safe_mode_password: Qwerty123456!
+  register: ad
+  when: inventory_hostname == "ldap-server"
+
+- name: reboot server
+  win_reboot:
+   msg: "Installing AD. Rebooting..."
+   pre_reboot_delay: 15
+  when: inventory_hostname == "ldap-server"
+
+- name: Ensure bind_user is created
+  community.windows.win_domain_user:
+    name: bind_user
+    password: P4ssw0rd123
+    state: present
+  when: inventory_hostname == "ldap-server"
+
+- name: Ensure user01 is created
+  community.windows.win_domain_user:
+    name: user01
+    firstname: User01
+    password: P4ssw0rd123
+    state: present
+  when: inventory_hostname == "ldap-server"
+
+# Client
+- name: install Client Cert
+  vyos.vyos.vyos_config:
+    lines: 
+      - "{{ hostvars['ovpn-server'].install_client.stdout_lines[0][-1] }}"
+      - "{{ hostvars['ovpn-server'].install_client.stdout_lines[0][-2] }}"
+  when: inventory_hostname == "client"
+
+
+- name: install CA on Client
+  vyos.vyos.vyos_config:
+    lines: 
+      - "{{ hostvars['ovpn-server'].install_ca.stdout_lines[0][-2] }}" # just the cert not the key
+  when: inventory_hostname == "client"
+
+- name: setup client
+  vyos.vyos.vyos_config:
+    src: "labs/{{ lab }}/client.conf"
+    save: True
+  when: inventory_hostname == "client"
+

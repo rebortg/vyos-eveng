@@ -1,0 +1,21 @@
+---
+
+hosts:
+  vyos:
+    vyos-wan:
+      tests:
+        ping:
+          - "tunnelbroker.net"
+        stdout:
+          - name: ping_ip
+            command: "ping 2001:470:20::2 count 4"
+          - name: ping_name
+            command: "ping tunnelbroker.net count 4"
+
+    client:
+      tests:
+        ping:
+          - "2001:470:20::2"
+        stdout:
+          - name: ping_ip
+            command: "ping 2001:470:20::2 count 4"

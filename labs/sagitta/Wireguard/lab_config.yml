@@ -1,0 +1,19 @@
+---
+
+- name: generate pki wireguard key-pair
+  vyos_command:
+    commands: generate pki wireguard key-pair
+  register: keys
+  when: inventory_hostname in groups['vyos']
+
+- name: set pub and private key
+  set_fact:
+    prikey: "{{ keys.stdout_lines[0][0].split(': ')[1] }}"
+    pubkey: "{{ keys.stdout_lines[0][1].split(': ')[1] }}"
+  when: inventory_hostname in groups['vyos']
+
+- name: setup nodes
+  vyos.vyos.vyos_config:
+    src: "labs/{{ lab }}/{{ inventory_hostname }}.conf"
+    save: True
+  when: inventory_hostname in groups['vyos']

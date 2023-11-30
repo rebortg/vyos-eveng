@@ -1,0 +1,22 @@
+---
+
+hosts:
+  windows:
+    ldap-server:
+      ansible_psrp_host : vyos-oobm
+      ansible_user: Administrator
+      ansible_password: Test123
+      ansible_connection: psrp
+      ansible_psrp_cert_validation: ignore
+  
+  vyos:
+    ovpn-server:
+      tests:
+        stdout:
+          - name: show_client
+            command: "show openvpn server"
+
+    client:
+      tests:
+        ping:
+          - "192.168.1.1"

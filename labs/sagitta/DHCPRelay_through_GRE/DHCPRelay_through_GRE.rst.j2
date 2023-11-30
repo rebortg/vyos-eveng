@@ -1,0 +1,103 @@
+############################
+DHCP Relay trough GRE-Bridge
+############################
+
+
+| Testdate: {{ current_date }}
+| Version: {{ node_template_version }}
+{% if upgrade %}
+| Upgrade Version: {{ upgrade_iso_version }}
+{% endif %}
+
+
+This simple structure shows how to configure a DHCP Relay over a GRE Bridge
+interface.
+
+********
+Topology
+********
+
+The topology has 3 VyOS routers and one client. Between the DHCP Server and
+the DHCP Relay is a GRE tunnel. The `transport` VyOS represent a large
+Network.
+
+.. image:: {{ output_include_dir }}/topology.png
+  :alt: Ansible Example topology image
+
+*************
+Configuration
+*************
+
+First, we configure the transport network and the Tunnel interface.
+
+
+Transport:
+
+.. literalinclude:: {{ output_include_dir }}/transport.conf
+   :language: none
+
+
+DHCP-Server
+
+.. literalinclude:: {{ output_include_dir }}/dhcp-server.conf
+   :language: none
+   :lines: 1-8
+
+
+DHCP-Relay
+
+.. literalinclude:: {{ output_include_dir }}/dhcp-relay.conf
+   :language: none
+   :lines: 1-8
+
+
+After this, we need the DHCP-Server and Relay configuration.
+To get a testable result, we just have one IP in the DHCP range.
+Expand it as you need it.
+
+DHCP-Server
+
+.. literalinclude:: {{ output_include_dir }}/dhcp-server.conf
+   :language: none
+   :lines: 9-13
+
+
+DHCP-Relay
+
+.. literalinclude:: {{ output_include_dir }}/dhcp-relay.conf
+   :language: none
+   :lines: 9-10
+
+
+***************
+Test the result
+***************
+
+Ping the Client from the DHCP Server.
+
+{% for item in hostvars['dhcp-server']['stdout'] %}
+{% if item['item']['name'] == 'ping_client' %}
+
+.. code-block:: none
+
+   vyos@dhcp-server:~$ {{ item['item']['command'] }}
+{% for line in item['stdout_lines'][0] %}
+   {{ line }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+
+And show all DHCP Leases
+
+{% for item in hostvars['dhcp-server']['stdout'] %}
+{% if item['item']['name'] == 'show_dhcp_server_leases' %}
+
+.. code-block:: none
+
+   vyos@dhcp-server:~$ {{ item['item']['command'] }}
+{% for line in item['stdout_lines'][0] %}
+   {{ line }}
+{% endfor %}
+{% endif %}
+{% endfor %}
