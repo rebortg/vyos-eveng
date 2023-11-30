@@ -5,6 +5,8 @@
     src: "tmp/{{ upgrade_iso.split('/')[-1] }}"
     dest: "/config/iso.iso"
     mode: binary
+  vars:
+    ansible_command_timeout: 300
 
 - name: "{{ lab }}: upgrade vyos"
   vyos.vyos.vyos_command:

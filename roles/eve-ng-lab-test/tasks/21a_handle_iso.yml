@@ -11,7 +11,7 @@
     path: "tmp/{{ upgrade_iso.split('/')[-1] }}"
   register: temp_iso
 
-- name: "{{ lab }}: ownload upgrade_iso"
+- name: "{{ lab }}: download upgrade_iso"
   delegate_to: localhost
   get_url:
     url: "{{ upgrade_iso }}"

@@ -93,7 +93,7 @@ if args.command == "run":
             pass
         
 
-        command_string = f'ansible-playbook -i labinventory.py -e lab={l} {iso} {upgrade} playbook.yml'
+        command_string = f'ansible-playbook -i labinventory.py -e lab={l} {iso} {upgrade} playbook.yml -vvv'
         print(command_string)
         exit_code_lab = os.WEXITSTATUS(os.system(command_string))
 
@@ -111,7 +111,7 @@ if args.command == "run":
             failed_labs.append((l,log_path))
             #stop lab b/c only one vyos-oobm can be up at the same time
             command_string_cleanup = f'ansible-playbook -i labinventory.py -e lab={l} {iso} {upgrade} playbook-cleanup.yml'
-            os.system(command_string_cleanup)
+            #os.system(command_string_cleanup)
     
     for fail in failed_labs:
         print(f"Lab {fail[0]} failed, please check output, log ({fail[1]}) and the lab on eve-ng")
