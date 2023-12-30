@@ -15,24 +15,27 @@ class InventoryModule(BaseInventoryPlugin):
     defaultinventory = {}
     lab = ''
     labinventory = {}
+    branch = ''
 
     def verify_file(self, path):
         with open("defaultinventory.yml", 'r') as stream:
             try:
                 self.defaultinventory = yaml.safe_load(stream)
             except yaml.YAMLError as exc:
-                print(exc)
                 return False
-        
         for arg in sys.argv:
             if "lab=" in arg:
                 self.lab = arg.split('=')[1]
+            if "branch=" in arg:
+                self.branch = arg.split('=')[1]
         
         if self.lab == '':
             return False
+        if self.branch == '':
+            return False
         
                 
-        with open(f"labs/{self.lab}/inventory.yml", 'r') as stream:
+        with open(f"labs/{self.branch}/{self.lab}/inventory.yml", 'r') as stream:
             try:
                 self.labinventory = yaml.safe_load(stream)
             except yaml.YAMLError as exc:

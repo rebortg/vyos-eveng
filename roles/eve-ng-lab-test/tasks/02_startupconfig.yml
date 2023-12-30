@@ -1,0 +1,6 @@
+---
+
+- name: decode oobm default startupconfig
+  set_fact:
+    oobm_config: "{{ lookup('template', 'vyos-oobm.default.conf.j2') | b64encode }}"
+  when: inventory_hostname in groups['eve']

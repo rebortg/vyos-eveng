@@ -1,25 +1,21 @@
 ---
 - debug:
-    msg: START vyos_lag_interfaces replaced integration tests on connection={{ ansible_connection
+    msg:
+      START vyos_lag_interfaces replaced integration tests on connection={{ ansible_connection
       }}
-
-- include_tasks: _remove_config.yaml
 
 - include_tasks: _populate.yaml
 
 - block:
-
     - name: Replace device configurations of listed LAG interfaces with provided
         configurations
       register: result
       vyos.vyos.vyos_lag_interfaces: &id001
         config:
-
           - name: bond1
             mode: 802.3ad
             hash_policy: layer2
             members:
-
               - member: eth2
         state: replaced
 
@@ -56,5 +52,4 @@
           - "{{ replaced['after'] | symmetric_difference(result['before']) |length\
             \ == 0 }}"
   always:
-
-    - include_tasks: _remove_config.yaml
+    - include_tasks: _remove_bond.yaml

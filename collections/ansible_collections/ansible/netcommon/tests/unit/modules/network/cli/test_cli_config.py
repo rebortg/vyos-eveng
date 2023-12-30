@@ -5,20 +5,18 @@
 # Make coding more python3-ish
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 from unittest.mock import MagicMock, patch
 
 from ansible_collections.ansible.netcommon.plugins.modules import cli_config
-from ansible_collections.ansible.netcommon.tests.unit.modules.utils import (
-    set_module_args,
-)
+from ansible_collections.ansible.netcommon.tests.unit.modules.utils import set_module_args
 
 from .cli_module import TestCliModule
 
 
 class TestCliConfigModule(TestCliModule):
-
     module = cli_config
 
     def setUp(self):
@@ -37,9 +35,7 @@ class TestCliConfigModule(TestCliModule):
 
         self.mock_connection.stop()
 
-    @patch(
-        "ansible_collections.ansible.netcommon.plugins.modules.cli_config.run"
-    )
+    @patch("ansible_collections.ansible.netcommon.plugins.modules.cli_config.run")
     def test_cli_config_backup_returns__backup__(self, run_mock):
         args = dict(backup=True)
         set_module_args(args)
@@ -70,9 +66,7 @@ class TestCliConfigModule(TestCliModule):
         diff.get.side_effect = ["set interface eth0 ip address dhcp", None]
         self.conn.get_diff.return_value = diff
         set_module_args({"config": "set interface eth0 ip address dhcp"})
-        self.execute_module(
-            changed=True, commands=["set interface eth0 ip address dhcp"]
-        )
+        self.execute_module(changed=True, commands=["set interface eth0 ip address dhcp"])
         self.conn.edit_config.assert_called_once_with(
             candidate=["set interface eth0 ip address dhcp"],
             commit=True,
@@ -84,9 +78,7 @@ class TestCliConfigModule(TestCliModule):
         self.conn.get_diff.return_value = diff
         set_module_args({"config": "set banner\nnew banner"})
         self.execute_module(changed=True)
-        self.conn.edit_banner.assert_called_once_with(
-            candidate='"new banner"', commit=True
-        )
+        self.conn.edit_banner.assert_called_once_with(candidate='"new banner"', commit=True)
 
     def test_cli_config_replace(self):
         self.conn.get_capabilities.return_value = """{
@@ -95,9 +87,7 @@ class TestCliConfigModule(TestCliModule):
                 "supports_replace": true
             }
         }"""
-        self.conn.edit_config.return_value = {
-            "diff": "set interface eth0 ip address dhcp"
-        }
+        self.conn.edit_config.return_value = {"diff": "set interface eth0 ip address dhcp"}
 
         args = {"config": "set interface eth0 ip address dhcp"}
 
@@ -135,9 +125,7 @@ class TestCliConfigModule(TestCliModule):
         }
         set_module_args(args)
         result = self.execute_module(failed=True)
-        self.assertEqual(
-            result["msg"], "Option replace is not supported on this platform"
-        )
+        self.assertEqual(result["msg"], "Option replace is not supported on this platform")
 
     def test_cli_config_replace_unspecified(self):
         self.conn.get_capabilities.return_value = """{
@@ -158,9 +146,7 @@ class TestCliConfigModule(TestCliModule):
         )
 
     def test_cli_config_rollback(self):
-        self.conn.rollback.return_value = {
-            "diff": "set interface eth0 ip address dhcp"
-        }
+        self.conn.rollback.return_value = {"diff": "set interface eth0 ip address dhcp"}
 
         args = {"rollback": 123456}
         set_module_args(args)

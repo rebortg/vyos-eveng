@@ -19,3 +19,5 @@ upgrade_iso_version: ""
 
 output_dir: "vyos-documentation/docs/configexamples/autotest/{{ lab }}"
 output_include_dir: "_include"
+
+oobm_hostname: "oobm"

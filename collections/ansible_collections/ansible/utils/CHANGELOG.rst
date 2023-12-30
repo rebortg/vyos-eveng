@@ -5,6 +5,79 @@ Ansible Utils Collection Release Notes
 .. contents:: Topics
 
 
+v3.0.0
+======
+
+Release Summary
+---------------
+
+Starting from this release, the minimum `ansible-core` version this collection requires is `2.14.0`. That last known version compatible with ansible-core<2.14 is `v2.12.0`.
+
+Major Changes
+-------------
+
+- Bumping `requires_ansible` to `>=2.14.0`, since previous ansible-core versions are EoL now.
+
+v2.12.0
+=======
+
+Minor Changes
+-------------
+
+- Fact_diff filter plugin - Add fact_diff filter plugin. (https://github.com/ansible-collections/ansible.utils/issues/78).
+
+New Plugins
+-----------
+
+Filter
+~~~~~~
+
+- fact_diff - Find the difference between currently set facts
+
+v2.11.0
+=======
+
+Minor Changes
+-------------
+
+- Add ipcut filter plugin.(https://github.com/ansible-collections/ansible.utils/issues/251)
+- Add ipv6form filter plugin.(https://github.com/ansible-collections/ansible.utils/issues/230)
+
+Bugfixes
+--------
+
+- Validate input for ipv4_hex(https://github.com/ansible-collections/ansible.utils/issues/281)
+
+New Plugins
+-----------
+
+Filter
+~~~~~~
+
+- ipcut - This filter is designed to get 1st or last few bits of IP address.
+- ipv6form - This filter is designed to convert ipv6 address in different formats. For example expand, compressetc.
+
+v2.10.4
+=======
+
+v2.10.3
+=======
+
+v2.10.2
+=======
+
+Minor Changes
+-------------
+
+- validate - Add option `check_format` for the jsonschema engine to disable JSON Schema format checking.
+- validate - Add support for JSON Schema draft 2019-09 and 2020-12 as well as automatically choosing the draft from the `$schema` field of the criteria.
+
+v2.10.1
+=======
+
+v2.10.0
+=======
+
 v2.9.0
 ======
 

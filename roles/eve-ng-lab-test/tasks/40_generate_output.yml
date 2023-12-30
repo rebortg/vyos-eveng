@@ -25,13 +25,13 @@
 - name: "{{ lab }}: generate lab rst file"
   delegate_to: localhost
   template: 
-    src: labs/{{ lab }}/{{ lab }}.rst.j2
+    src: labs/{{ branch }}/{{ lab }}/{{ lab }}.rst.j2
     dest: "{{ output_dir }}/{{ lab }}.rst"
 
 - name: "{{ lab }}: find all *.conf files in Lab"
   delegate_to: localhost
   find:
-    paths: labs/{{ lab }}
+    paths: labs/{{ branch }}/{{ lab }}
     patterns: '*.conf'
   register: conf_files
 
@@ -46,7 +46,7 @@
 - name: "{{ lab }}: find all *.config files in Lab"
   delegate_to: localhost
   find:
-    paths: labs/{{ lab }}
+    paths: labs/{{ branch }}/{{ lab }}
     patterns: '*.config'
   register: config_files
 
@@ -61,7 +61,7 @@
 - name: "{{ lab }}: find all *.png files in Lab"
   delegate_to: localhost
   find:
-    paths: labs/{{ lab }}
+    paths: labs/{{ branch }}/{{ lab }}
     patterns: '*.png'
   register: png_files
 
@@ -75,5 +75,5 @@
 - name: "{{ lab }}: copy ansible log files"
   delegate_to: localhost
   copy: 
-    src: "logs/{{ lab }}.log"
+    src: "logs/{{ branch }}/{{ lab }}.log"
     dest: "{{ output_dir }}/{{ lab }}.log"

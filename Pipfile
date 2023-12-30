@@ -6,19 +6,10 @@ name = "pypi"
 [packages]
 ansible = "*"
 paramiko = "*"
+gitpython = "*"
 scp = "*"
-sphinx-rtd-theme = "*"
-docutils = "<0.18"
-lxml = "*"
-sphinx-notfound-page = "*"
-Sphinx = ">=1.4.3"
-pywinrm = "*"
-pypsrp = "*"
-pysocks = "*"
-myst-parser = "*"
-sphinx-panels = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.12"

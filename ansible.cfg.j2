@@ -3,7 +3,7 @@ become=true
 become_method=sudo
 host_key_checking = False
 roles_path = ./roles
-collections_paths = ./collections
+collections_path = ./collections
 private_key_file = ./inventory/id_rsa
 inventory_plugins = ./inventory
 log_path = {{ log_path }}
@@ -19,7 +19,7 @@ enable_plugins = labinventory, yaml
 look_for_keys = no
 host_key_checking = no
 host_key_auto_add = yes
-proxy_command = "{{ proxy_command }}"
+#proxy_command = "{{ proxy_command }}"
 
 [persistent_connection]
 connect_timeout=120

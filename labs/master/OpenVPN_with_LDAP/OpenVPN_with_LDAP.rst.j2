@@ -1,0 +1,128 @@
+.. _examples-OpenVPN-with-LDAP:
+
+#################
+OpenVPN with LDAP
+#################
+
+| Testdate: {{ current_date }}
+| Version: {{ node_template_version }}
+{% if upgrade %}
+| Upgrade Version: {{ upgrade_iso_version }}
+{% endif %}
+
+This LAB show how to uwe OpenVPN with a Active Directory authentication backend.
+
+The Topology are consists of:
+ * Windows Server 2019 with a running Active Directory
+ * VyOS as a OpenVPN Server
+ * VyOS as Client
+
+.. image:: {{ output_include_dir }}/topology.png
+  :alt: OpenVPN with LDAP topology image
+
+Active Directory on Windows server
+==================================
+
+The Lab asume a full running Active Directory on the Windows Server.
+Here are some PowerShell commands to quickly add a Test Active Directory.
+
+.. code-block:: powershell
+
+    # install the Active Directory Server role
+    Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+
+    # install the Active Directory Server role
+    Install-ADDSForest -DomainName "vyos.local" -DomainNetBiosName "VYOS" -InstallDns:$true -NoRebootCompletion:$true
+
+    # create test user01 and binduser
+    New-ADUser binduser -AccountPassword(Read-Host -AsSecureString "Input Password") -Enabled $true
+    New-ADUser user01 -AccountPassword(Read-Host -AsSecureString "Input Password") -Enabled $true
+
+
+Configuration VyOS as OpenVPN Server
+====================================
+
+In this example OpenVPN will be setup with a client certificate and username / password authentication.
+
+First a CA, a signed server and client ceftificate and a Diffie-Hellman parameter musst be generated and installed.
+Please look :ref:`here <configuration/pki/index:pki>` for more information.
+
+| Add the LDAP plugin configuration file `/config/auth/ldap-auth.config`
+| Check all possible settings `here <https://github.com/threerings/openvpn-auth-ldap/blob/master/auth-ldap.conf>`_
+
+.. literalinclude:: {{ output_include_dir }}/ldap-auth.config
+   :language: none
+
+
+Now generate all required certificates on the ovpn-server:
+
+first the PCA
+
+.. code-block:: none
+
+   vyos@ovpn-server# run generate pki ca install OVPN-CA
+
+after this create a signed server and a client certificate
+
+.. code-block:: none
+   
+   vyos@ovpn-server# run generate pki certificate sign OVPN-CA install SRV
+   vyos@ovpn-server# run generate pki certificate sign OVPN-CA install CLIENT
+
+and last the DH Key
+
+.. code-block:: none
+
+   vyos@ovpn-server# run generate pki dh install DH
+
+after all these steps the config look like this:
+
+.. code-block:: none
+
+      {{ hostvars['ovpn-server'].install_ca.stdout_lines[0][-2] }}
+      {{ hostvars['ovpn-server'].install_ca.stdout_lines[0][-1] }}
+      {{ hostvars['ovpn-server'].install_srv.stdout_lines[0][-2] }}
+      {{ hostvars['ovpn-server'].install_srv.stdout_lines[0][-1] }}
+      {{ hostvars['ovpn-server'].install_client.stdout_lines[0][-2] }}
+      {{ hostvars['ovpn-server'].install_client.stdout_lines[0][-1] }}
+      {{ hostvars['ovpn-server'].install_dh.stdout_lines[0][-1] }}
+
+Once all the required certificates and keys are installed, the remaining 
+OpenVPN Server configuration can be carried out.
+
+.. literalinclude:: {{ output_include_dir }}/ovpn-server.conf
+   :language: none
+
+Client configuration
+====================
+
+One advantage of having the client certificate stored is the ability to create the client configuration.
+
+.. code-block:: none
+
+   vyos@ovpn-server:~$ generate openvpn client-config interface vtun10 ca OVPN-CA certificate CLIENT
+
+save the output to a file and import it in nearly all openvpn clients.
+
+.. code-block:: none
+
+{% for line in hostvars['ovpn-server'].ovpn_client_config.split('\n') %}
+   {{ line }}
+{% endfor %}
+
+
+Monitoring
+==========
+
+If the client is connect successfully you can check the output with
+{% for item in hostvars['ovpn-server']['stdout'] %}
+{% if item['item']['name'] == 'show_client' %}
+
+.. code-block:: none
+
+   vyos@ovpn-server:~$ {{ item['item']['command'] }}
+{% for line in item['stdout_lines'][0] %}
+   {{ line }}
+{% endfor %}
+{% endif %}
+{% endfor %}

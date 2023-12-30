@@ -2,9 +2,7 @@
 
 - import_tasks: 01_env_vars.yml
 
-- debug:
-    msg: "{{ node_template_name }}"
-
+- import_tasks: 02_startupconfig.yml
 
 - name: "{{ lab }}: fail if node_template_version is empty"
   fail: msg="The variable 'node_template_version' is empty"
@@ -17,7 +15,7 @@
 
 
 - name: include {{ lab }} lab_config.yml
-  import_tasks: "labs/{{ lab }}/lab_config.yml"
+  import_tasks: "labs/{{ branch }}/{{ lab }}/lab_config.yml"
   #when: inventory_hostname in groups['vyos']
 
 - import_tasks: 30_test_lab.yml

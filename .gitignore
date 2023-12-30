@@ -2,9 +2,11 @@
 .vscode
 vyos-documentation
 tmp
-logs/*.log
+logs/*/*.log
 output
 ansible.cfg
+defaultinventory.yml
 facts_file.json
 Pipfile
 Pipfile.lock
+_backup_env

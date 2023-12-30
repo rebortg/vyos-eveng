@@ -38,7 +38,7 @@
       Cookie: "{{ login.cookies_string }}"
     validate_certs: False
   with_items: "{{ response.json.data }}"
-  when: item.labname == "{{ eve_ng_folder_name }}/{{ lab }}"
+  when: (response.json.message != "No nodes running (60071).") and (item.labname == "{{ eve_ng_folder_name }}/{{ lab }}")
   register: response
 
 - name: "{{ lab }}: delete existing lab"

@@ -139,7 +139,6 @@ EXAMPLES = r"""
 # changed: [localhost] => (item=127.0.0.13)
 # changed: [localhost] => (item=127.0.0.14)
 # changed: [localhost] => (item=127.0.0.15)
-
 """
 
 RETURN = """
@@ -181,6 +180,5 @@ class FilterModule(object):
     """usable_range"""
 
     def filters(self):
-
         """a mapping of filter names to functions"""
         return {"usable_range": _usable_range}

@@ -133,9 +133,9 @@
         count: "1"
         name: "VyOS"
         cpulimit: "undefined"
-        cpu: "1"
+        cpu: "2"
         ram: "512"
-        ethernet: "4"
+        ethernet: "0"
         qemu_options: "-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc"
         ro_qemu_options: "-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc"
         config: "0"
@@ -180,12 +180,12 @@
 
   - name: "{{ lab }}: copy file"
     template: 
-      src: install_image.expect.j2
-      dest: /tmp/install_image.expect
+      src: install_image_{{ branch }}.expect.j2
+      dest: /tmp/install_image_{{ branch }}.expect
       mode: "+x"
 
   - name: "{{ lab }}: run expect script"
-    ansible.builtin.shell: "/tmp/install_image.expect"
+    ansible.builtin.shell: "/tmp/install_image_{{ branch }}.expect"
 
   - name: "{{ lab }}: Login to EVE-NG and get Cookie (due timeout)"
     uri:

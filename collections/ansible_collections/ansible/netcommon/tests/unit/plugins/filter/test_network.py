@@ -16,20 +16,20 @@
 # Make coding more python3-ish
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 import os
 import sys
 import unittest
 
-from ansible_collections.ansible.netcommon.plugins.filter.network import (
-    comp_type5,
-    hash_salt,
-    parse_xml,
-    type5_pw,
-    vlan_expander,
-    vlan_parser,
-)
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.comp_type5 import comp_type5
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.hash_salt import hash_salt
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.parse_xml import parse_xml
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.type5_pw import type5_pw
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.vlan_expander import vlan_expander
+from ansible_collections.ansible.netcommon.plugins.plugin_utils.vlan_parser import vlan_parser
+
 
 fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "network")
 
@@ -96,9 +96,7 @@ class TestNetworkParseFilter(unittest.TestCase):
         "XPath expression not supported in this version",
     )
     def test_parse_xml_to_dict(self):
-        spec_file_path = os.path.join(
-            fixture_path, "show_vlans_xml_with_key_spec.yml"
-        )
+        spec_file_path = os.path.join(fixture_path, "show_vlans_xml_with_key_spec.yml")
         parsed = parse_xml(output_xml, spec_file_path)
         expected = {
             "vlans": {
@@ -151,9 +149,7 @@ class TestNetworkParseFilter(unittest.TestCase):
         "XPath expression not supported in this version",
     )
     def test_parse_xml_with_condition_spec(self):
-        spec_file_path = os.path.join(
-            fixture_path, "show_vlans_xml_with_condition_spec.yml"
-        )
+        spec_file_path = os.path.join(fixture_path, "show_vlans_xml_with_condition_spec.yml")
         parsed = parse_xml(output_xml, spec_file_path)
         expected = {
             "vlans": [
@@ -170,13 +166,9 @@ class TestNetworkParseFilter(unittest.TestCase):
         self.assertEqual(parsed, expected)
 
     def test_parse_xml_with_single_value_spec(self):
-        spec_file_path = os.path.join(
-            fixture_path, "show_vlans_xml_single_value_spec.yml"
-        )
+        spec_file_path = os.path.join(fixture_path, "show_vlans_xml_single_value_spec.yml")
         parsed = parse_xml(output_xml, spec_file_path)
-        expected = {
-            "vlans": ["test-1", "test-2", "test-3", "test-4", "test-5"]
-        }
+        expected = {"vlans": ["test-1", "test-2", "test-3", "test-4", "test-5"]}
         self.assertEqual(parsed, expected)
 
     def test_parse_xml_validate_input(self):
@@ -185,15 +177,12 @@ class TestNetworkParseFilter(unittest.TestCase):
 
         with self.assertRaises(Exception) as e:
             parse_xml(output_xml, "junk_path")
-        self.assertEqual(
-            "unable to locate parse_xml template: junk_path", str(e.exception)
-        )
+        self.assertEqual("unable to locate parse_xml template: junk_path", str(e.exception))
 
         with self.assertRaises(Exception) as e:
             parse_xml(output, spec_file_path)
         self.assertEqual(
-            "parse_xml works on string input, but given input of : %s"
-            % type(output),
+            "parse_xml works on string input, but given input of : %s" % type(output),
             str(e.exception),
         )
 
@@ -212,7 +201,6 @@ class TestNetworkType5(unittest.TestCase):
         self.assertEqual(len(parsed), 30)
 
     def test_wrong_data_type(self):
-
         with self.assertRaises(Exception) as e:
             type5_pw([])
         self.assertEqual(
@@ -242,7 +230,6 @@ class TestNetworkType5(unittest.TestCase):
         )
 
     def test_bad_salt_char(self):
-
         with self.assertRaises(Exception) as e:
             type5_pw("password", "*()")
         self.assertEqual(
@@ -314,6 +301,7 @@ class TestVlanExapander(unittest.TestCase):
     def test_no_ranges(self):
         raw_list = "1,3,5"
         expanded_list = [1, 3, 5]
+        print(vlan_expander(raw_list))
         self.assertEqual(vlan_expander(raw_list), expanded_list)
 
 

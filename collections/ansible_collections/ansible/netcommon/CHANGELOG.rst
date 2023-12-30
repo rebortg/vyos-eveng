@@ -5,6 +5,131 @@ Ansible Netcommon Collection Release Notes
 .. contents:: Topics
 
 
+v6.0.0
+======
+
+Release Summary
+---------------
+
+Starting from this release, the minimum `ansible-core` version this collection requires is `2.14.0`. That last known version compatible with ansible-core<2.14 is `v5.3.0`.
+
+Major Changes
+-------------
+
+- Bumping `requires_ansible` to `>=2.14.0`, since previous ansible-core versions are EoL now.
+
+v5.3.0
+======
+
+Minor Changes
+-------------
+
+- Add new module cli_backup that exclusively handles configuration backup.
+
+Bugfixes
+--------
+
+- Fix attribute types from string to str in filter plugins.
+
+v5.2.0
+======
+
+Minor Changes
+-------------
+
+- Add a new cliconf plugin ``default`` that can be used when no cliconf plugin is found for a given network_os. This plugin only supports ``get()``. (https://github.com/ansible-collections/ansible.netcommon/pull/569)
+- httpapi - Add additional option ``ca_path``, ``client_cert``, ``client_key``, and ``http_agent`` that are available in open_url but not to httpapi. (https://github.com/ansible-collections/ansible.netcommon/issues/528)
+- telnet - add crlf option to send CRLF instead of just LF (https://github.com/ansible-collections/ansible.netcommon/pull/440).
+
+Deprecated Features
+-------------------
+
+- libssh - the ssh_*_args options are now marked that they will be removed after 2026-01-01.
+
+Bugfixes
+--------
+
+- Ensure that all connection plugin options that should be strings are actually strings (https://github.com/ansible-collections/ansible.netcommon/pull/549).
+
+New Plugins
+-----------
+
+Cliconf
+~~~~~~~
+
+- default - General purpose cliconf plugin for new platforms
+
+v5.1.3
+======
+
+Bugfixes
+--------
+
+- Vendor telnetlib from cpython (https://github.com/ansible-collections/ansible.netcommon/pull/546)
+
+v5.1.2
+======
+
+Bugfixes
+--------
+
+- Ensure that all connection plugin options that should be strings are actually strings (https://github.com/ansible-collections/ansible.netcommon/pull/549).
+
+v5.1.1
+======
+
+Bugfixes
+--------
+
+- network_resource - do not append network_os to module names when building supported resources list. This fix is only valid for cases where FACTS_RESOURCE_SUBSETS is undefined.
+
+v5.1.0
+======
+
+Minor Changes
+-------------
+
+- libssh - add ``config_file`` option to specify an alternate SSH config file to use.
+- parse_cli - add support for multiple matches inside a block by adding new dictionary key to result
+- telnet - add ``stdout`` and ``stdout_lines`` to module output.
+- telnet - add support for regexes to ``login_prompt`` and ``password_prompt``.
+- telnet - apply ``timeout`` to command prompts.
+
+Bugfixes
+--------
+
+- httpapi - ``send()`` method no longer applied leftover kwargs to ``open_url()``. Fix applies those arguments as intended (https://github.com/ansible-collections/ansible.netcommon/pull/524).
+- network_cli - network cli connection avoids traceback when using invalid user
+- network_cli - when receiving longer responses with libssh, parts of the response were sometimes repeated. The response is now returned as it is received (https://github.com/ansible-collections/community.routeros/issues/132).
+- network_resource - fix a potential UnboundLocalError if the module fails to import a Resource Module. (https://github.com/ansible-collections/ansible.netcommon/pull/513)
+- restconf - creation of new resources is no longer erroneously forced to use POST. (https://github.com/ansible-collections/ansible.netcommon/issues/502)
+
+v5.0.0
+======
+
+Minor Changes
+-------------
+
+- httpapi - Add option netcommon_httpapi_ciphers to allow overriding default SSL/TLS ciphers. (https://github.com/ansible-collections/ansible.netcommon/pull/494)
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- NetworkConnectionBase now inherits from PersistentConnectionBase in ansible.utils. As a result, the minimum ansible.utils version has increased to 2.7.0.
+- NetworkTemplate is no longer importable from ansible_collections.ansible.netcommon.plugins.module_utils.network.common and should now be found at its proper location ansible_collections.ansible.netcommon.plugins.module_utils.network.common.rm_base.network_template
+- ResourceModule is no longer importable from ansible_collections.ansible.netcommon.plugins.module_utils.network.common and should now be found at its proper location ansible_collections.ansible.netcommon.plugins.module_utils.network.common.rm_base.resource_module
+- VALID_MASKS, is_masklen, is_netmask, to_bits, to_ipv6_network, to_masklen, to_netmask, and to_subnet are no longer importable from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils and should now be found at their proper location ansible.module_utils.common.network
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- cli_parse - This plugin was moved to ansible.utils in version 1.0.0, and the redirect to that collection has now been removed.
+
+Bugfixes
+--------
+
+- Cast AnsibleUnsafeText to str in convert_doc_to_ansible_module_kwargs() to keep CSafeLoader happy. This fixes issues with content scaffolding tools.
+
 v4.1.0
 ======
 
@@ -455,7 +580,6 @@ Connection
 ~~~~~~~~~~
 
 - httpapi - Use httpapi to run command on network appliances
-- napalm - Provides persistent connection using NAPALM
 - netconf - Provides a persistent connection using the netconf protocol
 - network_cli - Use network_cli to run command on network appliances
 - persistent - Use a persistent unix socket for connection
@@ -475,22 +599,9 @@ New Modules
 
 - cli_command - Run a cli command on cli-based network devices
 - cli_config - Push text based configuration to network devices over network_cli
-- net_banner - (deprecated, removed after 2022-06-01) Manage multiline banners on network devices
 - net_get - Copy a file from a network device to Ansible Controller
-- net_interface - (deprecated, removed after 2022-06-01) Manage Interface on network devices
-- net_l2_interface - (deprecated, removed after 2022-06-01) Manage Layer-2 interface on network devices
-- net_l3_interface - (deprecated, removed after 2022-06-01) Manage L3 interfaces on network devices
-- net_linkagg - (deprecated, removed after 2022-06-01) Manage link aggregation groups on network devices
-- net_lldp - (deprecated, removed after 2022-06-01) Manage LLDP service configuration on network devices
-- net_lldp_interface - (deprecated, removed after 2022-06-01) Manage LLDP interfaces configuration on network devices
-- net_logging - (deprecated, removed after 2022-06-01) Manage logging on network devices
 - net_ping - Tests reachability using ping from a network device
 - net_put - Copy a file from Ansible Controller to a network device
-- net_static_route - (deprecated, removed after 2022-06-01) Manage static IP routes on network appliances (routers, switches et. al.)
-- net_system - (deprecated, removed after 2022-06-01) Manage the system attributes on network devices
-- net_user - (deprecated, removed after 2022-06-01) Manage the aggregate of local users on network device
-- net_vlan - (deprecated, removed after 2022-06-01) Manage VLANs on network devices
-- net_vrf - (deprecated, removed after 2022-06-01) Manage VRFs on network devices
 - netconf_config - netconf device configuration
 - netconf_get - Fetch configuration/state data from NETCONF enabled network devices.
 - netconf_rpc - Execute operations on NETCONF enabled network devices.

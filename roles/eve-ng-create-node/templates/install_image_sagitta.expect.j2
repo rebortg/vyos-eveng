@@ -1,0 +1,55 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+spawn telnet localhost {{telnet_port}}
+match_max 1000000
+send -- "\r"
+expect -exact "vyos login: "
+send -- "vyos\r"
+
+expect -exact "Password: "
+send -- "vyos\r"
+
+expect -exact "vyos@vyos:~\$ "
+send -- "install image\r"
+
+expect "Would you like to continue?"
+send -- "y\r"
+
+expect "What would you like to name this image"
+send -- "\r"
+
+expect "Please enter a password for the "
+send -- "\r"
+
+expect "What console should be used by default?"
+send -- "S\r"
+
+expect "Which one should be used for installation? "
+send -- "\r"
+
+expect "Installation will delete all data on the drive."
+send -- "y\r"
+
+expect "Would you like to use all the free space on the drive?"
+send -- "y\r"
+
+expect "vyos"
+send -- "\r"
+
+expect "vyos"
+send -- "reboot\r"
+
+expect "Are you sure you want to reboot this system?"
+send -- "y\r"
+
+expect -exact "vyos login: "
+send -- "vyos\r"
+
+expect -exact "Password: "
+send -- "vyos\r"
+
+expect -exact "vyos@vyos:~$ "
+send -- "cp /opt/vyatta/etc/config.boot.default /config/config.boot && sync\r"
+
+close $spawn_id

@@ -12,7 +12,7 @@
 
 - name: "{{ lab }}: Create {{ lab }} Lab"
   template: 
-    src: labs/{{ lab }}/{{ lab }}.unl.j2
+    src: labs/{{ branch }}/{{ lab }}/{{ lab }}.unl.j2
     dest: /opt/unetlab/labs/{{ eve_ng_folder_name }}/{{ lab }}.unl
     owner: www-data
     group: www-data

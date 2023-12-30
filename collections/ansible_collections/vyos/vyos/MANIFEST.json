@@ -2,7 +2,7 @@
  "collection_info": {
   "namespace": "vyos",
   "name": "vyos",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "authors": [
    "Ansible Network Community (ansible-network)"
   ],
@@ -26,7 +26,7 @@
   "name": "FILES.json",
   "ftype": "file",
   "chksum_type": "sha256",
-  "chksum_sha256": "d81ecfee57474dfd19ab2241f93b01c1552e1ac331fda79e32a933959c2823f0",
+  "chksum_sha256": "e3cabc8206d4a2c1214b1cb3ba1023fb4c5492c2317a26849efeba63a90ed498",
   "format": 1
  },
  "format": 1

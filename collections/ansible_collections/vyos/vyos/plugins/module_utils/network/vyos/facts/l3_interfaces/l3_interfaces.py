@@ -17,15 +17,15 @@ __metaclass__ = type
 
 import re
 from copy import deepcopy
-from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import (
-    utils,
-)
+
 from ansible.module_utils.six import iteritems
-from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.utils.utils import (
-    get_ip_address_version,
-)
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common import utils
+
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.argspec.l3_interfaces.l3_interfaces import (
     L3_interfacesArgs,
+)
+from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.utils.utils import (
+    get_ip_address_version,
 )
 
 
@@ -60,7 +60,7 @@ class L3_interfacesFacts(object):
         # operate on a collection of resource x
         objs = []
         interface_names = re.findall(
-            r"set interfaces (?:ethernet|bonding|vti|vxlan) (?:\'*)(\S+)(?:\'*)",
+            r"set interfaces (?:ethernet|bonding|bridge|dummy|tunnel|vti|vxlan) (?:\'*)(\S+)(?:\'*)",
             data,
             re.M,
         )
@@ -77,9 +77,7 @@ class L3_interfacesFacts(object):
         facts = {}
         if objs:
             facts["l3_interfaces"] = []
-            params = utils.validate_config(
-                self.argument_spec, {"config": objs}
-            )
+            params = utils.validate_config(self.argument_spec, {"config": objs})
             for cfg in params["config"]:
                 facts["l3_interfaces"].append(utils.remove_empties(cfg))
 
@@ -127,6 +125,10 @@ class L3_interfacesFacts(object):
             if item == "dhcp":
                 config["ipv4"].append({"address": item})
             elif item == "dhcpv6":
+                config["ipv6"].append({"address": item})
+            elif item == "no-default-link-local":
+                config["ipv6"].append({"address": item})
+            elif item == "autoconf":
                 config["ipv6"].append({"address": item})
             else:
                 ip_version = get_ip_address_version(item.split("/")[0])

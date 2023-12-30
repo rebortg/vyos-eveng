@@ -1,0 +1,29 @@
+# default ansible inventory for eve-ng and oobm
+# don't useable with ansible
+# its must be parsed by labinventory.py
+---
+
+hosts:
+  eve:
+    eveng:
+      ansible_host: eve-ng
+      ansible_user: root
+      ansible_ssh_pass: eve
+      ansible_python_interpreter: /usr/bin/python3
+  
+  oobm:
+    {{ oobm_hostname }}:
+      ansible_python_interpreter: /usr/bin/python3
+      ansible_user: vyos
+      #ansible_ssh_pass: vyos
+      ansible_network_os: vyos
+      ansible_connection: network_cli
+
+
+vyos_vars:
+  ansible_python_interpreter: /usr/bin/python3
+  ansible_user: vyos
+  #ansible_ssh_pass: vyos
+  ansible_network_os: vyos
+  ansible_connection: network_cli
+  ansible_paramiko_proxy_command: {{ proxy_command }}

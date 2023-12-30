@@ -14,14 +14,14 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 import platform
 import re
+
 from ansible_collections.vyos.vyos.plugins.module_utils.network.vyos.vyos import (
-    run_commands,
     get_capabilities,
+    run_commands,
 )
 
 
 class LegacyFactsBase(object):
-
     COMMANDS = frozenset()
 
     def __init__(self, module):
@@ -35,7 +35,6 @@ class LegacyFactsBase(object):
 
 
 class Default(LegacyFactsBase):
-
     COMMANDS = [
         "show version",
     ]
@@ -71,7 +70,6 @@ class Default(LegacyFactsBase):
 
 
 class Config(LegacyFactsBase):
-
     COMMANDS = [
         "show configuration commands",
         "show system commit",
@@ -106,7 +104,6 @@ class Config(LegacyFactsBase):
 
 
 class Neighbors(LegacyFactsBase):
-
     COMMANDS = [
         "show lldp neighbors",
         "show lldp neighbors detail",
