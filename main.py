@@ -106,7 +106,7 @@ def main():
         
         branch_labs = []
         for entry in os.listdir(f'labs/{args.branch}'):
-            if os.path.isdir(f'labs/{args.branch}/{entry}'):
+            if os.path.isdir(f'labs/{args.branch}/{entry}') and not entry.startswith('DEV_'):
                 branch_labs.append(entry)
         
         if args.lab:

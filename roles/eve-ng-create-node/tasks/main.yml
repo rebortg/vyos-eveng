@@ -66,7 +66,7 @@
       
   - name: "{{ lab }}: create virtioa.qcow2 file"
     ansible.builtin.shell: |
-      /opt/qemu/bin/qemu-img create -f qcow2 /opt/unetlab/addons/qemu/{{ node_template_name }}/virtioa.qcow2 10G
+      /opt/qemu/bin/qemu-img create -f qcow2 /opt/unetlab/addons/qemu/{{ node_template_name }}/virtioa.qcow2 20G
 
   - name: "{{ lab }}: Login to EVE-NG and get Cookie"
     uri:

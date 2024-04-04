@@ -19,6 +19,6 @@ python main.py run -l Wireguard \
 --branch equuleus
 
 python main.py run -l Wireguard \
---iso_path https://github.com/vyos/vyos-rolling-nightly-builds/releases/download/1.5-rolling-202312301423/vyos-1.5-rolling-202312301423-amd64.iso \
---iso_version 1.5-rolling-202312301423 \
+--iso_path https://github.com/vyos/vyos-rolling-nightly-builds/releases/download/1.5-rolling-202312310026/vyos-1.5-rolling-202312310026-amd64.iso \
+--iso_version 1.5-rolling-202312310026 \
 --branch master
